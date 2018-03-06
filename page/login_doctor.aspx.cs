@@ -23,7 +23,7 @@ public partial class page_login_doctor : System.Web.UI.Page
         if (doc != null)
         {
             Session["doctor_name"] = doc.emp_fname;
-            Response.Redirect("ddd");
+            Response.Redirect("../Page/index_doctor.aspx");
         }
         else
         {
