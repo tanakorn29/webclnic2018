@@ -6,23 +6,68 @@
 <link rel="stylesheet" href="../css/style.css">
     <body>
   <center>  <P1>ตารางปฏิบัติงานแพทย์</P1> </center>
-    <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" Height="261px" Width="989px">
-        <Columns>
-            <asp:BoundField HeaderText="ลำดับการนัด" />
-            <asp:BoundField HeaderText="วันเดือนปี" />
-            <asp:BoundField HeaderText="เวลา" />
-            <asp:BoundField HeaderText="รายชื่อแพทย์" />
-        </Columns>
-        <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
-        <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
-        <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
-        <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
-        <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#FFF1D4" />
-        <SortedAscendingHeaderStyle BackColor="#B95C30" />
-        <SortedDescendingCellStyle BackColor="#F1E5CE" />
-        <SortedDescendingHeaderStyle BackColor="#93451F" />
-    </asp:GridView>
+      <meta name="description" content="A schedule management with jQuery.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="dist/jquery.schedule.css">
+    <link rel="stylesheet" href="dist/jquery.schedule-demo.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-dark bg-dark mb-3">
+        <h1 class="navbar-brand mb-0">jQuery Schedule Demo v2.0</h1>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Basic</h2>
+                <pre class="p-2 mb-3">$("#schedule").jqs();</pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="schedule" class="jqs-demo mb-3"></div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <h2>Read mode</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div id="schedule2" class="jqs-demo mb-3"></div>
+            </div>
+            <div class="col-lg-4">
+            <pre class="p-2 mb-3 large">
+$("#schedule2").jqs({
+    mode: "read",
+    data: [{
+        day: 0,
+        periods: [
+            ["20:00", "00:00"],
+            ["20:00", "22:00"], // Invalid period, not displayed
+            ["00:00", "02:00"]
+        ]
+    }, {
+        day: 3,
+        periods: [
+            ["00:00", "08:30"],
+            ["09:00", "12:00"]
+        ]
+    }]
+});
+</pre>
+            </div>
+        </div>
+
 
 </body>
 </asp:Content>
