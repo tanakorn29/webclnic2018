@@ -1,0 +1,117 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="page2.master.cs" Inherits="page2" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>งานแพทย์และอนามัย มหาวิทยาลัยรามคำแหง</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/label.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/layout.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/mediaqueries.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/contents.css" type="text/css" media="all">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        @import url(fonts/thsarabunnew.css);
+
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'THSarabunNew', sans-serif;
+            font-size: 1.4em;
+            background-color: #f1f1f1;
+        }
+        .auto-style1 {
+            width: 68px;
+            height: 79px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper row1">
+        <header id="header" class="clear">
+     <div class="navbar-header">
+               <img alt="" class="auto-style1" src="../image/image1.jpg" /> 
+          
+            </div> 
+            <div id="hgroup">
+           <L1><h1><a href="#">ระบบการบริการ</a></h1></L1> 
+                <h2>งานแพทย์และอนามัย มหาวิทยาลัยรามคำแหง</h2>
+            </div>
+        </header>
+    </div>
+    <form id="form1" runat="server">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default" style="margin-bottom:10px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="../page/index.aspx">Home</a></li>
+                    <li><a href="../page/opd.aspx">ข้อมูลคนไข้</a></li>
+                      <li><a href="../page/opd.aspx">การนัดหมาย</a></li>
+                    <li><a href="../page/opd.aspx">ประวัติการรักษา</a></li>
+                 <!--   <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>
+                       <ul class="dropdown-menu">
+                            <li><a href="#">จัดตารางการปฏิบัติงานแพทย์</a></li>
+                            <li><a href="#">ระบบแพทย์</a></li>
+                        
+                        </ul>
+                    </li> --> 
+
+                </ul> 
+                        
+                <ul class="nav navbar-nav navbar-right">
+               <li class="active"><a href="#">
+                   <asp:Label ID="lblLogin" runat="server">ยังไม่เข้าสู่ระบบ</asp:Label></a></li> 
+                 
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <!-- Page Content -->
+
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+     
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+
+
+    <!-- /.container -->
+    <div class="wrapper row4">
+        <footer id="footer" class="clear">
+            <p class="fl_left">Copyright &copy; 2017 - All Rights Reserved - <a href="#">Ramkhamhaeng University</a></p>
+
+        </footer></div>
+        <!-- jQuery -->
+        <script type="text/javascript"  src="../js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</body>
+</html>

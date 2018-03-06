@@ -1,0 +1,59 @@
+﻿ul.v_menu{ /* กำหนดขอบเขตของเมนู */ 
+    list-style:none;   
+    margin:0px;   
+    padding:0px;   
+    width:180px;   
+    font-family:tahoma, "Microsoft Sans Serif", Vanessa;   
+    font-size:17px;   
+}   
+ul.v_menu > li{ /* กำหนดรูปแบบให้กับเมนูเ */ 
+    display:block;   
+    height:50px;   
+    text-indent:5px;   
+    background-color:#339900;   
+    border:1px #FFFFFF inset;   
+}   
+ul.v_menu > li:hover{ /* กำหนดรูปแบบให้กับเมนูเมื่อมีเมาส์อยู่เหนือ */ 
+    display:block;   
+    height:50px;   
+    text-indent:5px;   
+    background-color:#FFCC00;   
+    border:1px #FFFFFF inset;   
+}   
+ul.v_menu > li > a,ul.v_menu > li:hover > ul > li > a{ /* กำหนดรูปแบบให้กับลิ้งค์ */ 
+    text-decoration:none;   
+    color:#FFFFFF;   
+    line-height:20px;   
+}  
+ul.v_menu > li > ul{
+    display:none;
+    list-style:none;   
+    margin-left:180px; 
+    padding:0px;   
+    width:180px; 
+} 
+ul.v_menu > li:hover > ul{
+    display:block;
+    list-style:none;   
+    margin:0px;
+    margin-top:-21px;
+    margin-left:179px; 
+    padding:0px;   
+    width:180px; 
+} 
+ul.v_menu > li:hover > ul > li{ /* กำหนดรูปแบบให้กับเมนูย่อย */
+    display:block;   
+    height:50px;   
+           width:200px; 
+    text-indent:5px;   
+    background-color:#FFCC00;   
+    border:1px #FFFFFF inset;   
+}   
+ul.v_menu > li:hover > ul > li:hover{ /* กำหนดรูปแบบให้กับเมนูย่อยเมื่อเมาส์อยู่เหนือ */
+    display:block;   
+    height:50px;   
+        width:200px; 
+    text-indent:5px;   
+    background-color:#000000;   
+    border:1px #FFFFFF inset;   
+}   

@@ -1,0 +1,31 @@
+﻿
+body {
+  background: #f2f2f2;  
+}
+k1{
+    font-size: 4ex;
+    color:blue;
+
+}
+.lo
+{
+   width:1000px; 
+   height:500px; 
+   float:right;
+   background-image: url("../image/image4.jpg");
+}
+
+.lo1
+{
+   width:1000px; 
+   height:500px; 
+   float:right;
+   background-image: url("../image/image10.jpg");
+}
+.lo2
+{
+   width:1000px; 
+   height:500px; 
+   float:right;
+   background-image: url("../image/image114.jpg");
+}
