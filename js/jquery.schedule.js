@@ -25,8 +25,9 @@
                 "Tuesday",
                 "Wednesday",
                 "Thursday",
-                "Friday"
-              
+                "Friday",
+                "Saturday",
+                "Sunday"
             ],
             onInit: function () {},
             onAddPeriod: function () {},

@@ -4,7 +4,8 @@
       <meta http-equiv=Content-Type content="text/html; charset=utf-8">
               <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/jquery.schedule.css">
+      <link rel="stylesheet" href="../css/jquery.schedule.css">
+    <link rel="stylesheet" href="../css/jquery.schedule-demo.css">
  
     <body>
   <center>  <P1>ตารางปฏิบัติงานแพทย์</P1> </center>
@@ -36,10 +37,6 @@
                     ]
                 }]
             });
-      
-
-
-
         </script>
 
 </body>
