@@ -20,9 +20,18 @@
   </tr>
               <tr class="active">
       <td class="active" style="width: 230px">
-         เวลาการปฏิบัติงาน</td>
+         เวลาเริ่มการปฏิบัติงาน</td>
         <td class="active" style="width: 342px">
             <asp:TextBox ID="TextBox1" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Time"></asp:TextBox>
+      </td>
+        
+  </tr>
+           
+              <tr class="active">
+      <td class="active" style="width: 230px">
+         เวลาเลิกการปฏิบัติงาน</td>
+        <td class="active" style="width: 342px">
+            <asp:TextBox ID="TextBox2" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Time"></asp:TextBox>
       </td>
         
   </tr>

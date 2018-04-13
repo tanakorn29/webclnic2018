@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class page_login : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnlogin_Click(object sender, EventArgs e)
+    {
+        String Username = txtusername.Text;
+
+        String Password = txtpassword.Text;
+
+        employee_ru ru = employee_ru.Login_employee_ru(Username, Password);
+     /*   doctor doc = doctor.Login_doctor(Username, Password);
+
+        if(doc != null)
+        {
+            Session["doc_name"] = doc.emp_doc_name;
+            Response.Redirect("../Page/index_doctor.aspx");
+        }else
+        {
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่มีข้อมูลแพทย์');", true);
+        }
+        */
+        if (ru != null)
+        {
+            string user = ru.username;
+     /*
+         if(ru.status == "อนุญาติ")
+           {
+                Session["staff_name"] = ru.emp_ru_name;
+                if (ru.pos_name == "เจ้าหน้าที่")
+                {
+                    Response.Redirect("../Page/index_opd.aspx");
+                }
+                else if (ru.pos_name == "เวชระเบียน")
+                {
+                    Response.Redirect("../Page/index_opd.aspx");
+                }
+                else if (ru.pos_name == "พยาบาล")
+                {
+                    Response.Redirect("../Page/index_opd.aspx");
+                }
+                else if (ru.pos_name == "เภสัชกรณ์")
+                {
+                    Response.Redirect("../Page/index_opd.aspx");
+                }
+                else
+                {
+                    Response.Redirect("../Page/index_student.aspx");
+                }
+           }else
+           {
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
+            }
+  */
+
+
+
+
+
+        }
+        else
+        {
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่พบข้อมูลในระบบ');", true);
+        }
+    }
+}

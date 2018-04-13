@@ -9,10 +9,17 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["doctor_name"] != null)
+        if (Session["doc_name"] != null)
         {
-            lblLogin.Text = "" + Session["doctor_name"];
+            lblLogin.Text = "" + Session["doc_name"];
 
         }
+    }
+
+    protected void lblLogin_Click(object sender, EventArgs e)
+    {
+
+        Session.Clear();
+        Response.Redirect("../page/login_doctor.aspx");
     }
 }

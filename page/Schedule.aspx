@@ -13,6 +13,7 @@
             <div class="col">
                 <div id="schedule" class="jqs-demo mb-3"></div>
             </div>
+          <asp:Button ID="btnregister" runat="server" Text="ลงเวลาปฏิบัติงาน" BackColor="White" Height="45px" Width="203px" />
         </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

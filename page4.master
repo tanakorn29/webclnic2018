@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="page2.master.cs" Inherits="page2" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="page4.master.cs" Inherits="page5" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +47,13 @@
             position: absolute;
             height: 1px;
             padding: 0;
-            margin: -1px;
             overflow: hidden;
             clip: rect(0,0,0,0);
+            left: 23px;
+            top: 11px;
+            margin-left: -1px;
+            margin-right: -1px;
+            margin-top: -1px;
         }
     </style>
 </head>
@@ -82,8 +87,7 @@
                 <ul class="nav navbar-nav">
                    
                     <li><a href="../page/opd_data.aspx">ข้อมูลคนไข้</a></li>
-                      <li><a href="../page/appointment.aspx">การนัดหมาย</a></li>
-                    <li><a href="#">ประวัติการรักษา</a></li>
+                    <li><a href="../page/opd.aspx">ประวัติการรักษา</a></li>
                  <!--   <li class="dropdown">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>
                        <ul class="dropdown-menu">

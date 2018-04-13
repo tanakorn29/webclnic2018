@@ -13,18 +13,16 @@ public class doctor
     //  private static MySqlCommand command;
     private static SqlConnection conn;
     private static SqlCommand command;
-    public int emp_id { get; set; }
-    public string emp_username { get; set; }
-    public string emp_password { get; set; }
-    public string emp_fname { get; set; }
-    public string emp_sname { get; set; }
-    public string emp_birth { get; set; }
-    public string emp_addr { get; set; }
-    public string emp_telhome { get; set; }
-    public string emp_tel { get; set; }
-    public string emp_email { get; set; }
-    public string emp_occupation_id { get; set; }
-    public string emp_position { get; set; }
+    public int emp_doc_id { get; set; }
+    public string emp_doc_name { get; set; }
+    public string emp_doc_idcard { get; set; }
+    public string emp_doc_birth { get; set; }
+    public string emp_doc_address { get; set; }
+    public string emp_doc_tel { get; set; }
+    public string emp_doc_email { get; set; }
+    public int emp_doc_occupation_id { get; set; }
+    public string emp_doc_specialist { get; set; }
+
     static doctor()
     {
         //   string strConnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -34,45 +32,42 @@ public class doctor
         conn = new SqlConnection(connectionString);
         command = new SqlCommand("", conn);
     }
-    public doctor(int emp_id, string emp_username,
-     string emp_password, string emp_fname, string emp_sname, string emp_birth,
-    string emp_addr, string emp_telhome,string emp_tel,string emp_email,string emp_occupation_id,
-    string emp_position)
+
+    public doctor(int emp_doc_id, string emp_doc_name,
+     string emp_doc_idcard, string emp_doc_birth, string emp_doc_address, string emp_doc_tel,
+    string emp_doc_email, int emp_doc_occupation_id, string emp_doc_specialist)
     {
         //
         // TODO: Add constructor logic here
         //
+        this.emp_doc_id = emp_doc_id;
+        this.emp_doc_name = emp_doc_name;
+        this.emp_doc_idcard = emp_doc_idcard;
+        this.emp_doc_birth = emp_doc_birth;
+        this.emp_doc_address = emp_doc_address;
+        this.emp_doc_tel = emp_doc_tel;
+        this.emp_doc_email = emp_doc_email;
+        this.emp_doc_occupation_id = emp_doc_occupation_id;
+        this.emp_doc_specialist = emp_doc_specialist;
 
-        this.emp_id = emp_id;
-        this.emp_username = emp_username;
-        this.emp_password = emp_password;
-        this.emp_fname = emp_fname;
-        this.emp_sname = emp_sname;
-        this.emp_birth = emp_birth;
-        this.emp_addr = emp_addr;
-        this.emp_telhome = emp_telhome;
-        this.emp_tel = emp_tel;
-        this.emp_email = emp_email;
-        this.emp_occupation_id = emp_occupation_id;
-        this.emp_position = emp_position;
     }
-    public doctor(string emp_username,
-     string emp_password,string emp_fname)
+    public doctor(
+     string emp_doc_idcard, string emp_doc_birth, string emp_doc_name)
     {
         //
         // TODO: Add constructor logic here
         //
 
 
-        this.emp_username = emp_username;
-        this.emp_password = emp_password;
-        this.emp_fname = emp_fname;
+        this.emp_doc_idcard = emp_doc_idcard;
+        this.emp_doc_birth = emp_doc_birth;
 
+        this.emp_doc_name = emp_doc_name;
     }
 
     public static doctor Login_doctor(string username, string password)
     {
-        string query = String.Format("SELECT COUNT(*) FROM employee WHERE emp_username = '{0}'", username);
+        string query = String.Format("select count(*)  from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id where user_control.uct_user ='{0}'", username);
         command.CommandText = query;
         try
         {
@@ -80,12 +75,12 @@ public class doctor
             int countuser = (int)command.ExecuteScalar();
             if (countuser == 1)
             {
-                query = String.Format("select emp_password from employee WHERE emp_username  = '{0}'", username);
+                query = String.Format("select user_control.uct_password from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id where user_control.uct_user ='{0}'", username);
                 command.CommandText = query;
                 string dbpassword = command.ExecuteScalar().ToString();
                 if (dbpassword == password)
                 {
-                    query = String.Format("select emp_fName from employee WHERE emp_username = '{0}' ", username);
+                    query = String.Format("select employee_doctor.emp_doc_name from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id where user_control.uct_user ='{0}' ", username);
                     command.CommandText = query;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())

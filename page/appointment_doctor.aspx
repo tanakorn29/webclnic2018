@@ -1,13 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page2.master" AutoEventWireup="true" CodeFile="appointment_history.aspx.cs" Inherits="page_appointment_history" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page3.master" AutoEventWireup="true" CodeFile="appointment_doctor.aspx.cs" Inherits="page_appointment_doctor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-       <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+           <meta http-equiv=Content-Type content="text/html; charset=utf-8">
               <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
     
 <body>
-  <center>  <P1>ประวัติการนัดหมาย</P1> </center>
+  <center>  <P1>ตารางนัดหมายคนไข้</P1> </center>
    <center><asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None" Height="226px" Width="787px">
+        <Columns>
+            <asp:ButtonField Text="อนุมัติการนัดหมาย" />
+        </Columns>
         <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
         <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
         <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
@@ -19,7 +22,7 @@
         <SortedDescendingHeaderStyle BackColor="#33276A" />
     </asp:GridView>
 
-<asp:Button ID="btnblack" class="btn btn-primary" runat="server" Text="ย้อนกลับ" Height="59px" OnClick="btnblack_Click" Width="206px"></asp:Button>
+
 
    </center> 
 

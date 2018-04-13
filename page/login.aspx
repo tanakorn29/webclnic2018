@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page.master" AutoEventWireup="true" CodeFile="login_doctor.aspx.cs" Inherits="page_login_doctor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page.master" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="page_login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-        
+         
      <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
     
 <body>
   <div class="login-page">
   <div class="form">
-      <k1>ระบบบริการแพทย์</k1>
+      <k1>เข้าสู่ระบบ</k1>
        <asp:TextBox ID="txtusername" placeholder="ใส่ชื่อผู้ใช้" runat="server"></asp:TextBox>
        <asp:TextBox ID="txtpassword" placeholder="ใส่รหัสผ่าน" runat="server" TextMode="Password"></asp:TextBox>
     <asp:Button ID="btnlogin" runat="server" class="btn btn-primary" Text="เข้าสู่ระบบ" BackColor="#660033" OnClick="btnlogin_Click"/>

@@ -1,0 +1,179 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// Summary description for appointment
+/// </summary>
+public class appointment
+{
+    private static SqlConnection conn;
+    private static SqlCommand command;
+    public int app_id { get; set; }
+    public DateTime app_date { get; set; }
+    public string app_time { get; set; }
+    public string app_remark { get; set; }
+    public string  doc_name { get; set; }
+    public string opd_name { get; set; }
+    public int status_approve { get; set; }
+    public int status_app { get; set; }
+
+    static appointment()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ToString();
+        conn = new SqlConnection(connectionString);
+        command = new SqlCommand("", conn);
+    }
+    public appointment(int app_id, DateTime app_date, string app_time,
+        string app_remark,string doc_name,string opd_name,int status_approve,int status_app)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.app_id = app_id;
+        this.app_date = app_date;
+        this.app_time = app_time;
+        this.app_remark = app_remark;
+        this.doc_name = doc_name;
+        this.opd_name = opd_name;
+        this.status_approve = status_approve;
+        this.status_app = status_app;
+    }
+
+    public appointment(DateTime app_date, string app_time,
+    string app_remark, string doc_name, string opd_name, int status_approve, int status_app)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        
+        this.app_date = app_date;
+        this.app_time = app_time;
+        this.app_remark = app_remark;
+        this.doc_name = doc_name;
+        this.opd_name = opd_name;
+        this.status_approve = status_approve;
+        this.status_app = status_app;
+
+    }
+
+    public appointment(int status_approve)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+
+     
+        this.status_approve = status_approve;
+
+    }
+    public static appointment check_status(string opd_name)
+    {
+        string query = string.Format("select appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where opd.opd_name = '{0}'", opd_name);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+             
+                int status_approve1 = reader.GetInt32(0);
+                appointment app = new appointment(status_approve1);
+                return app;
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+    public static appointment show_app(int status_app, string opd_name)
+    {
+        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  appointment.status_app = {0} AND opd.opd_name = '{1}'", status_app,opd_name);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DateTime app_date = reader.GetDateTime(0);
+                string app_time = reader.GetString(1);
+                string app_remark = reader.GetString(2);
+                string employee_doctor = reader.GetString(3);
+                string opd_name1 = reader.GetString(4);
+                int status_approve1 = reader.GetInt32(5);
+
+                appointment app = new appointment(app_date, app_time, app_remark, employee_doctor, opd_name1, status_approve1, status_app);
+                return app;
+            }
+
+
+            }
+        finally
+        {
+            conn.Close();
+        }
+            return null;
+    }
+
+    public static DataTable  show_app_history(string opd_name)
+    {
+        string query = string.Format("select appointment.app_date As วันที่นัดหมาย,appointment.app_time As เวลานัดหมาย,appointment.app_remark As หมายเหตุ,employee_doctor.emp_doc_name As แพทย์ที่เข้าพบ from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where appointment.status_app = 0 AND opd.opd_name = '{0}'", opd_name);
+        DataTable dt = new DataTable();
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+    
+          
+            SqlDataReader reader = command.ExecuteReader();
+   
+            dt.Load(reader);
+         
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return dt;
+    }
+
+    public static DataTable show_app_doctor(string doctor_name)
+    {
+        string query = string.Format("select appointment.app_date As วันที่นัดหมาย, appointment.app_time As เวลานัดหมาย,appointment.app_remark As หมายเหตุ from appointment inner join employee_doctor On employee_doctor.emp_doc_id = appointment.emp_doc_id where appointment.status_approve = 3 AND  employee_doctor.emp_doc_name =  '{0}'", doctor_name);
+        DataTable dt = new DataTable();
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            dt.Load(reader);
+
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return dt;
+    }
+
+
+}
