@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="page2.master.cs" Inherits="page2" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="page5.master.cs" Inherits="page5" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,13 +80,11 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                         <li class="active"><a href="../page/index_opd.aspx">Home</a></li>
-                             
+            <li><a href="#">Home</a></li>
                     <li><a href="#">ตารางนัดหมายคนไข้</a></li>
                     <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
-                    <li><a href="../page/opd_data.aspx">ข้อมูลคนไข้</a></li>
-                      <li><a href="../page/appointment.aspx">การนัดหมาย</a></li>
-                    <li><a href="#">ประวัติการรักษา</a></li>
+                      <li><a href="#">จัดการข้อมูลนัดหมายตนไข้</a></li>
+               
                  <!--   <li class="dropdown">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>
                        <ul class="dropdown-menu">

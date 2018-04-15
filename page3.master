@@ -69,8 +69,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-    
-                    <li><a href="#">ตารางการปฏิบัติงาน</a></li>
+                      <li><a href="#">Home</a></li>
+                    <li><a href="#">ตารางนัดหมายคนไข้</a></li>
+                    <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
+                    <li><a href="#">ลงตารางการปฏิบัติงาน</a></li>
                       <li><a href="../page/appointment_doctor.aspx">ตารางนัดหมาย</a></li>
                  
                  <!--   <li class="dropdown">

@@ -19,55 +19,67 @@ public partial class page_login : System.Web.UI.Page
         String Password = txtpassword.Text;
 
         employee_ru ru = employee_ru.Login_employee_ru(Username, Password);
-     /*   doctor doc = doctor.Login_doctor(Username, Password);
 
-        if(doc != null)
-        {
-            Session["doc_name"] = doc.emp_doc_name;
-            Response.Redirect("../Page/index_doctor.aspx");
-        }else
-        {
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่มีข้อมูลแพทย์');", true);
-        }
-        */
+     doctor doc = doctor.Login_doctor(Username, Password);
+
         if (ru != null)
         {
             string user = ru.username;
-     /*
-         if(ru.status == "อนุญาติ")
-           {
-                Session["staff_name"] = ru.emp_ru_name;
-                if (ru.pos_name == "เจ้าหน้าที่")
+            employee_ru show_name = employee_ru.show_employees(user);
+
+     if(show_name != null)
+            {
+                if (show_name.status == "อนุญาติ")
                 {
-                    Response.Redirect("../Page/index_opd.aspx");
-                }
-                else if (ru.pos_name == "เวชระเบียน")
-                {
-                    Response.Redirect("../Page/index_opd.aspx");
-                }
-                else if (ru.pos_name == "พยาบาล")
-                {
-                    Response.Redirect("../Page/index_opd.aspx");
-                }
-                else if (ru.pos_name == "เภสัชกรณ์")
-                {
-                    Response.Redirect("../Page/index_opd.aspx");
+                    Session["staff_name"] = show_name.emp_ru_name;
+                    if (show_name.pos_name == "เจ้าหน้าที่")
+                    {
+                        Response.Redirect("../Page/index_opd.aspx");
+                    }
+                    else if (show_name.pos_name == "เวชระเบียน")
+                    {
+                        Response.Redirect("../Page/index_opd.aspx");
+                    }
+                    else if (show_name.pos_name == "พยาบาล")
+                    {
+                        Response.Redirect("../Page/nurse_index_opd.aspx");
+                    }
+                    else if (show_name.pos_name == "เภสัชกรณ์")
+                    {
+                        Response.Redirect("../Page/index_opd.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Page/index_student.aspx");
+                    }
                 }
                 else
                 {
-                    Response.Redirect("../Page/index_student.aspx");
+                    if (show_name.pos_name == "พยาบาล")
+                    {
+                        Response.Redirect("../Page/appointment_management.aspx");
+                    }else
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
+                    }
+               
                 }
-           }else
-           {
-                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
+
+
             }
-  */
+
 
 
 
 
 
         }
+        else if (doc != null)
+        {
+            Session["doc_name"] = doc.emp_doc_name;
+            Response.Redirect("../Page/index_doctor.aspx");
+        }
+        
         else
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่พบข้อมูลในระบบ');", true);

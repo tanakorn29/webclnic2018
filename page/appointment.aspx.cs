@@ -34,8 +34,8 @@ public partial class page_appointment : System.Web.UI.Page
                     Session["status1"] = "แพทย์ขอเลื่อนนัด";
                 } else if (app.status_approve == 3)
             {
-                lblstatus.Text = "รอแพทย์อนุมัติการนัดหมาย";
-                Session["status1"] = "รอแพทย์อนุมัติการนัดหมาย";
+                lblstatus.Text = "รออนุมัติการนัดหมาย";
+                Session["status1"] = "รออนุมัติการนัดหมาย";
             }
             
             }
