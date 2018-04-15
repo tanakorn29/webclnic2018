@@ -80,10 +80,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
+            <li><a href="../page/appointment_management_index.aspx">Home</a></li>
                     <li><a href="#">ตารางนัดหมายคนไข้</a></li>
                     <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
-                      <li><a href="#">จัดการข้อมูลนัดหมายตนไข้</a></li>
+                      <li><a href="../page/app_management.aspx">จัดการข้อมูลนัดหมายตนไข้</a></li>
                
                  <!--   <li class="dropdown">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>

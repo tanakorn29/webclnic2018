@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -60,7 +61,22 @@ public class appointment
         this.status_app = status_app;
 
     }
+    public appointment(DateTime app_date, string app_time,
+string app_remark, string doc_name, string opd_name, int status_approve)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
 
+        this.app_date = app_date;
+        this.app_time = app_time;
+        this.app_remark = app_remark;
+        this.doc_name = doc_name;
+        this.opd_name = opd_name;
+        this.status_approve = status_approve;
+
+
+    }
     public appointment(int status_approve)
     {
         //
@@ -71,6 +87,85 @@ public class appointment
         this.status_approve = status_approve;
 
     }
+    public static ArrayList sent_app_nurse()
+    {
+
+        ArrayList list = new ArrayList();
+        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where status_approve = 2 OR status_approve = 3");
+
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                DateTime app_date = reader.GetDateTime(0);
+                string app_time = reader.GetString(1);
+                string app_remark = reader.GetString(2);
+                string employee_doctor = reader.GetString(3);
+                string opd_name1 = reader.GetString(4);
+                int status_approve1 = reader.GetInt32(5);
+                appointment app1 = new appointment(app_date, app_time, app_remark, employee_doctor, opd_name1, status_approve1);
+                list.Add(app1);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
+    public static int count_app()
+    {
+
+
+        string query = string.Format("select count(*) from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where status_approve = 2 OR status_approve = 3");
+        command.CommandText = query;
+        try
+        {
+            conn.Open();
+            int countapp = (int)command.ExecuteScalar();
+            return countapp;
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return 0;
+    }
+    public static ArrayList sent_app_doctor(int status_app)
+    {
+
+        ArrayList list = new ArrayList();
+        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  appointment.status_approve = '{0}'", status_app);
+
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                DateTime app_date = reader.GetDateTime(0);
+                string app_time = reader.GetString(1);
+                string app_remark = reader.GetString(2);
+                string employee_doctor = reader.GetString(3);
+                string opd_name1 = reader.GetString(4);
+                int status_approve1 = reader.GetInt32(5);
+                appointment app1 = new appointment(app_date, app_time, app_remark, employee_doctor, opd_name1, status_approve1);
+                list.Add(app1);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
+
     public static appointment check_status(string opd_name)
     {
         string query = string.Format("select appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where opd.opd_name = '{0}'", opd_name);

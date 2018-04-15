@@ -55,9 +55,10 @@ public partial class page_login : System.Web.UI.Page
                 }
                 else
                 {
+                    Session["staff_name"] = show_name.emp_ru_name;
                     if (show_name.pos_name == "พยาบาล")
                     {
-                        Response.Redirect("../Page/appointment_management.aspx");
+                        Response.Redirect("../Page/appointment_management_index.aspx");
                     }else
                     {
                         ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);

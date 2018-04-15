@@ -7,20 +7,36 @@
     
 <body>
   <center>  
-      <P1>การนัดหมาย</P1> </center>
-   <center><asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None" Height="226px" Width="787px">
-        <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
-        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
-        <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
-        <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
-        <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#F1F1F1" />
-        <SortedAscendingHeaderStyle BackColor="#594B9C" />
-        <SortedDescendingCellStyle BackColor="#CAC9C9" />
-        <SortedDescendingHeaderStyle BackColor="#33276A" />
-    </asp:GridView>
-
-   </center> 
+      <P1>จัดการข้อมูลการนัดหมายคนไข้</P1> </center>
+        <table class="table table-condensed">
+  
+            <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+          สถานะการนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DropDownList1"  class="dropdown-item" runat="server" Height="42px" Width="193px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+              <asp:ListItem Value="9">กรุณาเลือกสถานะการนัดหมาย</asp:ListItem>
+              <asp:ListItem Value="2">แพทย์ขอเลื่อนนัด</asp:ListItem>
+              <asp:ListItem Value="3">คนไข้ขอเลื่อนนัด</asp:ListItem>
+          </asp:DropDownList>
+      
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; จำนวนคนไข้ที่มีการเลื่อนนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <asp:Label ID="lblnumber" runat="server"></asp:Label>
+&nbsp; คน</td>
+        
+  </tr>
+             <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+          <asp:Label ID="lbloutput" runat="server" Text="Label"></asp:Label>
+      </td>
+        
+  </tr>
+            <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="ส่งใบนัดหมายให้แพทย์อนุมัติ" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </k2>
+      </td>
+        
+        
+  </tr>
+    </table> <br />
 
 </body>
 </asp:Content>
