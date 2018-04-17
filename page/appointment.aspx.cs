@@ -110,7 +110,7 @@ public partial class page_appointment : System.Web.UI.Page
 
 
         }
-        else if(status_approve == "รอแพทย์อนุมัติการนัดหมาย")
+        else if(status_approve == "รออนุมัติการนัดหมาย")
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอการอนุมัติจากแพทย์');", true);
         }

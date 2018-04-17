@@ -89,6 +89,22 @@ string app_remark, string doc_name, string opd_name, int status_approve)
 
 
     }
+    public appointment(DateTime app_date, string app_time,
+string app_remark, string opd_name)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+
+        this.app_date = app_date;
+        this.app_time = app_time;
+        this.app_remark = app_remark;
+       
+        this.opd_name = opd_name;
+   
+
+
+    }
     public appointment(int status_approve)
     {
         //
@@ -129,7 +145,23 @@ string app_remark, string doc_name, string opd_name, int status_approve)
 
         return list;
     }
+    public static string update_app_doctor(appointment app)
+    {
 
+        try
+        {
+            string query = String.Format("Update appointment set app_date = '{0}',app_time = '{1}',status_approve = 3 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{2}' AND opd.opd_name = '{3}'", app.app_date,app.app_time,app.app_remark, app.opd_name);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            return "อัพเดตข้อมูลเรียบร้อย";
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
     public static string update_status (appointment app)
     {
       

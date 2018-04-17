@@ -12,7 +12,7 @@
       <td class="active" style="width: 230px">
          วันนัดหมาย</td>
         <td class="active" style="width: 342px">
-            <asp:TextBox ID="txttelhomeparent" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Date"></asp:TextBox>
+            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Date"></asp:TextBox>
       </td>
         
   </tr>
@@ -20,13 +20,13 @@
       <td class="active" style="width: 230px">
          เวลานัดหมาย</td>
         <td class="active" style="width: 342px">
-            <asp:TextBox ID="TextBox1" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Time"></asp:TextBox>
+            <asp:TextBox ID="txttime" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Time"></asp:TextBox>
       </td>
         
   </tr>
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" ></asp:Button></k2>  
+        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnsubmit_Click" ></asp:Button></k2>  
       </td>
         
         
