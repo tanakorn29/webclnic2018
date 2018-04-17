@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,7 +22,10 @@ public partial class page_appointment : System.Web.UI.Page
             if (app != null)
             {
                 lbldate.Text = Convert.ToString(app.app_date);
+            Session["date"] = Convert.ToString(app.app_date);
                 lbltime.Text = app.app_time;
+            lblremark.Text = app.app_remark;
+            Session["remark"] = app.app_remark;
                 lbldoctor.Text = app.doc_name;
                 
                 if (app.status_approve == 1)
@@ -61,10 +67,50 @@ public partial class page_appointment : System.Web.UI.Page
             Response.Redirect("../page/patient_appointment_next.aspx");
         }else if (status_approve == "แพทย์ขอเลื่อนนัด")
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showPopup", "if (!confirm('ยืนยันการเลื่อนนัดหมายจากแพทย์ ?')){ alert('ยกเลิกการนัดหมาย')  }else{  window.location.assign('../page/patient_appointment_next.aspx')}", true);
+            Response.Redirect("../page/next_app.aspx");
+            //  string opd = "" + Session["staff_name"];
+            //   appointment update = new appointment(opd);
 
+            //     System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //     sb.Append("<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>");
+            //       sb.Append("<script type = 'text/javascript'>");
+
+            //       sb.Append("if (!confirm('ยืนยันการเลื่อนนัดหมายจากแพทย์ ?')){");
+
+            //    string update1 = appointment.update_status(update);
+
+            //    sb.Append(update1);
+            /*     sb.Append("$.ajax({");
+                 sb.Append("    type: 'POST',");
+                 sb.Append("   url: 'appointment.aspx / GetData',");
+                 sb.Append("       contentType: 'application / json; charset = utf - 8',");
+                 sb.Append("      dataType: 'json',");
+                 sb.Append("      success: function (response) {");
+                 sb.Append("      var names = response.d;");
+                 sb.Append("    alert(names);");
+                 sb.Append("      },");
+                 sb.Append("     failure: function (response) {");
+                 sb.Append("       alert(response.d);");
+                 sb.Append("        }");
+                 sb.Append("          });");*/
+            //       ScriptManager.RegisterStartupScript(this, this.GetType(), "updatejson", "updatejson();", true);
+            //    sb.Append("}else{ ");
+
+            //        sb.Append("window.location.assign('../page/patient_appointment_next.aspx') }");
+            //        sb.Append("</script>");
+
+            //        ClientScript.RegisterClientScriptBlock(this.GetType(), "showPopup", sb.ToString());
+
+
+
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "showPopup", "if (!confirm('ยืนยันการเลื่อนนัดหมายจากแพทย์ ?')){ alert('ยกเลิกการนัดหมาย')  }else{  window.location.assign('../page/patient_appointment_next.aspx')}", true);
+            //   ScriptManager.RegisterStartupScript(this, this.GetType(), "CallConfirmBox", "CallConfirmBox();", true);
             // Response.Redirect("../page/patient_appointment_next.aspx");
-        }else if(status_approve == "รอแพทย์อนุมัติการนัดหมาย")
+
+
+
+        }
+        else if(status_approve == "รอแพทย์อนุมัติการนัดหมาย")
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอการอนุมัติจากแพทย์');", true);
         }
@@ -81,4 +127,44 @@ public partial class page_appointment : System.Web.UI.Page
     {
         Response.Redirect("../page/appointment_history.aspx");
     }
+
+
+
+    protected void Submit(object sender, EventArgs e)
+    {
+        string confirmValue = Request.Form["confirm_value"];
+        if (confirmValue == "Yes")
+        {
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('Yes');", true);
+        }
+        else
+        {
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('NO');", true);
+        }
+    }
+
+    [WebMethod]
+
+    public static string GetData()
+
+    {
+        /*
+        string name = "" + HttpContext.Current.Session["staff_name"];
+
+        appointment app = new appointment(name);
+        string name1 = appointment.update_status(app);
+        */
+
+        Dictionary<string, string> name = new Dictionary<string, string>();
+
+        name.Add("1", "Sourav Kayal");
+
+        name.Add("2", "Ram mishra");
+
+        string myJsonString = (new JavaScriptSerializer()).Serialize(name);
+
+        return myJsonString;
+
+    }
+
 }
