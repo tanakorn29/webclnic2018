@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for employee_ru
+/// Summary description for nurse
 /// </summary>
-public class employee_ru
+public class nurse
 {
     private static SqlConnection conn;
     private static SqlCommand command;
@@ -35,7 +35,9 @@ public class employee_ru
 
     public string status { get; set; }
     public string username { get; set; }
-    static employee_ru()
+
+
+    static nurse()
     {
         //   string strConnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         // conn = new MySqlConnection(strConnString);
@@ -44,14 +46,15 @@ public class employee_ru
         conn = new SqlConnection(connectionString);
         command = new SqlCommand("", conn);
     }
-    public employee_ru(int emp_id, string emp_ru_name,
-   string emp_ru_idcard, string emp_ru_birthday, string emp_ru_age, string emp_ru_telwork,
-  string emp_ru_telmobile, string emp_ru_telhome, string emp_ru_telparent, string emp_ru_nameparent, 
-  string emp_ru_addressparent,
-  string emp_ru_namedad,string emp_ru_namemom, string emp_ru_namehusband_and_wife,
-  string emp_ru_address, string emp_ru_occupation_id, string emp_ru_status, 
-  string pos_id,string pos_name,
-  string workplace_id,string status,string username)
+
+    public nurse(int emp_id, string emp_ru_name,
+ string emp_ru_idcard, string emp_ru_birthday, string emp_ru_age, string emp_ru_telwork,
+string emp_ru_telmobile, string emp_ru_telhome, string emp_ru_telparent, string emp_ru_nameparent,
+string emp_ru_addressparent,
+string emp_ru_namedad, string emp_ru_namemom, string emp_ru_namehusband_and_wife,
+string emp_ru_address, string emp_ru_occupation_id, string emp_ru_status,
+string pos_id, string pos_name,
+string workplace_id, string status, string username)
     {
         //
         // TODO: Add constructor logic here
@@ -80,26 +83,23 @@ public class employee_ru
         this.status = status;
         this.username = username;
     }
-    public employee_ru(string emp_ru_name,
-        string pos_name,string status,string username)
+    public nurse(string emp_ru_name,
+string emp_ru_idcard, string emp_ru_birthday, string pos_name)
     {
-  
+        //
+        // TODO: Add constructor logic here
+        //
+
         this.emp_ru_name = emp_ru_name;
-        this.pos_name = pos_name;
-        this.status = status;
-        this.username = username;
-    }
-    public employee_ru(string emp_ru_idcard, string emp_ru_birthday, string username)
-    {
         this.emp_ru_idcard = emp_ru_idcard;
         this.emp_ru_birthday = emp_ru_birthday;
-        this.username = username;
-
-    }
+        this.pos_name = pos_name;
   
-    public static employee_ru Login_employee_ru(string username, string password)
+    }
+
+    public static nurse Login_nurse(string username, string password)
     {
-        string query = String.Format("SELECT COUNT(*) from ((employee_ru inner join user_control On user_control.emp_ru_id = employee_ru.emp_ru_id) inner join position On position.pos_id = employee_ru.pos_id) inner join privilege On privilege.emp_ru_id = employee_ru.emp_ru_id where user_control.uct_user = '{0}'", username);
+        string query = String.Format("select count(*)  from employee_ru inner join user_control on user_control.emp_ru_id = employee_ru.emp_ru_id inner join position on position.pos_id = employee_ru.pos_id where user_control.uct_user ='{0}'", username);
         command.CommandText = query;
         try
         {
@@ -107,22 +107,23 @@ public class employee_ru
             int countuser = (int)command.ExecuteScalar();
             if (countuser == 1)
             {
-                query = String.Format("select user_control.uct_password from ((employee_ru inner join user_control On user_control.emp_ru_id = employee_ru.emp_ru_id) inner join position On position.pos_id = employee_ru.pos_id) inner join privilege On privilege.emp_ru_id = employee_ru.emp_ru_id where user_control.uct_user = '{0}'", username);
+                query = String.Format("select user_control.uct_password from employee_ru inner join user_control on user_control.emp_ru_id = employee_ru.emp_ru_id inner join position on position.pos_id = employee_ru.pos_id where user_control.uct_user ='{0}'", username);
                 command.CommandText = query;
                 string dbpassword = command.ExecuteScalar().ToString();
                 if (dbpassword == password)
                 {
-                    query = String.Format("select user_control.uct_user from ((employee_ru inner join user_control On user_control.emp_ru_id = employee_ru.emp_ru_id) inner join position On position.pos_id = employee_ru.pos_id) inner join privilege On privilege.emp_ru_id = employee_ru.emp_ru_id where user_control.uct_user =  '{0}' ", username);
+                    query = String.Format("select employee_ru.emp_ru_name , position.pos_name  from employee_ru inner join user_control on user_control.emp_ru_id = employee_ru.emp_ru_id inner join position on position.pos_id = employee_ru.pos_id where user_control.uct_user = '{0}' ", username);
                     command.CommandText = query;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
 
-                        string username1 = reader.GetString(0);
+                        string emp_name = reader.GetString(0);
+
+                        string position_name = reader.GetString(1);
 
 
-
-                        employee_ru ru = new employee_ru(username, password,username1);
+                        nurse ru = new nurse(emp_name,username, password, position_name);
                         return ru;
 
                     }
@@ -144,33 +145,4 @@ public class employee_ru
 
         return null;
     }
-    public static employee_ru show_employees(string user_name)
-    {
-        string query = String.Format("SELECT employee_ru.emp_ru_name,position.pos_name,privilege.privil_status from ((employee_ru inner join user_control On user_control.emp_ru_id = employee_ru.emp_ru_id) inner join position On position.pos_id = employee_ru.pos_id) inner join privilege On privilege.emp_ru_id = employee_ru.emp_ru_id where user_control.uct_user = '{0}'", user_name);
-   
-        try
-        {
-            conn.Open();
-            command.CommandText = query;
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                string empname = reader.GetString(0);
-                string posname = reader.GetString(1);
-                string status = reader.GetString(2);
-
-
-                employee_ru ru = new employee_ru(empname,posname,status,user_name);
-                return ru;
-
-            }
-
-            }
-        finally
-        {
-            conn.Close();
-        }
-        return null;
-    }
-
 }

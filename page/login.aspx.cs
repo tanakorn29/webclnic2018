@@ -22,6 +22,7 @@ public partial class page_login : System.Web.UI.Page
 
      doctor doc = doctor.Login_doctor(Username, Password);
 
+        nurse nu = nurse.Login_nurse(Username, Password);
         if (ru != null)
         {
             string user = ru.username;
@@ -29,7 +30,7 @@ public partial class page_login : System.Web.UI.Page
 
      if(show_name != null)
             {
-                if (show_name.status == "อนุญาติ")
+                if (show_name.status == "อนุญาต")
                 {
                     Session["staff_name"] = show_name.emp_ru_name;
                     if (show_name.pos_name == "เจ้าหน้าที่")
@@ -55,6 +56,8 @@ public partial class page_login : System.Web.UI.Page
                 }
                 else
                 {
+                 //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
+                    
                     Session["staff_name"] = show_name.emp_ru_name;
                     if (show_name.pos_name == "พยาบาล")
                     {
@@ -80,7 +83,22 @@ public partial class page_login : System.Web.UI.Page
             Session["doc_name"] = doc.emp_doc_name;
             Response.Redirect("../Page/index_doctor.aspx");
         }
-        
+        else if (nu != null)
+        {
+
+            Session["nurse_name"] = nu.emp_ru_name;
+         
+            if (nu.pos_name == "พยาบาล")
+            {
+                Response.Redirect("../Page/appointment_management_index.aspx");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
+            }
+            Response.Redirect("../Page/index_doctor.aspx");
+        }
+
         else
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่พบข้อมูลในระบบ');", true);

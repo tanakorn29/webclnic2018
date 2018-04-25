@@ -8,11 +8,11 @@ public class app_update : IHttpHandler {
          [WebMethod]
     public void ProcessRequest (HttpContext context) {
         context.Response.ContentType = "text/plain";
-        string opd = ""+ context.Session["staff_name"];
-        appointment update = new appointment(opd);
+  //      string opd = ""+ context.Session["staff_name"];
+    //    appointment update = new appointment(opd);
         JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-        context.Response.Write(serializer.Serialize(opd));
+    //    context.Response.Write(serializer.Serialize(opd));
 
         /*
     string a = "นายธนากร ณ ระนอง";

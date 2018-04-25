@@ -11,10 +11,11 @@ public partial class page_app_management : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Fillapp();
-       int count_people = appointment.count_app();
-        lblnumber.Text = " " + count_people;
+      //  Fillapp();
+     //  int count_people = appointment.count_app();
+     //   lblnumber.Text = " " + count_people;
     }
+    /*
     private void Fillapp()
     {
         ArrayList app = new ArrayList();
@@ -91,6 +92,8 @@ public partial class page_app_management : System.Web.UI.Page
         }
        lbloutput.Text = sb.ToString();
     }
+
+    */
     protected void btnapp_Click(object sender, EventArgs e)
     {
 
@@ -98,6 +101,20 @@ public partial class page_app_management : System.Web.UI.Page
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Fillapp();
+        // Fillapp();
+        GridView1.Visible = true;
+
+    }
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridViewRow row = GridView1.SelectedRow;
+        txtdate.Text=  row.Cells[1].Text;
+        txttime.Text = row.Cells[2].Text;
+        txtremark.Text = row.Cells[3].Text;
+        txtdoctor.Text = row.Cells[4].Text;
+        txtopd.Text = row.Cells[5].Text;
+     
+
     }
 }
