@@ -25,13 +25,14 @@
   </tr>
              <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-          <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataSourceID="SqlDataSource1" EmptyDataText="ค้นหาไม่เจอ" Height="158px" Visible="False" Width="872px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+          <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataSourceID="SqlDataSource1" EmptyDataText="ค้นหาไม่เจอ" Height="158px" Visible="False" Width="872px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="app_id">
               <Columns>
                   <asp:CommandField ShowSelectButton="True" />
+                  <asp:BoundField DataField="app_id" HeaderText="หมายเลขอ้างอิงการนัดหมาย" SortExpression="app_id" InsertVisible="False" ReadOnly="True" />
                   <asp:BoundField DataField="app_date" HeaderText="วันที่นัดหมาย" SortExpression="app_date" />
-                  <asp:BoundField DataField="app_time" HeaderText="เวลาการนัดหมาย" SortExpression="app_time" />
-                  <asp:BoundField DataField="app_remark" HeaderText="หมายเหตุ" SortExpression="app_remark" />
-                  <asp:BoundField DataField="emp_doc_name" HeaderText="ชื่อแพทย์ที่เข้าพบ" SortExpression="emp_doc_name" />
+                  <asp:BoundField DataField="app_time" HeaderText="เวลานัดหมาย" SortExpression="app_time" />
+                  <asp:BoundField DataField="app_remark" HeaderText="หมายเหตุการนัดหมาย" SortExpression="app_remark" />
+                  <asp:BoundField DataField="emp_doc_name" HeaderText="แพทย์ที่เข้าพบ" SortExpression="emp_doc_name" />
                   <asp:BoundField DataField="opd_name" HeaderText="ชื่อคนไข้" SortExpression="opd_name" />
               </Columns>
               <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
@@ -44,7 +45,7 @@
               <SortedDescendingCellStyle BackColor="#F1E5CE" />
               <SortedDescendingHeaderStyle BackColor="#93451F" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  (appointment.status_approve = @status_approve)">
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select appointment.app_id,appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  (appointment.status_approve = @status_approve) AND appointment.status_app = 1">
               <SelectParameters>
                   <asp:ControlParameter ControlID="DropDownList1" Name="status_approve" PropertyName="SelectedValue" Type="Int32" />
               </SelectParameters>
@@ -58,22 +59,32 @@
         
         
   </tr>
+             <tr class="active">
+      <td class="active" style="width: 70px">
+        <k2>เลขที่อ้างอิงการนัดหมาย </k2>
+      </td>
+          <td class="active" style="width: 230px">
+        <k2><asp:TextBox ID="txtnum" class="form-control" runat="server" Width="229px" Enabled="False"></asp:TextBox> </k2>
+      </td>
+        
+        
+  </tr>
             <tr class="active">
       <td class="active" style="width: 70px">
         <k2>วันที่นัดหมาย </k2>
       </td>
           <td class="active" style="width: 230px">
-        <k2><asp:TextBox ID="txtdate" class="form-control" runat="server" Width="457px" Enabled="False"></asp:TextBox> </k2>
+        <k2><asp:TextBox ID="txtdate" class="form-control" runat="server" Width="229px" Enabled="False" TextMode="Date"></asp:TextBox> </k2>
       </td>
         
         
   </tr>
               <tr class="active">
-      <td class="active" style="width: 70px">
+      <td class="active" style="width: 70px; height: 50px;">
         <k2>เวลาการนัดหมาย</k2>
       </td>
-          <td class="active" style="width: 230px">
-        <k2><asp:TextBox ID="txttime" class="form-control" runat="server" Width="457px" Enabled="False"></asp:TextBox> </k2>
+          <td class="active" style="width: 230px; height: 50px;">
+        <k2><asp:TextBox ID="txttime" class="form-control" runat="server" Width="231px" Enabled="False" TextMode="Time"></asp:TextBox> </k2>
       </td>
         
         
@@ -111,7 +122,9 @@
   
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="อนุมัติใบนัดหมาย" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </k2>
+        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="อนุมัติใบนัดหมาย" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <asp:Button ID="Button1" runat="server" class="btn btn-default"  Height="41px" Text="ยกเลิกการนัดหมาย" Width="171px" OnClick="Button1_Click" />
+          </k2>
       </td>
         
         

@@ -45,6 +45,8 @@ public class appointment
         this.status_app = status_app;
     }
 
+
+
     public appointment(DateTime app_date, string app_time,
     string app_remark, string doc_name, string opd_name, int status_approve, int status_app)
     {
@@ -115,6 +117,57 @@ string app_remark, string opd_name)
         this.status_approve = status_approve;
 
     }
+    public appointment(int app_id,DateTime app_date, string app_time)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.app_id = app_id;
+        this.app_date = app_date;
+        this.app_time = app_time;
+
+    }
+
+
+
+    public static string update_app_opd(appointment app)
+    {
+
+        try
+        {
+            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 4 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            return "อัพเดตข้อมูลเรียบร้อย";
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
+
+
+    public static string cancel_app(appointment app)
+    {
+
+        try
+        {
+            string query = String.Format("Update appointment set status_app = 0 where app_id = {0}", app.app_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            return "อัพเดตข้อมูลเรียบร้อย";
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
+
     public static ArrayList sent_app_nurse()
     {
 
@@ -301,6 +354,42 @@ string app_remark, string opd_name)
         }
             return null;
     }
+
+    public static appointment show_app2(int status_app, int status)
+    {
+        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  appointment.status_app = {0} AND appointment.status_approve = {1}", status_app, status);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DateTime app_date = reader.GetDateTime(0);
+                string app_time = reader.GetString(1);
+                string app_remark = reader.GetString(2);
+                string employee_doctor = reader.GetString(3);
+                string opd_name1 = reader.GetString(4);
+                int status_approve1 = reader.GetInt32(5);
+
+                appointment app = new appointment(app_date, app_time, app_remark, employee_doctor, opd_name1, status_approve1, status_app);
+                return app;
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
+
+
+
+
 
     public static DataTable  show_app_history(string opd_name)
     {

@@ -27,17 +27,26 @@ public partial class page_appointment : System.Web.UI.Page
             lblremark.Text = app.app_remark;
             Session["remark"] = app.app_remark;
                 lbldoctor.Text = app.doc_name;
-                
+            int status_app1 = app.status_app;
                 if (app.status_approve == 1)
                 {
                     lblstatus.Text = "นัดหมายการรักษาปกติ";
                     Session["status1"] = "นัดหมายการรักษาปกติ";
 
                 }
-                else if (app.status_approve == 2)
+                else if (app.status_approve == 4)
                 {
+              
                     lblstatus.Text = "แพทย์ขอเลื่อนนัด";
                     Session["status1"] = "แพทย์ขอเลื่อนนัด";
+
+                
+            
+
+                
+                    
+                
+          
                 } else if (app.status_approve == 3)
             {
                 lblstatus.Text = "รออนุมัติการนัดหมาย";
