@@ -11,7 +11,7 @@ public partial class page_joson : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        GetData();
     }
 
     [WebMethod]
@@ -19,21 +19,21 @@ public partial class page_joson : System.Web.UI.Page
     public static string GetData()
 
     {
-        /*
+      
         Dictionary<string, string> name = new Dictionary<string, string>();
 
         name.Add("1", "Sourav Kayal");
 
         name.Add("2", "Ram mishra");
-        */
-
+        string myJsonString = (new JavaScriptSerializer()).Serialize(name);
+        /*
         string name = "นายธนากร ณ ระนอง";
       
 
         appointment app = new appointment(name);
         string name1 = appointment.update_status(app);
         string myJsonString = (new JavaScriptSerializer()).Serialize(name1);
-
+        */
         return myJsonString;
 
     }

@@ -51,6 +51,15 @@ public class doctor
         this.emp_doc_specialist = emp_doc_specialist;
 
     }
+    public doctor(int emp_doc_id, string emp_doc_name)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.emp_doc_id = emp_doc_id;
+        this.emp_doc_name = emp_doc_name;
+
+    }
     public doctor(
      string emp_doc_idcard, string emp_doc_birth, string emp_doc_name)
     {
@@ -113,5 +122,36 @@ public class doctor
 
         return null;
     }
-  
+    public static doctor doc_idshow(string doc_name)
+    {
+        string query = String.Format("select emp_doc_id from employee_doctor where emp_doc_name = '{0}' ", doc_name);
+        
+        try
+        {
+          
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+
+                int doc_id = reader.GetInt32(0);
+
+
+
+
+                        doctor doc = new doctor(doc_id,doc_name);
+                        return doc;
+
+                    }
+       
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return null;
+    }
 }

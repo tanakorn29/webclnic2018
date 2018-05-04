@@ -4,18 +4,9 @@
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
  <script>
-     function updatejson() {
-        
-         if (confirm("Confirm Proceed Further?")) {
-             myMethod1(); //OK Callback function here..
-         } else {
-             myMethod2(); //CANCEL Callback function here..
-         }
+ 
+     
 
-
-     }
-     function myMethod1() {
-         //any stuff here..
          $.ajax({
 
              type: "POST",
@@ -30,8 +21,8 @@
 
                  var names = response.d;
 
-                 //alert(names);
-                 alert("อัพเดตแล้ว");
+                alert(names);
+                // alert("อัพเดตแล้ว");
              },
 
              failure: function (response) {
@@ -42,12 +33,9 @@
 
          });
 
-     }
+     
 
-     function myMethod2() {
-         //any stuff here..
-         alert("2");
-     }
+
 
  </script>
 

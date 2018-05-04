@@ -13,31 +13,60 @@
             <div class="col">
                 <div id="schedule" class="jqs-demo mb-3"></div>
             </div>
-          <asp:Button ID="btnregister" runat="server" Text="ลงเวลาปฏิบัติงาน" BackColor="White" Height="45px" Width="203px" />
+     <center>    <asp:Button ID="btnregister" runat="server" Text="เลื่อนวันและเวลาปฏิบัติงาน" BackColor="White" Height="45px" Width="203px" OnClick="btnregister_Click" /></center> 
         </div>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="../js/jquery.schedule.js"></script>
         <script>
 
-         //   $("#schedule").jqs();
+            //   $("#schedule").jqs();
+
+            $.ajax({
+
+                type: "POST",
+
+                url: "Schedule.aspx/GetData",
+
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+
+                success: function (response) {
+
+                    var names = response.d;
+
+
+      // alert(names);
+                    // alert("อัพเดตแล้ว");
+                },
+
+                failure: function (response) {
+
+                    alert(response.d);
+
+                }
+
+            });
+
             $("#schedule").jqs({
                 mode: "read",
                 data: [{
                     day: 0,
                     periods: [
-                        ["20:00", "21:00"],
-                        ["20:00", "22:00"], // Invalid period, not displayed
-                        ["00:00", "02:00"]
+
+                      //  ["20:00", "22:00"]
                     ]
                 }, {
-                    day: 3,
+                    day: 1,
                     periods: [
-                        ["00:00", "08:30"],
-                        ["09:00", "12:00"]
+                     //   ["00:00", "08:30"]
                     ]
                 }]
             });
+
+
         </script>
 
 </body>
