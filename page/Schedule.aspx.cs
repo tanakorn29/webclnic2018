@@ -11,39 +11,42 @@ public partial class page_Schedule : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       // GetData();
-    }
+        //    GetData();
 
+       lbldoctor.Text = "" + Session["doc_name"];
+    }
+    /*
     [WebMethod]
 
     public static string GetData()
 
     {
-
-        Dictionary<string, string> name = new Dictionary<string, string>();
-        string doc_name = "น.พ. A";
-
-        schedule_work_doctor swd = schedule_work_doctor.swd_show(doc_name);
-
-        if(swd != null)
-        {
-            name.Add(swd.swd_day_work,swd.swd_start_time);
-            name.Add(Convert.ToString(swd.room_id),"");
-        }
-
-
-        string myJsonString = (new JavaScriptSerializer()).Serialize(name);
         /*
-        string name = "นายธนากร ณ ระนอง";
-      
+                Dictionary<string, string> name = new Dictionary<string, string>();
+                string doc_name = "น.พ. A";
 
-        appointment app = new appointment(name);
-        string name1 = appointment.update_status(app);
-        string myJsonString = (new JavaScriptSerializer()).Serialize(name1);
-        */
-        return myJsonString;
+                schedule_work_doctor swd = schedule_work_doctor.swd_show(doc_name);
 
-    }
+                if(swd != null)
+                {
+                    name.Add(swd.swd_day_work,swd.swd_start_time);
+                    name.Add(Convert.ToString(swd.room_id),"");
+                }
+
+
+                string myJsonString = (new JavaScriptSerializer()).Serialize(name);*/
+    /*
+  Dictionary<string, string> name = new Dictionary<string, string>();
+name.Add("{ mode: 'read'","");
+name.Add ("20:00", "22:00");
+
+//     string name = "20:00, 22:00";
+
+string myJsonString = (new JavaScriptSerializer()).Serialize(name);
+
+return myJsonString;
+
+}   */
 
     protected void btnregister_Click(object sender, EventArgs e)
     {

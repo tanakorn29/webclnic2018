@@ -8,12 +8,38 @@
     <link rel="stylesheet" href="../css/jquery.schedule-demo.css">
  
     <body>
-  <center>  <P1>ตารางปฏิบัติงานแพทย์</P1> </center>
+  <center>  <P1>ตารางปฏิบัติงานแพทย์  <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label></P1> 
+      
+        </center>
       <div class="row">
             <div class="col">
-                <div id="schedule" class="jqs-demo mb-3"></div>
+           <!--  <div id="schedule" class="jqs-demo mb-3"></div>  -->    
+        <center>        <asp:GridView ID="GridView1" runat="server" Height="120px" Width="784px" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:BoundField DataField="swd_day_work" HeaderText="swd_day_work" SortExpression="swd_day_work" />
+                        <asp:BoundField DataField="swd_start_time" HeaderText="swd_start_time" SortExpression="swd_start_time" />
+                        <asp:BoundField DataField="swd_end_time" HeaderText="swd_end_time" SortExpression="swd_end_time" />
+                        <asp:BoundField DataField="room_id" HeaderText="room_id" SortExpression="room_id" />
+                    </Columns>
+                    <FooterStyle BackColor="#CCCC99" />
+                    <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                    <RowStyle BackColor="#F7F7DE" />
+                    <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                    <SortedAscendingHeaderStyle BackColor="#848384" />
+                    <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                    <SortedDescendingHeaderStyle BackColor="#575357" />
+                </asp:GridView>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="
+select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND employee_doctor.emp_doc_name =@emp_doc_name">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
+                    </SelectParameters>
+                </asp:SqlDataSource>    </center> 
             </div>
-     <center>    <asp:Button ID="btnregister" runat="server" Text="เลื่อนวันและเวลาปฏิบัติงาน" BackColor="White" Height="45px" Width="203px" OnClick="btnregister_Click" /></center> 
+     <center>    <asp:Button ID="btnregister" runat="server" Text="เลื่อนวันและเวลาปฏิบัติงาน" BackColor="#000066" class="btn btn-primary" Height="45px" Width="203px" OnClick="btnregister_Click" /></center> 
         </div>
           <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -38,8 +64,9 @@
                     var names = response.d;
 
 
-      // alert(names);
-                    // alert("อัพเดตแล้ว");
+                    alert(names);
+
+                  
                 },
 
                 failure: function (response) {
@@ -50,13 +77,16 @@
 
             });
 
-            $("#schedule").jqs({
+            $("#schedule").jqs(names/*{
                 mode: "read",
-                data: [{
+                days: ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"],
+                data: [
+
+                   {
                     day: 0,
                     periods: [
 
-                      //  ["20:00", "22:00"]
+                   //  [response.d]
                     ]
                 }, {
                     day: 1,
@@ -64,7 +94,8 @@
                      //   ["00:00", "08:30"]
                     ]
                 }]
-            });
+            }*/);
+            // alert("อัพเดตแล้ว");
 
 
         </script>
