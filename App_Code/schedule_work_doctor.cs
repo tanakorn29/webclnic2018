@@ -199,7 +199,7 @@ int room_id,
             //  command.CommandText = query;
             //  int amountOfUsers = (int)command.ExecuteScalar();
             //  if (amountOfUsers < 1)
-            //  {
+            //  { 
             string query = String.Format("Update schedule_work_doctor set swd_note = 'รอการทำงานแทน',swd_status_room = 2 where swd_id = {0}", swd.swd_id);
             conn.Open();
             command.CommandText = query;
