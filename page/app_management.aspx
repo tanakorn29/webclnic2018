@@ -14,8 +14,8 @@
       <td class="active" style="width: 230px" colspan="2">
           สถานะการนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DropDownList1"  class="dropdown-item" runat="server" Height="42px" Width="193px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
               <asp:ListItem Value="9">กรุณาเลือกสถานะการนัดหมาย</asp:ListItem>
-              <asp:ListItem Value="2">แพทย์ขอเลื่อนนัด</asp:ListItem>
-              <asp:ListItem Value="3">คนไข้ขอเลื่อนนัด</asp:ListItem>
+              <asp:ListItem Value="3">แพทย์ขอเลื่อนนัด</asp:ListItem>
+              <asp:ListItem Value="4">คนไข้ขอเลื่อนนัด</asp:ListItem>
           </asp:DropDownList>
       
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; จำนวนคนไข้ที่มีการเลื่อนนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -28,12 +28,15 @@
           <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataSourceID="SqlDataSource1" EmptyDataText="ค้นหาไม่เจอ" Height="158px" Visible="False" Width="872px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="app_id">
               <Columns>
                   <asp:CommandField ShowSelectButton="True" />
-                  <asp:BoundField DataField="app_id" HeaderText="หมายเลขอ้างอิงการนัดหมาย" SortExpression="app_id" InsertVisible="False" ReadOnly="True" />
-                  <asp:BoundField DataField="app_date" HeaderText="วันที่นัดหมาย" SortExpression="app_date" />
-                  <asp:BoundField DataField="app_time" HeaderText="เวลานัดหมาย" SortExpression="app_time" />
-                  <asp:BoundField DataField="app_remark" HeaderText="หมายเหตุการนัดหมาย" SortExpression="app_remark" />
-                  <asp:BoundField DataField="emp_doc_name" HeaderText="แพทย์ที่เข้าพบ" SortExpression="emp_doc_name" />
+                  <asp:BoundField DataField="app_id" HeaderText="รหัสอ้างอิงการนัด" SortExpression="app_id" InsertVisible="False" ReadOnly="True" />
+                  <asp:BoundField DataField="app_date" HeaderText="วันที่นัด" SortExpression="app_date" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="False" />
+                  <asp:BoundField DataField="app_time" HeaderText="เวลานัด" SortExpression="app_time" />
+                  <asp:BoundField DataField="app_remark" HeaderText="หมายเหตุ" SortExpression="app_remark" />
+                  <asp:BoundField DataField="emp_doc_name" HeaderText="ชื่อแพทย์ที่เข้าพบ" SortExpression="emp_doc_name" />
                   <asp:BoundField DataField="opd_name" HeaderText="ชื่อคนไข้" SortExpression="opd_name" />
+                  
+   
+                  
               </Columns>
               <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
               <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />

@@ -30,7 +30,7 @@ public partial class page_login : System.Web.UI.Page
 
      if(show_name != null)
             {
-                if (show_name.status == "อนุญาต")
+                if (show_name.status == "ได้รับสิทธิการรักษา")
                 {
                     Session["staff_name"] = show_name.emp_ru_name;
                     if (show_name.pos_name == "เจ้าหน้าที่")

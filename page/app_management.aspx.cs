@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -100,15 +101,22 @@ public partial class page_app_management : System.Web.UI.Page
       //  string ID = Convert.ToString(Session["ID"]);
         int num = Convert.ToInt16(Session["app_ID"]);
 
-        if (num == 2)
+        if (num != 4)
         {
             int app_id = Convert.ToInt16(txtnum.Text);
-            DateTime date = Convert.ToDateTime(txtdate.Text);
-            string time = txttime.Text;
+            System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("th-TH");
+            String strDate = "27-06-2560";
+            DateTime dateThai = Convert.ToDateTime(strDate, _cultureTHInfo);
 
-            appointment app = new appointment(app_id, date, time);
-            appointment.update_app_opd(app);
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('แจ้งคนไข้เรียบร้อยแล้ว');", true);
+
+            //  DateTime date = Convert.ToDateTime(txtdate.Text);
+            string date = txtdate.Text;
+          //  DateTime date = DateTime.ParseExact(txtdate.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            string time = txttime.Text;
+          //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date + "');", true);
+        appointment app = new appointment(app_id, date, time);
+          
+       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) +"');", true);
         }
     }
 
@@ -116,7 +124,7 @@ public partial class page_app_management : System.Web.UI.Page
     {
         // Fillapp();
         int num = Convert.ToInt32(DropDownList1.SelectedValue);
-        if(num == 2)
+        if(num == 3)
         {
             Session["app_ID"] = num;
             txtdate.Enabled = true;

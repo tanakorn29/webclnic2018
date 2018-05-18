@@ -12,6 +12,9 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
 
         //  txtroom.Text = "" + Session["doc_name"];
         txtdocname.Text = "" + Session["doc_name"]; 
+
+
+
     }
     /*
     protected void btnsubmit_Click(object sender, EventArgs e)
@@ -29,17 +32,39 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
     */
     protected void btnsummit_Click(object sender, EventArgs e)
     {
-        string name = "" + Session["doc_name"];
+    
+     
+       
+       schedule_work_doctor swd = new schedule_work_doctor(Convert.ToInt32(txtswd.Text));
+
+        schedule_work_doctor.update_chenge_note(swd);
+
+
+
+    //ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_chenge_note(swd) + "');", true);
+
+
+
+        Response.Redirect("../page/next_swd.aspx");
+
+
+        // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + doc.emp_doc_id + "');", true);
+
+        //     schedule_work_doctor swd = new schedule_work_doctor(DropDownList1.SelectedValue.ToString(), DropDownList2.SelectedValue.ToString(), Convert.ToInt32(txtroom.Text), doc.emp_doc_id);
+
+        //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_next_swd(swd) + "');", true);
+
+
+
+
+
+
         //  int s = 1;
-        doctor doc = doctor.doc_idshow(name);
-        if (doc != null)
-        {
-            schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txttime.Text, Convert.ToInt32(txtroom.Text), doc.emp_doc_id);
 
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_next_swd(swd) + "');", true);
-        }
+
+        // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + DropDownList1.SelectedValue.ToString()+ "');", true);
     }
-
+    /*
     protected void ddlroom_SelectedIndexChanged(object sender, EventArgs e)
     {
         txtroom.Text = ddlroom.SelectedItem.ToString();
@@ -55,5 +80,18 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
     protected void ddltime_SelectedIndexChanged(object sender, EventArgs e)
     {
         txttime.Text = ddltime.SelectedItem.ToString();
+    }
+
+    */
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridViewRow row = GridView1.SelectedRow;
+     txtswd.Text = row.Cells[1].Text;
+    }
+
+    protected void txtdocname_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

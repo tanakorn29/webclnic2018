@@ -21,20 +21,20 @@ public partial class page_appointment : System.Web.UI.Page
             appointment app = appointment.show_app(status_app, name);
             if (app != null)
             {
-                lbldate.Text = Convert.ToString(app.app_date);
-            Session["date"] = Convert.ToString(app.app_date);
-                lbltime.Text = app.app_time;
+            lbldate.Text = ""+ app.date_app;
+       Session["date"] = app.date_app;
+            lbltime.Text = app.app_time;
             lblremark.Text = app.app_remark;
             Session["remark"] = app.app_remark;
                 lbldoctor.Text = app.doc_name;
             int status_app1 = app.status_app;
-                if (app.status_approve == 1)
+                if (app.status_approve == 2)
                 {
                     lblstatus.Text = "นัดหมายการรักษาปกติ";
                     Session["status1"] = "นัดหมายการรักษาปกติ";
 
                 }
-                else if (app.status_approve == 4)
+                else if (app.status_approve == 3)
                 {
               
                     lblstatus.Text = "แพทย์ขอเลื่อนนัด";
@@ -47,7 +47,7 @@ public partial class page_appointment : System.Web.UI.Page
                     
                 
           
-                } else if (app.status_approve == 3)
+                } else if (app.status_approve == 4)
             {
                 lblstatus.Text = "รออนุมัติการนัดหมาย";
                 Session["status1"] = "รออนุมัติการนัดหมาย";

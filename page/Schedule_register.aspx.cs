@@ -122,4 +122,9 @@ public partial class page_Schedule_register : System.Web.UI.Page
     {
         txtdate.Text = DropDownList2.SelectedValue.ToString();
     }
+
+    protected void txtdate_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

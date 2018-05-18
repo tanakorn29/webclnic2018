@@ -76,7 +76,7 @@ where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_stat
                             <tr>
                 <td style="height: 20px">วันปฏิบัติงาน</td>
                 <td style="height: 20px"> 
-                   <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="438px" Enabled="False"></asp:TextBox>
+                   <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="438px" Enabled="False" OnTextChanged="txtdate_TextChanged"></asp:TextBox>
                 </td>
                
 

@@ -15,7 +15,8 @@ public class appointment
     private static SqlConnection conn;
     private static SqlCommand command;
     public int app_id { get; set; }
-    public DateTime app_date { get; set; }
+    public string app_date { get; set; }
+    public DateTime date_app { get; set; }
     public string app_time { get; set; }
     public string app_remark { get; set; }
     public string  doc_name { get; set; }
@@ -29,7 +30,7 @@ public class appointment
         conn = new SqlConnection(connectionString);
         command = new SqlCommand("", conn);
     }
-    public appointment(int app_id, DateTime app_date, string app_time,
+    public appointment(int app_id, string app_date,DateTime date_app , string app_time,
         string app_remark,string doc_name,string opd_name,int status_approve,int status_app)
     {
         //
@@ -37,6 +38,7 @@ public class appointment
         //
         this.app_id = app_id;
         this.app_date = app_date;
+        this.date_app = date_app;
         this.app_time = app_time;
         this.app_remark = app_remark;
         this.doc_name = doc_name;
@@ -47,14 +49,14 @@ public class appointment
 
 
 
-    public appointment(DateTime app_date, string app_time,
+    public appointment(DateTime date_app, string app_time,
     string app_remark, string doc_name, string opd_name, int status_approve, int status_app)
     {
         //
         // TODO: Add constructor logic here
         //
         
-        this.app_date = app_date;
+        this.date_app = date_app;
         this.app_time = app_time;
         this.app_remark = app_remark;
         this.doc_name = doc_name;
@@ -75,7 +77,7 @@ public class appointment
      
 
     }
-    public appointment(DateTime app_date, string app_time,
+    public appointment(string app_date, string app_time,
 string app_remark, string doc_name, string opd_name, int status_approve)
     {
         //
@@ -91,7 +93,7 @@ string app_remark, string doc_name, string opd_name, int status_approve)
 
 
     }
-    public appointment(DateTime app_date, string app_time,
+    public appointment(string app_date, string app_time,
 string app_remark, string opd_name)
     {
         //
@@ -117,7 +119,7 @@ string app_remark, string opd_name)
         this.status_approve = status_approve;
 
     }
-    public appointment(int app_id,DateTime app_date, string app_time)
+    public appointment(int app_id,string app_date, string app_time)
     {
         //
         // TODO: Add constructor logic here
@@ -135,7 +137,7 @@ string app_remark, string opd_name)
 
         try
         {
-            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 4 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
+            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 2 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
             conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
@@ -181,7 +183,7 @@ string app_remark, string opd_name)
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                DateTime app_date = reader.GetDateTime(0);
+                string app_date = reader.GetString(0);
                 string app_time = reader.GetString(1);
                 string app_remark = reader.GetString(2);
                 string employee_doctor = reader.GetString(3);
@@ -203,7 +205,7 @@ string app_remark, string opd_name)
 
         try
         {
-            string query = String.Format("Update appointment set app_date = '{0}',app_time = '{1}',status_approve = 3 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{2}' AND opd.opd_name = '{3}'", app.app_date,app.app_time,app.app_remark, app.opd_name);
+            string query = String.Format("Update appointment set app_date = '{0}',app_time = '{1}',status_approve = 4 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{2}' AND opd.opd_name = '{3}'", app.app_date,app.app_time,app.app_remark, app.opd_name);
             conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
@@ -254,7 +256,7 @@ string app_remark, string opd_name)
     {
 
 
-        string query = string.Format("select count(*) from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where status_approve = 2 OR status_approve = 3");
+        string query = string.Format("select count(*) from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where status_approve = 4 OR status_approve = 3");
         command.CommandText = query;
         try
         {
@@ -281,7 +283,7 @@ string app_remark, string opd_name)
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                DateTime app_date = reader.GetDateTime(0);
+                string app_date = reader.GetString(0);
                 string app_time = reader.GetString(1);
                 string app_remark = reader.GetString(2);
                 string employee_doctor = reader.GetString(3);
@@ -355,36 +357,7 @@ string app_remark, string opd_name)
             return null;
     }
 
-    public static appointment show_app2(int status_app, int status)
-    {
-        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  appointment.status_app = {0} AND appointment.status_approve = {1}", status_app, status);
-        try
-        {
-            conn.Open();
-            command.CommandText = query;
-            SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                DateTime app_date = reader.GetDateTime(0);
-                string app_time = reader.GetString(1);
-                string app_remark = reader.GetString(2);
-                string employee_doctor = reader.GetString(3);
-                string opd_name1 = reader.GetString(4);
-                int status_approve1 = reader.GetInt32(5);
-
-                appointment app = new appointment(app_date, app_time, app_remark, employee_doctor, opd_name1, status_approve1, status_app);
-                return app;
-            }
-
-
-        }
-        finally
-        {
-            conn.Close();
-        }
-        return null;
-    }
 
 
 

@@ -95,6 +95,16 @@ int room_id,
         this.room_id = room_id;
 
     }
+
+    public schedule_work_doctor(int swd_id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.swd_id = swd_id;
+
+   
+    }
     public static schedule_work_doctor check_room(string day,string time)
     {
         string query = string.Format("select swd_start_time,swd_status_room, room_id  from schedule_work_doctor where swd_day_work = '{0}' AND swd_status_room = 0 AND swd_start_time = '{1}' ", day,time);
@@ -151,26 +161,57 @@ int room_id,
         }
     }
 
-    public static string update_next_swd(schedule_work_doctor swd)
+
+    public static string updateswd2(schedule_work_doctor swd)
     {
-        string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work, swd.swd_start_time);
+        // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
         try
         {
+            //    conn.Open();
+            //  command.CommandText = query;
+            //  int amountOfUsers = (int)command.ExecuteScalar();
+            //  if (amountOfUsers < 1)
+            //  {
+            string query = String.Format("Update schedule_work_doctor set swd_status_room = 3,swd_note = 'รอการอนุมัติการเลื่อนปฏิบัติงาน',emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id, swd.room_id, swd.swd_start_time, swd.swd_day_work);
             conn.Open();
             command.CommandText = query;
-            int amountOfUsers = (int)command.ExecuteScalar();
-            if (amountOfUsers < 1)
-            {
-                query = String.Format("Update schedule_work_doctor set swd_status_room = 2 ,swd_note = 'เลื่อนปฏิบัติงาน',emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id, swd.room_id, swd.swd_start_time, swd.swd_day_work);
+            command.ExecuteNonQuery();
+            return "รอการอนุมัติการเลื่อนปฏิบัติงาน";
 
-                command.CommandText = query;
-                command.ExecuteNonQuery();
-                return "รอการอนุมัติการเลื่อนปฏิบัติงาน";
-            }
-            else
-            {
-                return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
-            }
+            //  }
+            // else
+            //  {
+            // return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
+            //  }
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    public static string update_chenge_note(schedule_work_doctor swd)
+    {
+        // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
+        try
+        {
+            //    conn.Open();
+            //  command.CommandText = query;
+            //  int amountOfUsers = (int)command.ExecuteScalar();
+            //  if (amountOfUsers < 1)
+            //  {
+            string query = String.Format("Update schedule_work_doctor set swd_note = 'รอการทำงานแทน',swd_status_room = 2 where swd_id = {0}", swd.swd_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+
+      
+            return "อัพเดตเรียบร้อย";
+            //  }
+            // else
+            //  {
+            // return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
+            //  }
         }
         finally
         {
@@ -214,6 +255,8 @@ int room_id,
 
         return null;
     }
+
+    
 
 
 }
