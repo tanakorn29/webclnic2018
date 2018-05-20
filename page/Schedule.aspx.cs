@@ -14,6 +14,18 @@ public partial class page_Schedule : System.Web.UI.Page
         //    GetData();
 
        lbldoctor.Text = "" + Session["doc_name"];
+        
+        btnworkswd.Visible = false;
+        schedule_work_doctor sc = schedule_work_doctor.swd_work(lbldoctor.Text);
+        if(sc != null)
+        {
+            if (sc.swd_status_room == 4)
+            {
+                btnworkswd.Visible = true;
+              //  Response.Redirect("../page/schedule_work.aspx");
+            }
+        }
+        
     }
     /*
     [WebMethod]
@@ -51,5 +63,10 @@ return myJsonString;
     protected void btnregister_Click(object sender, EventArgs e)
     {
         Response.Redirect("../page/next_worksxhedule.aspx");
+    }
+
+    protected void btnworkswd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("../page/schedule_work.aspx");
     }
 }

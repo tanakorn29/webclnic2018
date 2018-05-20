@@ -39,7 +39,7 @@ select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doct
                     </SelectParameters>
                 </asp:SqlDataSource>    </center> 
             </div>
-     <center>    <asp:Button ID="btnregister" runat="server" Text="เลื่อนวันและเวลาปฏิบัติงาน" BackColor="#000066" class="btn btn-primary" Height="45px" Width="203px" OnClick="btnregister_Click" /></center> 
+     <center>    <asp:Button ID="btnregister" runat="server" Text="เลื่อนวันและเวลาปฏิบัติงาน" BackColor="#000066" class="btn btn-primary" Height="45px" Width="203px" OnClick="btnregister_Click" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <asp:Button ID="btnworkswd" runat="server" Text="ทำงานแทน" BackColor="#000066" class="btn btn-primary" Height="45px" Width="203px" OnClick="btnworkswd_Click" Visible="False"/></center> 
         </div>
           <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

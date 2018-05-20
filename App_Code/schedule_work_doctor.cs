@@ -96,14 +96,24 @@ int room_id,
 
     }
 
+    public schedule_work_doctor(int swd_id, int emp_doc_id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.swd_id = swd_id;
+        this.emp_doc_id = emp_doc_id;
+   
+    }
+
     public schedule_work_doctor(int swd_id)
     {
         //
         // TODO: Add constructor logic here
         //
         this.swd_id = swd_id;
+    
 
-   
     }
     public static schedule_work_doctor check_room(string day,string time)
     {
@@ -133,7 +143,47 @@ int room_id,
         }
         return null;
     }
+    public schedule_work_doctor(int swd_status_room, string emp_doc_name)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.swd_status_room = swd_status_room;
+        this.emp_doc_name = emp_doc_name;
+    }
 
+    public static schedule_work_doctor swd_work(string name)
+    {
+        string query = String.Format("select schedule_work_doctor.swd_status_room,employee_doctor.emp_doc_name from employee_doctor inner join schedule_work_doctor on schedule_work_doctor.emp_doc_id = employee_doctor.emp_doc_id where emp_doc_name = '{0}' AND swd_status_room = 4", name);
+
+        try
+        {
+
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+                int swd_status_room1  = reader.GetInt32(0);
+                string emp_name = reader.GetString(1);
+        
+
+
+                schedule_work_doctor swd = new schedule_work_doctor(swd_status_room1,emp_name);
+                return swd;
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return null;
+    }
     public static string updateswd(schedule_work_doctor swd)
     {
        // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
@@ -218,7 +268,34 @@ int room_id,
             conn.Close();
         }
     }
+    public static string update_chenge_note_work(schedule_work_doctor swd)
+    {
+        // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
+        try
+        {
+            //    conn.Open();
+            //  command.CommandText = query;
+            //  int amountOfUsers = (int)command.ExecuteScalar();
+            //  if (amountOfUsers < 1)
+            //  { 
+            string query = String.Format("Update schedule_work_doctor set swd_note = '',swd_status_room = 1 where swd_id = {0}", swd.swd_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
 
+
+            return "อัพเดตเรียบร้อย";
+            //  }
+            // else
+            //  {
+            // return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
+            //  }
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
 
 
     public static schedule_work_doctor swd_show(string name)
