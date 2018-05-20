@@ -137,7 +137,7 @@ string app_remark, string opd_name)
 
         try
         {
-            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 2 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
+            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 5 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
             conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
@@ -150,6 +150,23 @@ string app_remark, string opd_name)
 
     }
 
+    public static string update_app_doctor_next(appointment app)
+    {
+
+        try
+        {
+            string query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 2 where app_id = {2}", app.app_date, app.app_time, app.app_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            return "อัพเดตข้อมูลเรียบร้อย";
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
 
     public static string cancel_app(appointment app)
     {
@@ -240,7 +257,7 @@ string app_remark, string opd_name)
 
         try
         {
-            string query = String.Format("Update appointment set status_approve = 1 , status_app = 1  from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark =  '{0}' AND opd.opd_name = '{1}'", app.app_remark,app.opd_name);
+            string query = String.Format("Update appointment set status_approve = 2 , status_app = 1  from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark =  '{0}' AND opd.opd_name = '{1}'", app.app_remark,app.opd_name);
             conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();

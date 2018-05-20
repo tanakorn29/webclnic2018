@@ -22,7 +22,7 @@ public partial class page_next_app : System.Web.UI.Page
         Response.Redirect("../page/appointment.aspx");
 
     }
-
+    /*
     protected void btncancel_Click(object sender, EventArgs e)
     {
         string name = "" + Session["staff_name"];
@@ -35,4 +35,5 @@ public partial class page_next_app : System.Web.UI.Page
         
     
     }
+    */
 }

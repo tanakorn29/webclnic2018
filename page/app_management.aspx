@@ -125,7 +125,7 @@
   
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="อนุมัติใบนัดหมาย" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <asp:Button ID="Button1" runat="server" class="btn btn-default"  Height="41px" Text="ยกเลิกการนัดหมาย" Width="171px" OnClick="Button1_Click" />
           </k2>
       </td>

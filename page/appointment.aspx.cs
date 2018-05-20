@@ -52,8 +52,13 @@ public partial class page_appointment : System.Web.UI.Page
                 lblstatus.Text = "รออนุมัติการนัดหมาย";
                 Session["status1"] = "รออนุมัติการนัดหมาย";
             }
-            
+            else if (app.status_approve == 5)
+            {
+                lblstatus.Text = "อนุมัติการเลื่อนนัดหมายจากแพทย์";
+                Session["status1"] = "อนุมัติการเลื่อนนัดหมายจากแพทย์";
             }
+
+        }
 
         
           
@@ -76,7 +81,8 @@ public partial class page_appointment : System.Web.UI.Page
             Response.Redirect("../page/patient_appointment_next.aspx");
         }else if (status_approve == "แพทย์ขอเลื่อนนัด")
         {
-            Response.Redirect("../page/next_app.aspx");
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอข้อมูลนัดหมายจากพยาบาล');", true);
+            //  Response.Redirect("../page/next_app.aspx");
             //  string opd = "" + Session["staff_name"];
             //   appointment update = new appointment(opd);
 
@@ -122,6 +128,10 @@ public partial class page_appointment : System.Web.UI.Page
         else if(status_approve == "รออนุมัติการนัดหมาย")
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอการอนุมัติจากแพทย์');", true);
+        }
+        else if (status_approve == "อนุมัติการเลื่อนนัดหมายจากแพทย์")
+        {
+            Response.Redirect("../page/next_app.aspx");
         }
         else
         {
