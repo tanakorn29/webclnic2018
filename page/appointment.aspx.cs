@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
@@ -21,12 +22,19 @@ public partial class page_appointment : System.Web.UI.Page
             appointment app = appointment.show_app(status_app, name);
             if (app != null)
             {
-            lbldate.Text = ""+ app.date_app;
-       Session["date"] = app.date_app;
+            CultureInfo culture = new CultureInfo("en-US");
+            DateTime date_app = Convert.ToDateTime(app.date_app , culture);
+            string app_date = String.Format("{0:yyyy-MM-dd}", date_app, culture);
+            string date_th = date_app.ToString("yyyy-MM-dd", culture);
+            lbldate.Text = ""+ date_th;
+
+            Session["date"] = date_th;
             lbltime.Text = app.app_time;
             lblremark.Text = app.app_remark;
             Session["remark"] = app.app_remark;
                 lbldoctor.Text = app.doc_name;
+            Session["doctor_name"] = app.doc_name;
+
             int status_app1 = app.status_app;
                 if (app.status_approve == 2)
                 {
@@ -54,8 +62,8 @@ public partial class page_appointment : System.Web.UI.Page
             }
             else if (app.status_approve == 5)
             {
-                lblstatus.Text = "อนุมัติการเลื่อนนัดหมายจากแพทย์";
-                Session["status1"] = "อนุมัติการเลื่อนนัดหมายจากแพทย์";
+                lblstatus.Text = "อนุมัติการเลื่อนนัดหมาย";
+                Session["status1"] = "อนุมัติการเลื่อนนัดหมาย";
             }
 
         }
@@ -129,7 +137,7 @@ public partial class page_appointment : System.Web.UI.Page
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอการอนุมัติจากแพทย์');", true);
         }
-        else if (status_approve == "อนุมัติการเลื่อนนัดหมายจากแพทย์")
+        else if (status_approve == "อนุมัติการเลื่อนนัดหมาย")
         {
             Response.Redirect("../page/next_app.aspx");
         }

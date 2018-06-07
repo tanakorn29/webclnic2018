@@ -12,27 +12,19 @@
   
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-          สถานะการนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DropDownList1"  class="dropdown-item" runat="server" Height="42px" Width="193px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-              <asp:ListItem Value="9">กรุณาเลือกสถานะการนัดหมาย</asp:ListItem>
-              <asp:ListItem Value="3">แพทย์ขอเลื่อนนัด</asp:ListItem>
-              <asp:ListItem Value="4">คนไข้ขอเลื่อนนัด</asp:ListItem>
-          </asp:DropDownList>
-      
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; จำนวนคนไข้ที่มีการเลื่อนนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;จำนวนคนไข้ที่มีการเลื่อนนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <asp:Label ID="lblnumber" runat="server"></asp:Label>
 &nbsp; คน</td>
         
   </tr>
              <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-          <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataSourceID="SqlDataSource1" EmptyDataText="ค้นหาไม่เจอ" Height="158px" Visible="False" Width="872px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="app_id">
+          <center><asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataSourceID="SqlDataSource1" EmptyDataText="ค้นหาไม่เจอ" Height="158px" Visible="False" Width="872px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="app_id">
               <Columns>
                   <asp:CommandField ShowSelectButton="True" />
-                  <asp:BoundField DataField="app_id" HeaderText="รหัสอ้างอิงการนัด" SortExpression="app_id" InsertVisible="False" ReadOnly="True" />
-                  <asp:BoundField DataField="app_date" HeaderText="วันที่นัด" SortExpression="app_date" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="False" />
-                  <asp:BoundField DataField="app_time" HeaderText="เวลานัด" SortExpression="app_time" />
+                  <asp:BoundField DataField="app_id" HeaderText="รหัสอ้างอิงการนัดหมาย" SortExpression="app_id" InsertVisible="False" ReadOnly="True" />
                   <asp:BoundField DataField="app_remark" HeaderText="หมายเหตุ" SortExpression="app_remark" />
-                  <asp:BoundField DataField="emp_doc_name" HeaderText="ชื่อแพทย์ที่เข้าพบ" SortExpression="emp_doc_name" />
+                  <asp:BoundField DataField="emp_doc_name" HeaderText="แพทย์ผู้ทำการรักษา" SortExpression="emp_doc_name" />
                   <asp:BoundField DataField="opd_name" HeaderText="ชื่อคนไข้" SortExpression="opd_name" />
                   
    
@@ -48,13 +40,54 @@
               <SortedDescendingCellStyle BackColor="#F1E5CE" />
               <SortedDescendingHeaderStyle BackColor="#93451F" />
           </asp:GridView>
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select appointment.app_id,appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  (appointment.status_approve = @status_approve) AND appointment.status_app = 1">
-              <SelectParameters>
-                  <asp:ControlParameter ControlID="DropDownList1" Name="status_approve" PropertyName="SelectedValue" Type="Int32" />
-              </SelectParameters>
-          </asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select appointment.app_id,appointment.app_date,appointment.app_time,appointment.app_remark,employee_doctor.emp_doc_name,opd.opd_name,appointment.status_approve from ((appointment inner join opd On opd.opd_id= appointment.opd_id) inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id) where  (appointment.status_approve = 3) AND appointment.status_app = 1">
+          </asp:SqlDataSource></center>
       </td>
          </tr>
+
+              <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+      <center><P1>ตารางงานแพทย์</P1></center> 
+      </td>
+        
+        
+  </tr>
+
+             <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+        <center>   <asp:GridView ID="GridView2" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
+                     <Columns>
+                         <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
+                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาที่มาปฏิบัติงาน" SortExpression="swd_start_time" />
+                         <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
+                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
+                     </Columns>
+                     <FooterStyle BackColor="White" ForeColor="#000066" />
+                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                     <RowStyle ForeColor="#000066" />
+                     <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                     <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                     <SortedDescendingHeaderStyle BackColor="#00547E" />
+                     </asp:GridView> 
+                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select employee_doctor.emp_doc_name , 
+schedule_work_doctor.swd_day_work,
+schedule_work_doctor.swd_start_time,
+schedule_work_doctor.room_id,schedule_work_doctor.swd_note 
+from schedule_work_doctor 
+inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id 
+where schedule_work_doctor.swd_status_room = 1 
+AND employee_doctor.emp_doc_name = @emp_doc_name ">
+                         <SelectParameters>
+                             <asp:ControlParameter ControlID="txtdoctor" Name="emp_doc_name" PropertyName="Text" />
+                         </SelectParameters>
+          </asp:SqlDataSource></center> 
+      </td>
+        
+        
+  </tr>
               <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
       <center><P1>ข้อมูลการนัดหมายคนไข้</P1></center> 
@@ -87,7 +120,7 @@
         <k2>เวลาการนัดหมาย</k2>
       </td>
           <td class="active" style="width: 230px; height: 50px;">
-        <k2><asp:TextBox ID="txttime" class="form-control" runat="server" Width="231px" Enabled="False" TextMode="Time"></asp:TextBox> </k2>
+        <k2><asp:TextBox ID="txttime" class="form-control" runat="server" Width="231px" Enabled="False">00.00</asp:TextBox> </k2>
       </td>
         
         

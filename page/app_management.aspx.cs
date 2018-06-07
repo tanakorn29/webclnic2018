@@ -15,7 +15,10 @@ public partial class page_app_management : System.Web.UI.Page
         //  Fillapp();
          int count_people = appointment.count_app();
         lblnumber.Text = " " + count_people;
-     
+        GridView1.Visible = true;
+    
+        txtdate.Enabled = true;
+        txttime.Enabled = true;
     }
     /*
     private void Fillapp()
@@ -104,25 +107,49 @@ public partial class page_app_management : System.Web.UI.Page
         if (num != 4)
         {
             int app_id = Convert.ToInt16(txtnum.Text);
-            System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("th-TH");
-            String strDate = "27-06-2560";
-            DateTime dateThai = Convert.ToDateTime(strDate, _cultureTHInfo);
+            System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("en-US");
 
 
             //  DateTime date = Convert.ToDateTime(txtdate.Text);
             string date = txtdate.Text;
           //  DateTime date = DateTime.ParseExact(txtdate.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             string time = txttime.Text;
-          //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date + "');", true);
-        appointment app = new appointment(app_id, date, time);
+            //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date + "');", true);
+            string doc_name = txtdoctor.Text;
+            doctor doc_name1 = doctor.doc_idshow(doc_name);
+            double time_zone = Convert.ToDouble(time);
+            DateTime day = Convert.ToDateTime(date, _cultureTHInfo);
+            string app_day = String.Format("{0:dddd}", day, _cultureTHInfo);
+            if (time_zone <= 12.00)
+            {
+
+                if (doc_name1 != null)
+                {
+                    int doc_id = doc_name1.emp_doc_id;
+                    appointment app = new appointment(app_id, doc_id,"เช้า",app_day, date, time);
+
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                }
           
-       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) +"');", true);
+
+
+
+            }
+            else if (time_zone >= 12.01)
+            {
+
+
+
+
+            }
+              
         }
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
         // Fillapp();
+        /*
         int num = Convert.ToInt32(DropDownList1.SelectedValue);
         if(num == 3)
         {
@@ -135,19 +162,19 @@ public partial class page_app_management : System.Web.UI.Page
             txtdate.TextMode = TextBoxMode.SingleLine;
             txttime.Enabled = false;
         }
-        GridView1.Visible = true;
 
+  
+        */
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = GridView1.SelectedRow;
         txtnum.Text = row.Cells[1].Text;
-        txtdate.Text=  row.Cells[2].Text;
-        txttime.Text = row.Cells[3].Text;
-        txtremark.Text = row.Cells[4].Text;
-        txtdoctor.Text = row.Cells[5].Text;
-        txtopd.Text = row.Cells[6].Text;
+     
+        txtremark.Text = row.Cells[2].Text;
+        txtdoctor.Text = row.Cells[3].Text;
+        txtopd.Text = row.Cells[4].Text;
      
 
     }

@@ -74,6 +74,9 @@ public class doctor
         this.emp_doc_name = emp_doc_name;
     }
 
+ 
+
+
     public static doctor Login_doctor(string username, string password)
     {
         string query = String.Format("select count(*)  from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id where user_control.uct_user ='{0}'", username);

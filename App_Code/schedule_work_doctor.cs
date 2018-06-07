@@ -186,24 +186,24 @@ int room_id,
     }
     public static string updateswd(schedule_work_doctor swd)
     {
-       // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
+       string query = String.Format("SELECT COUNT(*) from schedule_work_doctor where swd_status_room = 1 AND emp_doc_id = {0}  AND swd_start_time = '{1}' AND swd_day_work = '{2}'", swd.emp_doc_id,  swd.swd_start_time, swd.swd_day_work);
      try
       {
-        //    conn.Open();
-          //  command.CommandText = query;
-          //  int amountOfUsers = (int)command.ExecuteScalar();
-          //  if (amountOfUsers < 1)
-          //  {
-               string query = String.Format("Update schedule_work_doctor set swd_status_room = 1,emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id,swd.room_id,swd.swd_start_time,swd.swd_day_work);
-            conn.Open();
+          conn.Open();
+         command.CommandText = query;
+          int amountOfUsers = (int)command.ExecuteScalar();
+            if (amountOfUsers < 1)
+            {
+               query = String.Format("Update schedule_work_doctor set swd_status_room = 1,emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id,swd.room_id,swd.swd_start_time,swd.swd_day_work);
+           // conn.Open();
             command.CommandText = query;
                 command.ExecuteNonQuery();
                 return "ลงเวลาเรียบร้อย";
-          //  }
-           // else
-          //  {
-               // return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
-          //  }
+          }
+          else
+          {
+            return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
+          }
         }
         finally
         {

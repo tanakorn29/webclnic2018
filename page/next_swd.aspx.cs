@@ -34,10 +34,10 @@ public partial class next_swd : System.Web.UI.Page
                 
                 if (room_id == 1 || time1 == time)
                 {
-                 schedule_work_doctor swd = new schedule_work_doctor(DropDownList2.SelectedValue.ToString(), DropDownList1.SelectedValue.ToString(), room_id, doc.emp_doc_id);
+                schedule_work_doctor swd = new schedule_work_doctor(DropDownList2.SelectedValue.ToString(), DropDownList1.SelectedValue.ToString(), room_id, doc.emp_doc_id);
 
-                   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                  // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
 
 
                 }

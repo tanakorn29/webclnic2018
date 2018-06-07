@@ -10,7 +10,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        lbldoctor.Text = ""+Session["doctor_name"];
     }
 
     protected void btnsubmit_Click(object sender, EventArgs e)
@@ -26,9 +26,47 @@ public partial class page_patient_appointment : System.Web.UI.Page
         string time = txttime.Text;
         string name = "" + Session["staff_name"];
         string remark = "" + Session["remark"];
-        appointment app = new appointment(date, time, remark, name);
-        appointment.update_app_doctor(app);
-        Response.Redirect("../page/appointment.aspx");
+        string name_doc = "" + Session["doctor_name"];
+        doctor doc_name = doctor.doc_idshow(name_doc);
+
+        DateTime day = Convert.ToDateTime(date , culture);
+   
+        string date_app = day.ToString("yyyy-MM-dd", culture);
+        string app_day = String.Format("{0:dddd}", day, culture);
+        double time_zone = Convert.ToDouble(time);
+
+        if (time_zone <= 12.00)
+        {
+
+            if (doc_name != null)
+            {
+                int doc_id = doc_name.emp_doc_id;
+                appointment app = new appointment(doc_id, "เช้า", app_day, date_app, time, remark, name);
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_doctor(app) + "');", true);
+
+                //  Response.Redirect("../page/appointment.aspx");
+            }
+
+
+
+        }
+        else if (time_zone >= 12.01)
+        {
+            if (doc_name != null)
+            {
+                int doc_id = doc_name.emp_doc_id;
+                appointment app = new appointment(doc_id, "บ่าย", app_day, date, time, remark, name);
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_doctor(app) + "');", true);
+
+                //  Response.Redirect("../page/appointment.aspx");
+            }
+
+
+        }
+          
+
+
+ 
     
     }
 }

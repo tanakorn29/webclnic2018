@@ -47,8 +47,8 @@ where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_stat
    
             <asp:DropDownList ID="DropDownList1" class="dropdown-item" runat="server" Height="38px" Width="318px">
                 <asp:ListItem>กรุณาเลือกเวลา</asp:ListItem>
-                <asp:ListItem>08:30</asp:ListItem>
-                <asp:ListItem>13:00</asp:ListItem>
+                <asp:ListItem>08.30</asp:ListItem>
+                <asp:ListItem>13.00</asp:ListItem>
             </asp:DropDownList>
            
                 </td>

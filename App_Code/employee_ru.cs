@@ -96,7 +96,45 @@ public class employee_ru
         this.username = username;
 
     }
+
+    public employee_ru(int emp_id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+
+        this.emp_id = emp_id;
   
+
+    }
+    public static employee_ru show_employees_id(string user_name)
+    {
+        string query = String.Format("select employee_ru.emp_ru_id from employee_ru where employee_ru.emp_ru_name = '{0}'", user_name);
+
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int emp_id = reader.GetInt32(0);
+          
+
+
+                employee_ru ru = new employee_ru(emp_id);
+                return ru;
+
+            }
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
     public static employee_ru Login_employee_ru(string username, string password)
     {
         string query = String.Format("SELECT COUNT(*) from ((employee_ru inner join user_control On user_control.emp_ru_id = employee_ru.emp_ru_id) inner join position On position.pos_id = employee_ru.pos_id) inner join privilege On privilege.emp_ru_id = employee_ru.emp_ru_id where user_control.uct_user = '{0}'", username);
