@@ -107,7 +107,7 @@ public partial class page_app_management : System.Web.UI.Page
         if (num != 4)
         {
             int app_id = Convert.ToInt16(txtnum.Text);
-            System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("en-US");
+            System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("th-TH");
 
 
             //  DateTime date = Convert.ToDateTime(txtdate.Text);
