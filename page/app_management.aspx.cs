@@ -138,11 +138,18 @@ public partial class page_app_management : System.Web.UI.Page
             else if (time_zone >= 12.01)
             {
 
+                if (doc_name1 != null)
+                {
+                    int doc_id = doc_name1.emp_doc_id;
+                    appointment app = new appointment(app_id, doc_id, "บ่าย", app_day, date, time);
+
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                }
 
 
 
             }
-              
+
         }
     }
 
