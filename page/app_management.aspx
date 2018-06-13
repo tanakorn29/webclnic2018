@@ -120,7 +120,17 @@ AND employee_doctor.emp_doc_name = @emp_doc_name ">
         <k2>เวลาการนัดหมาย</k2>
       </td>
           <td class="active" style="width: 230px; height: 50px;">
-        <k2><asp:TextBox ID="txttime" class="form-control" runat="server" Width="231px" Enabled="False">00.00</asp:TextBox> </k2>
+              <k2>
+            <asp:DropDownList ID="DropDownList1" class="btn btn-secondary dropdown-toggle" runat="server" Height="116px" Width="254px">
+                <asp:ListItem>08.30</asp:ListItem>
+                <asp:ListItem>09.30</asp:ListItem>
+                <asp:ListItem>10.30</asp:ListItem>
+                <asp:ListItem>11.15</asp:ListItem>
+                <asp:ListItem>13.30</asp:ListItem>
+                <asp:ListItem>14.30</asp:ListItem>
+                <asp:ListItem>15.10</asp:ListItem>
+            </asp:DropDownList>
+              </k2>
       </td>
         
         

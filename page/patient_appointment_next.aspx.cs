@@ -23,7 +23,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
         //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('"+ date + "');", true);
         //  DateTime date_month_year = Convert.ToDateTime(date.ToString("yyyy-MM-dd"));
         string date = txtdate.Text;
-        string time = txttime.Text;
+        string time = DropDownList1.SelectedItem.ToString();
         string name = "" + Session["staff_name"];
         string remark = "" + Session["remark"];
         string name_doc = "" + Session["doctor_name"];
@@ -32,7 +32,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
         DateTime day = Convert.ToDateTime(date , culture);
    
         string date_app = day.ToString("yyyy-MM-dd", culture);
-        string app_day = String.Format("{0:dddd}", day, culture);
+        string app_day = day.ToString("dddd", culture);
         double time_zone = Convert.ToDouble(time);
 
         if (time_zone <= 12.00)

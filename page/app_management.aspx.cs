@@ -18,7 +18,7 @@ public partial class page_app_management : System.Web.UI.Page
         GridView1.Visible = true;
     
         txtdate.Enabled = true;
-        txttime.Enabled = true;
+      //  txttime.Enabled = true;
     }
     /*
     private void Fillapp()
@@ -113,13 +113,13 @@ public partial class page_app_management : System.Web.UI.Page
             //  DateTime date = Convert.ToDateTime(txtdate.Text);
             string date = txtdate.Text;
           //  DateTime date = DateTime.ParseExact(txtdate.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            string time = txttime.Text;
+            string time = DropDownList1.SelectedItem.ToString();
             //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date + "');", true);
             string doc_name = txtdoctor.Text;
             doctor doc_name1 = doctor.doc_idshow(doc_name);
             double time_zone = Convert.ToDouble(time);
-            DateTime day = Convert.ToDateTime(date, _cultureTHInfo);
-            string app_day = String.Format("{0:dddd}", day, _cultureTHInfo);
+            DateTime day = Convert.ToDateTime(date);
+            string app_day = day.ToString("dddd", _cultureTHInfo);
             if (time_zone <= 12.00)
             {
 

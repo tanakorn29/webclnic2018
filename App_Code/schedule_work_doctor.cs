@@ -21,6 +21,8 @@ public class schedule_work_doctor
     public string swd_timezone { get; set; }
     public string swd_status { get; set; }
     public int swd_status_room { get; set; }
+    public string swd_work_place { get; set; }
+    public string swd_emp_work_place { get; set; }
     public int emp_ru_id { get; set; }
     public int room_id { get; set; }
     public int emp_doc_id { get; set; }
@@ -33,7 +35,7 @@ public class schedule_work_doctor
     }
     public schedule_work_doctor(int swd_id,string swd_month_work, string swd_day_work,
         string swd_start_time, string swd_end_time, string swd_note, string swd_timezone,
-        string swd_status, int swd_status_room, int emp_ru_id, int room_id,
+        string swd_status, int swd_status_room, string swd_work_place, string swd_emp_work_place, int emp_ru_id, int room_id,
         int emp_doc_id,string emp_doc_name)
     {
         //
@@ -48,6 +50,8 @@ public class schedule_work_doctor
         this.swd_timezone = swd_timezone;
         this.swd_status = swd_status;
         this.swd_status_room = swd_status_room;
+        this.swd_work_place = swd_work_place;
+        this.swd_emp_work_place = swd_emp_work_place;
         this.emp_ru_id = emp_ru_id;
         this.room_id = room_id;
         this.emp_doc_id = emp_doc_id;
@@ -150,11 +154,12 @@ int room_id,
         //
         this.swd_status_room = swd_status_room;
         this.emp_doc_name = emp_doc_name;
+
     }
 
     public static schedule_work_doctor swd_work(string name)
     {
-        string query = String.Format("select schedule_work_doctor.swd_status_room,employee_doctor.emp_doc_name from employee_doctor inner join schedule_work_doctor on schedule_work_doctor.emp_doc_id = employee_doctor.emp_doc_id where emp_doc_name = '{0}' AND swd_status_room = 4", name);
+        string query = String.Format("select schedule_work_doctor.swd_status_room,employee_doctor.emp_doc_name from employee_doctor inner join schedule_work_doctor on schedule_work_doctor.emp_doc_id = employee_doctor.emp_doc_id where swd_emp_work_place = '{0}' AND swd_status_room = 4", name);
 
         try
         {

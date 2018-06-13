@@ -31,9 +31,9 @@
                     <SortedDescendingHeaderStyle BackColor="#575357" />
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="
-select swd_id,swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 4 AND employee_doctor.emp_doc_name =@emp_doc_name">
+select swd_id,swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 4 AND schedule_work_doctor.swd_emp_work_place =@emp_work_place ">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="lbldoctor" Name="emp_work_place" PropertyName="Text" />
                     </SelectParameters>
                 </asp:SqlDataSource>    </center> 
         <center>  <P1>จัดการข้อมูลตารางปฏิบัติงาน</P1> </center>
