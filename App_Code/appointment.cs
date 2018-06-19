@@ -28,7 +28,7 @@ public class appointment
     public string opd_name { get; set; }
     public int status_approve { get; set; }
     public int status_app { get; set; }
-   
+   public string swd_date_work { get; set; }
  
 
 
@@ -39,7 +39,7 @@ public class appointment
         command = new SqlCommand("", conn);
     }
     public appointment(int app_id, int emp_doc_id, string swd_timezone, string day_swd, string app_day, string app_date,DateTime date_app , string app_time,
-        string app_remark,string doc_name,string opd_name,int status_approve,int status_app
+        string app_remark,string doc_name,string opd_name,int status_approve,int status_app, string swd_date_work
     )
     {
         //
@@ -59,6 +59,7 @@ public class appointment
         this.opd_name = opd_name;
         this.status_approve = status_approve;
         this.status_app = status_app;
+        this.swd_date_work = swd_date_work;
   
      
  
@@ -112,7 +113,7 @@ string app_remark, string doc_name, string opd_name, int status_approve)
 
     }
     public appointment(int emp_doc_id, string swd_timezone, string app_day, string app_date, string app_time,
-string app_remark, string opd_name)
+string app_remark, string opd_name , string swd_date_work)
     {
         //
         // TODO: Add constructor logic here
@@ -126,7 +127,7 @@ string app_remark, string opd_name)
         this.app_remark = app_remark;
        
         this.opd_name = opd_name;
-
+        this.swd_date_work = swd_date_work;
 
     }
     public appointment(int status_approve)
@@ -139,7 +140,7 @@ string app_remark, string opd_name)
         this.status_approve = status_approve;
 
     }
-    public appointment(int app_id, int emp_doc_id, string swd_timezone, string app_day, string app_date, string app_time)
+    public appointment(int app_id, int emp_doc_id, string swd_timezone, string app_day, string app_date, string app_time, string swd_date_work)
     {
         //
         // TODO: Add constructor logic here
@@ -150,14 +151,14 @@ string app_remark, string opd_name)
         this.app_day = app_day;
         this.app_date = app_date;
         this.app_time = app_time;
-
+        this.swd_date_work = swd_date_work;
     }
 
 
 
     public static string update_app_opd(appointment app)
     {
-        string query = String.Format("select count(*) from schedule_work_doctor where emp_doc_id = '{0}' AND swd_timezone = '{1}' AND swd_day_work = '{2}'", app.emp_doc_id, app.swd_timezone, app.app_day);
+        string query = String.Format("select count(*) from schedule_work_doctor where emp_doc_id = '{0}' AND swd_timezone = '{1}' AND swd_day_work = '{2}' AND swd_date_work = '{3}'", app.emp_doc_id, app.swd_timezone, app.app_day, app.swd_date_work);
         try
         {
             conn.Open();
@@ -166,14 +167,14 @@ string app_remark, string opd_name)
             if (count_swd == 1)
             {
 
-                
+               
           query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 5 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
             // conn.Open();
              command.CommandText = query;
-             command.ExecuteNonQuery();
-             return "อัพเดตข้อมูลเรียบร้อย";
-             
-
+             command.ExecuteNonQuery();           
+    
+                return "อัพเดตข้อมูลเรียบร้อย";
+  
 
               //  return "อัพเดตเรียบร้อย";
 
@@ -262,7 +263,7 @@ string app_remark, string opd_name)
     }
     public static string update_app_doctor(appointment app)
     {
-        string query = String.Format("select count(*) from schedule_work_doctor where emp_doc_id = '{0}' AND swd_timezone = '{1}' AND swd_day_work = '{2}'", app.emp_doc_id, app.swd_timezone, app.app_day);
+        string query = String.Format("select count(*) from schedule_work_doctor where emp_doc_id = '{0}' AND swd_timezone = '{1}' AND swd_day_work = '{2}' AND swd_date_work = '{3}'", app.emp_doc_id, app.swd_timezone, app.app_day,app.swd_date_work);
         try
         {
             conn.Open();

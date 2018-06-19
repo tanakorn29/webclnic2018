@@ -57,10 +57,11 @@
       <td class="active" style="width: 230px" colspan="2">
         <center>   <asp:GridView ID="GridView2" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
                      <Columns>
-                         <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
-                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาที่มาปฏิบัติงาน" SortExpression="swd_start_time" />
-                         <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
-                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
+                         <asp:BoundField DataField="swd_date_work" HeaderText="swd_date_work" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
+                         <asp:BoundField DataField="swd_day_work" HeaderText="swd_day_work" SortExpression="swd_day_work" />
+                         <asp:BoundField DataField="swd_start_time" HeaderText="swd_start_time" SortExpression="swd_start_time" />
+                         <asp:BoundField DataField="room_id" HeaderText="room_id" SortExpression="room_id" />
+                         <asp:BoundField DataField="swd_note" HeaderText="swd_note" SortExpression="swd_note" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -72,7 +73,7 @@
                      <SortedDescendingCellStyle BackColor="#CAC9C9" />
                      <SortedDescendingHeaderStyle BackColor="#00547E" />
                      </asp:GridView> 
-                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select employee_doctor.emp_doc_name , 
+                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select schedule_work_doctor.swd_date_work,
 schedule_work_doctor.swd_day_work,
 schedule_work_doctor.swd_start_time,
 schedule_work_doctor.room_id,schedule_work_doctor.swd_note 

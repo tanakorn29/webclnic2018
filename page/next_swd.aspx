@@ -13,10 +13,10 @@
                    <Columns>
                        <asp:BoundField DataField="swd_month_work" HeaderText="เดือน" SortExpression="swd_month_work" />
                        <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
-                       <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มปฏิบัติงาน" SortExpression="swd_start_time" />
-                       <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกปฏิบัติงาน" SortExpression="swd_end_time" />
-                       <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
-                       <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
+                       <asp:BoundField DataField="swd_start_time" HeaderText="วันที่เริ่มงาน" SortExpression="swd_start_time" />
+                       <asp:BoundField DataField="swd_end_time" HeaderText="วันที่เลิกงาน" SortExpression="swd_end_time" />
+                       <asp:BoundField DataField="swd_status" HeaderText="สถานะ" SortExpression="swd_status" />
+                       <asp:BoundField DataField="room_id" HeaderText="ห้อง" SortExpression="room_id" />
                    </Columns>
                    <FooterStyle BackColor="#CCCCCC" />
                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -29,9 +29,10 @@
                    </asp:GridView> 
                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_month_work,swd_day_work,swd_start_time,swd_end_time,swd_note,emp_ru_id,
  swd_status,room_id from schedule_work_doctor
-where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_status_room = 0">
+where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_status_room = 0 AND swd_date_work = @swd_date_work">
                        <SelectParameters>
-                           <asp:ControlParameter ControlID="DropDownList2" Name="swd_day_work" PropertyName="SelectedValue" />
+                           <asp:ControlParameter ControlID="txtday" Name="swd_day_work" PropertyName="Text" />
+                           <asp:ControlParameter ControlID="txtswdwork" Name="swd_date_work" PropertyName="Text" />
                        </SelectParameters>
                    </asp:SqlDataSource>
                </center></td>
@@ -56,19 +57,14 @@ where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_stat
   </tr>
            <tr class="active">
       <td class="active" style="width: 230px">
-         วัน</td>
+         เลือกวันที่ปฏิบัติงาน</td>
         <td class="active" style="width: 342px">
             
-                       <asp:DropDownList ID="DropDownList2" class="dropdown-item" runat="server" Height="28px" Width="315px" AutoPostBack="True">
-                           <asp:ListItem>กรุณาเลือกวัน</asp:ListItem>
-                           <asp:ListItem>จันทร์</asp:ListItem>
-                           <asp:ListItem>อังคาร</asp:ListItem>
-                           <asp:ListItem>พุธ</asp:ListItem>
-                           <asp:ListItem>พฤหัสบดี</asp:ListItem>
-                           <asp:ListItem>ศุกร์</asp:ListItem>
-                           <asp:ListItem>เสาร์</asp:ListItem>
-                           <asp:ListItem>อาทิตย์</asp:ListItem>
-                       </asp:DropDownList>
+                               <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="359px" TextMode="Date" OnTextChanged="txtdate_TextChanged"></asp:TextBox>
+      
+                              
+      
+                       <asp:Button ID="Button1" runat="server" Text="เลือก" class="btn btn-primary" Height="49px" Width="227px" OnClick="btnselect_Click" />
 
 
             
@@ -77,8 +73,47 @@ where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_stat
                </td>
         
   </tr>
+       <tr class="active">
+      <td class="active" style="width: 230px">
+         วันที่ปฏิบัติงาน</td>
+        <td class="active" style="width: 342px">
+            
+                 <asp:TextBox ID="txtswdwork" class="form-control"  runat="server" AutoPostBack="True" Height="41px" Width="226px" Enabled="False" OnTextChanged="txtswdwork_TextChanged" ></asp:TextBox>  
       
-          
+                              
+      
+         
+
+
+            
+
+
+               </td>
+
+       
+        
+  </tr>
+          <tr class="active"> 
+                <td class="active" style="width: 230px">
+         วันปฏิบัติงาน</td>
+        <td class="active" style="width: 342px">
+            
+                 <asp:TextBox ID="txtday" class="form-control"  runat="server" AutoPostBack="True" Height="41px" Width="226px" Enabled="False"></asp:TextBox>  
+      
+                              
+      
+         
+
+
+            
+
+
+               </td>
+
+
+
+
+          </tr>
            <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
          <center>

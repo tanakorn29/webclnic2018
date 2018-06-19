@@ -15,6 +15,7 @@ public class schedule_work_doctor
     public int swd_id { get; set; }
     public string swd_month_work { get; set; }
     public string swd_day_work { get; set; }
+    public string swd_date_work { get; set; }
     public string swd_start_time { get; set; }
     public string swd_end_time { get; set; }
     public string swd_note { get; set; }
@@ -33,7 +34,7 @@ public class schedule_work_doctor
         conn = new SqlConnection(connectionString);
         command = new SqlCommand("", conn);
     }
-    public schedule_work_doctor(int swd_id,string swd_month_work, string swd_day_work,
+    public schedule_work_doctor(int swd_id,string swd_month_work, string swd_day_work, string swd_date_work,
         string swd_start_time, string swd_end_time, string swd_note, string swd_timezone,
         string swd_status, int swd_status_room, string swd_work_place, string swd_emp_work_place, int emp_ru_id, int room_id,
         int emp_doc_id,string emp_doc_name)
@@ -44,6 +45,7 @@ public class schedule_work_doctor
         this.swd_id = swd_id;
         this.swd_month_work = swd_month_work;
         this.swd_day_work = swd_day_work;
+        this.swd_date_work = swd_date_work;
         this.swd_start_time = swd_start_time;
         this.swd_end_time = swd_end_time;
         this.swd_note = swd_note;
@@ -57,7 +59,7 @@ public class schedule_work_doctor
         this.emp_doc_id = emp_doc_id;
         this.emp_doc_name = emp_doc_name;
     }
-    public schedule_work_doctor(string swd_day_work,
+    public schedule_work_doctor(string swd_day_work, string swd_date_work,
      string swd_start_time,
     int room_id,
      int emp_doc_id)
@@ -67,6 +69,7 @@ public class schedule_work_doctor
         //
 
         this.swd_day_work = swd_day_work;
+        this.swd_date_work = swd_date_work;
         this.swd_start_time = swd_start_time;
 
         this.room_id = room_id;
@@ -88,11 +91,12 @@ int room_id,
         this.room_id = room_id;
         this.emp_doc_name = emp_doc_name;
     }
-    public schedule_work_doctor(string swd_start_time , int swd_status_room,  int room_id)
+    public schedule_work_doctor( string swd_start_time , int swd_status_room,  int room_id)
     {
         //
         // TODO: Add constructor logic here
         //
+   
         this.swd_start_time = swd_start_time;
         this.swd_status_room = swd_status_room;
 
@@ -119,9 +123,9 @@ int room_id,
     
 
     }
-    public static schedule_work_doctor check_room(string day,string time)
+    public static schedule_work_doctor check_room(DateTime day,string time)
     {
-        string query = string.Format("select swd_start_time,swd_status_room, room_id  from schedule_work_doctor where swd_day_work = '{0}' AND swd_status_room = 0 AND swd_start_time = '{1}' ", day,time);
+        string query = string.Format("select swd_start_time,swd_status_room, room_id  from schedule_work_doctor where swd_date_work = '{0}' AND swd_status_room = 0 AND swd_start_time = '{1}' ", day,time);
         try
         {
             conn.Open();
@@ -191,7 +195,7 @@ int room_id,
     }
     public static string updateswd(schedule_work_doctor swd)
     {
-       string query = String.Format("SELECT COUNT(*) from schedule_work_doctor where swd_status_room = 1 AND emp_doc_id = {0}  AND swd_start_time = '{1}' AND swd_day_work = '{2}'", swd.emp_doc_id,  swd.swd_start_time, swd.swd_day_work);
+       string query = String.Format("SELECT COUNT(*) from schedule_work_doctor where swd_status_room = 1 AND emp_doc_id = {0}  AND swd_start_time = '{1}' AND swd_day_work = '{2}' AND swd_date_work = '{3}'", swd.emp_doc_id,  swd.swd_start_time, swd.swd_day_work,swd.swd_date_work);
      try
       {
           conn.Open();
@@ -199,7 +203,7 @@ int room_id,
           int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers < 1)
             {
-               query = String.Format("Update schedule_work_doctor set swd_status_room = 1,emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id,swd.room_id,swd.swd_start_time,swd.swd_day_work);
+               query = String.Format("Update schedule_work_doctor set swd_status_room = 1,emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}' AND swd_date_work = '{4}'", swd.emp_doc_id,swd.room_id,swd.swd_start_time,swd.swd_day_work, swd.swd_date_work);
            // conn.Open();
             command.CommandText = query;
                 command.ExecuteNonQuery();
@@ -219,25 +223,25 @@ int room_id,
 
     public static string updateswd2(schedule_work_doctor swd)
     {
-        // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
+        string query = String.Format("SELECT COUNT(*) from schedule_work_doctor where swd_status_room = 1 AND emp_doc_id = {0}  AND swd_start_time = '{1}' AND swd_day_work = '{2}' AND swd_date_work = '{3}'", swd.emp_doc_id, swd.swd_start_time, swd.swd_day_work, swd.swd_date_work);
         try
         {
-            //    conn.Open();
-            //  command.CommandText = query;
-            //  int amountOfUsers = (int)command.ExecuteScalar();
-            //  if (amountOfUsers < 1)
-            //  {
-            string query = String.Format("Update schedule_work_doctor set swd_status_room = 3,swd_note = 'รอการอนุมัติการเลื่อนปฏิบัติงาน',emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}'", swd.emp_doc_id, swd.room_id, swd.swd_start_time, swd.swd_day_work);
             conn.Open();
+            command.CommandText = query;
+            int amountOfUsers = (int)command.ExecuteScalar();
+            if (amountOfUsers < 1)
+            {
+              query = String.Format("Update schedule_work_doctor set swd_status_room = 3,swd_note = 'รอการอนุมัติการเลื่อนปฏิบัติงาน',emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}' AND swd_date_work = '{4}'", swd.emp_doc_id, swd.room_id, swd.swd_start_time, swd.swd_day_work, swd.swd_date_work);
+          //  conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
             return "รอการอนุมัติการเลื่อนปฏิบัติงาน";
 
-            //  }
-            // else
-            //  {
-            // return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
-            //  }
+            }
+            else
+            {
+                return "ห้องตรวจซ้ำ กรุณาเลือกใหม่";
+            }
         }
         finally
         {

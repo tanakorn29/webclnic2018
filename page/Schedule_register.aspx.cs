@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -53,7 +54,7 @@ public partial class page_Schedule_register : System.Web.UI.Page
     {
         string name = "" + Session["doc_name"];
         //  int s = 1;
-        string day = DropDownList2.SelectedValue.ToString();
+        DateTime day = Convert.ToDateTime(TextBox2.Text);
         string time1 = DropDownList3.SelectedValue.ToString();
         schedule_work_doctor swd1 = schedule_work_doctor.check_room(day,time1);
 
@@ -68,7 +69,7 @@ public partial class page_Schedule_register : System.Web.UI.Page
             {
                 if (room_id == 1 || time1 == time)
                 {
-                    schedule_work_doctor swd = new schedule_work_doctor(txtdate.Text, DropDownList3.SelectedValue.ToString(), room_id , doc.emp_doc_id);
+                    schedule_work_doctor swd = new schedule_work_doctor(txtdate.Text,TextBox2.Text ,DropDownList3.SelectedValue.ToString(), room_id , doc.emp_doc_id);
 
                     ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd(swd) + "');", true);
                     // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
@@ -76,7 +77,7 @@ public partial class page_Schedule_register : System.Web.UI.Page
 
                 } else
                 {
-                    schedule_work_doctor swd = new schedule_work_doctor(txtdate.Text, DropDownList3.SelectedValue.ToString(), room_id, doc.emp_doc_id);
+                    schedule_work_doctor swd = new schedule_work_doctor(txtdate.Text, TextBox2.Text , DropDownList3.SelectedValue.ToString(), room_id, doc.emp_doc_id);
 
                     ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd(swd) + "');", true);
                 }
@@ -112,7 +113,7 @@ public partial class page_Schedule_register : System.Web.UI.Page
 
         }
 
-  
+
   
 
 
@@ -120,11 +121,35 @@ public partial class page_Schedule_register : System.Web.UI.Page
 
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        txtdate.Text = DropDownList2.SelectedValue.ToString();
+    //   txtdate.Text = DropDownList2.SelectedValue.ToString();
     }
 
     protected void txtdate_TextChanged(object sender, EventArgs e)
     {
+        CultureInfo ThaiCulture = new CultureInfo("th-TH");
+        DateTime date_t = Convert.ToDateTime(TextBox1.Text);
+        string date_th = date_t.ToString("dddd", ThaiCulture);
+        txtdate.Text = date_th;
+    }
 
+    protected void txtdate0_TextChanged(object sender, EventArgs e)
+    {
+    }
+
+
+    protected void btnselect_Click(object sender, EventArgs e)
+    {
+        CultureInfo ThaiCulture = new CultureInfo("th-TH");
+        DateTime date_t = Convert.ToDateTime(TextBox1.Text);
+        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+        TextBox2.Text = date_th;
+
+        string day = date_t.ToString("dddd", ThaiCulture);
+        txtdate.Text = day;
+    }
+
+    protected void TextBox2_TextChanged(object sender, EventArgs e)
+    {
+     
     }
 }

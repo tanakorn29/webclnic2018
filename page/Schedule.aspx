@@ -9,18 +9,38 @@
  
     <body>
   <center>  <P1>ตารางปฏิบัติงานแพทย์  <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label></P1> 
+       <table style="width: 100%;">
+
+                     <tr>
+           
+                   <td>เลือกวันที่ปฏิบัติงาน</td>
+                <td>
+                               <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="233px" TextMode="Date"></asp:TextBox>
       
+                              
+      
+                </td>
+                            <td> <asp:Button ID="Button1" runat="server" Text="เลือก" class="btn btn-primary" Height="49px" Width="227px" OnClick="btnselect_Click" /></td>
+               
+            </tr>
+
+            <tr>
+                 <td colspan="3"><center>วันที่ปฏิบัติงาน&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <asp:TextBox ID="txtswdwork" class="form-control"  runat="server" AutoPostBack="True" Height="41px" Width="226px" Enabled="False" OnTextChanged="txtswdwork_TextChanged" ></asp:TextBox>  </center></td>
+           </tr>
+
+           </table>
         </center>
+  
       <div class="row">
             <div class="col">
            <!--  <div id="schedule" class="jqs-demo mb-3"></div>  -->    
         <center>        <asp:GridView ID="GridView1" runat="server" Height="120px" Width="784px" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
-                        <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มทำงาน" SortExpression="swd_start_time" />
+                        <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
+                        <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มปฏิบัติงาน" SortExpression="swd_start_time" />
                         <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกงาน" SortExpression="swd_end_time" />
-                        <asp:BoundField DataField="room_id" HeaderText="ห้อง" SortExpression="room_id" />
+                        <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
                     </Columns>
                     <FooterStyle BackColor="#CCCC99" />
                     <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
@@ -33,9 +53,10 @@
                     <SortedDescendingHeaderStyle BackColor="#575357" />
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="
-select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND employee_doctor.emp_doc_name =@emp_doc_name">
+select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND employee_doctor.emp_doc_name =@emp_doc_name AND swd_date_work = @swd_date_work">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="txtswdwork" Name="swd_date_work" PropertyName="Text" />
                     </SelectParameters>
                 </asp:SqlDataSource>    </center> 
             </div>
@@ -47,8 +68,9 @@ select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doct
           <center><asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="swd_id" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical" Height="87px" Width="752px">
               <AlternatingRowStyle BackColor="#CCCCCC" />
               <Columns>
-                  <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
-                  <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มปฏิบัติงาน" SortExpression="swd_start_time" />
+                  <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
+                  <asp:BoundField DataField="swd_date_work" HeaderText="วันที่" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
+                  <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
                   <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกงาน" SortExpression="swd_end_time" />
                   <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
               </Columns>
@@ -61,7 +83,7 @@ select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doct
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
               </asp:GridView> 
-              <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_id,swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND schedule_work_doctor.swd_emp_work_place =@emp_work_place ">
+              <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_id,swd_day_work,swd_date_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND schedule_work_doctor.swd_emp_work_place =@emp_work_place ">
                   <SelectParameters>
                       <asp:ControlParameter ControlID="lbldoctor" Name="emp_work_place" PropertyName="Text" />
                   </SelectParameters>

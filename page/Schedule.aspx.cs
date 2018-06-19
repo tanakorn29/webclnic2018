@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -68,5 +69,19 @@ return myJsonString;
     protected void btnworkswd_Click(object sender, EventArgs e)
     {
         Response.Redirect("../page/schedule_work.aspx");
+    }
+
+    protected void btnselect_Click(object sender, EventArgs e)
+    {
+        CultureInfo ThaiCulture = new CultureInfo("th-TH");
+        DateTime date_t = Convert.ToDateTime(txtdate.Text);
+        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+        txtswdwork.Text = date_th;
+    }
+
+    protected void txtswdwork_TextChanged(object sender, EventArgs e)
+    {
+     
+
     }
 }

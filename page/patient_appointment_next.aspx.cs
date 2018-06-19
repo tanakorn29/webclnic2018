@@ -34,14 +34,15 @@ public partial class page_patient_appointment : System.Web.UI.Page
         string date_app = day.ToString("yyyy-MM-dd", culture);
         string app_day = day.ToString("dddd", culture);
         double time_zone = Convert.ToDouble(time);
-
+        string date_work = day.ToString("yyyy-MM-dd", culture);
         if (time_zone <= 12.00)
         {
 
             if (doc_name != null)
             {
                 int doc_id = doc_name.emp_doc_id;
-                appointment app = new appointment(doc_id, "เช้า", app_day, date_app, time, remark, name);
+                appointment app = new appointment(doc_id, "เช้า", app_day, date_app, time, remark, name, date_work);
+                
                 ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_doctor(app) + "');", true);
 
                 //  Response.Redirect("../page/appointment.aspx");
@@ -54,8 +55,9 @@ public partial class page_patient_appointment : System.Web.UI.Page
         {
             if (doc_name != null)
             {
+                
                 int doc_id = doc_name.emp_doc_id;
-                appointment app = new appointment(doc_id, "บ่าย", app_day, date, time, remark, name);
+                appointment app = new appointment(doc_id, "บ่าย", app_day, date_app, time, remark, name, date_work);
                 ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_doctor(app) + "');", true);
 
                 //  Response.Redirect("../page/appointment.aspx");
@@ -68,5 +70,16 @@ public partial class page_patient_appointment : System.Web.UI.Page
 
  
     
+    }
+
+    protected void btnapp_Click(object sender, EventArgs e)
+    {
+        CultureInfo ThaiCulture = new CultureInfo("th-TH");
+        DateTime date_t = Convert.ToDateTime(txtdate.Text);
+        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+    lbldate.Text= date_th;
+
+        string day = date_t.ToString("dddd", ThaiCulture);
+   
     }
 }

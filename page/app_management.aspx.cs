@@ -109,6 +109,7 @@ public partial class page_app_management : System.Web.UI.Page
             int app_id = Convert.ToInt16(txtnum.Text);
             System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("th-TH");
 
+            System.Globalization.CultureInfo thday = new System.Globalization.CultureInfo("th-TH");
 
             //  DateTime date = Convert.ToDateTime(txtdate.Text);
             string date = txtdate.Text;
@@ -119,16 +120,19 @@ public partial class page_app_management : System.Web.UI.Page
             doctor doc_name1 = doctor.doc_idshow(doc_name);
             double time_zone = Convert.ToDouble(time);
             DateTime day = Convert.ToDateTime(date);
-            string app_day = day.ToString("dddd", _cultureTHInfo);
+            string app_day = day.ToString("dddd", thday);
+            string date_app_pp = day.ToString("yyyy-MM-dd", _cultureTHInfo);
             if (time_zone <= 12.00)
             {
 
                 if (doc_name1 != null)
                 {
-                    int doc_id = doc_name1.emp_doc_id;
-                    appointment app = new appointment(app_id, doc_id,"เช้า",app_day, date, time);
 
-                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+               //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  "+ app_day + "');", true);
+                  int doc_id = doc_name1.emp_doc_id;
+                       appointment app = new appointment(app_id, doc_id,"เช้า",app_day, date_app_pp, time, date_app_pp);
+
+                       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
                 }
           
 
@@ -140,10 +144,12 @@ public partial class page_app_management : System.Web.UI.Page
 
                 if (doc_name1 != null)
                 {
-                    int doc_id = doc_name1.emp_doc_id;
-                    appointment app = new appointment(app_id, doc_id, "บ่าย", app_day, date, time);
 
-                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+               //    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  " + app_day + "');", true);
+                 int doc_id = doc_name1.emp_doc_id;
+                         appointment app = new appointment(app_id, doc_id, "บ่าย", app_day, date_app_pp, time, date_app_pp);
+
+                         ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
                 }
 
 
@@ -200,5 +206,10 @@ public partial class page_app_management : System.Web.UI.Page
             appointment_mg.cancel_app(app);
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ยกเลิกเรียบร้อยแล้ว');", true);
         }
+    }
+
+    protected void btndate_Click(object sender, EventArgs e)
+    {
+
     }
 }

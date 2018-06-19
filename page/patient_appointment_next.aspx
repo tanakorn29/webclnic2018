@@ -23,10 +23,11 @@
                    <td class="active" style="width: 230px" colspan="2">
                  <center> <asp:GridView ID="GridView1" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                      <Columns>
-                         <asp:BoundField DataField="emp_doc_name" HeaderText="ชื่อแพทย์" SortExpression="emp_doc_name" />
                          <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
-                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาที่มาปฏิบัติงาน" SortExpression="swd_start_time" />
+                         <asp:BoundField DataField="swd_date_work" HeaderText="วันที่ปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
+                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
                          <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
+                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -39,7 +40,7 @@
                      <SortedDescendingHeaderStyle BackColor="#00547E" />
                      </asp:GridView> 
                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select employee_doctor.emp_doc_name , 
-schedule_work_doctor.swd_day_work,
+schedule_work_doctor.swd_day_work,schedule_work_doctor.swd_date_work,
 schedule_work_doctor.swd_start_time,
 schedule_work_doctor.room_id,schedule_work_doctor.swd_note 
 from schedule_work_doctor 
@@ -59,7 +60,9 @@ AND employee_doctor.emp_doc_name = @emp_doc_name
       <td class="active" style="width: 230px">
          วันนัดหมาย</td>
         <td class="active" style="width: 342px">
-            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="438px" TextMode="Date"></asp:TextBox>
+            <asp:Label ID="lbldate" runat="server"></asp:Label>
+            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="242px" TextMode="Date"></asp:TextBox>
+            <asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="เลือก" OnClick="btnapp_Click" ></asp:Button>
       </td>
         
   </tr>
@@ -81,7 +84,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name
   </tr>
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnsubmit_Click" ></asp:Button></k2>  
+        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnsubmit_Click" ></asp:Button></k2>
       </td>
         
         

@@ -18,4 +18,14 @@ public partial class date : System.Web.UI.Page
         string app_day = String.Format("{0:dddd}", day);
         ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('"+app_day+"');", true);
     }
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void TextBox2_TextChanged(object sender, EventArgs e)
+    {
+        Label1.Text = "" + TextBox2.Text;
+    }
 }
