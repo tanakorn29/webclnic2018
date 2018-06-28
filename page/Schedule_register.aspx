@@ -26,13 +26,13 @@
         </table>
   <center>     <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EmptyDataText="ยังไม่เปิดลงทะเบียน" Height="216px" Width="1105px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
-                <asp:BoundField DataField="swd_month_work" HeaderText="swd_month_work" SortExpression="swd_month_work" />
-                <asp:BoundField DataField="swd_day_work" HeaderText="swd_day_work" SortExpression="swd_day_work" />
-                <asp:BoundField DataField="swd_start_time" HeaderText="swd_start_time" SortExpression="swd_start_time" />
-                <asp:BoundField DataField="swd_end_time" HeaderText="swd_end_time" SortExpression="swd_end_time" />
-                <asp:BoundField DataField="swd_note" HeaderText="swd_note" SortExpression="swd_note" />
-                <asp:BoundField DataField="swd_status" HeaderText="swd_status" SortExpression="swd_status" />
-                <asp:BoundField DataField="room_id" HeaderText="room_id" SortExpression="room_id" />
+                <asp:BoundField DataField="swd_month_work" HeaderText="เดือน" SortExpression="swd_month_work" />
+                <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
+                <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
+                <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกงาน" SortExpression="swd_end_time" />
+                <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
+                <asp:BoundField DataField="swd_status" HeaderText="สถานะ" SortExpression="swd_status" />
+                <asp:BoundField DataField="room_id" HeaderText="ห้อง" SortExpression="room_id" />
             </Columns>
             <FooterStyle BackColor="White" ForeColor="#333333" />
             <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
