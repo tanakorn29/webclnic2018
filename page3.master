@@ -70,10 +70,10 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                       <li><a href="../page/index_doctor.aspx">Home</a></li>
-                    <li><a href="#">ตารางนัดหมายคนไข้</a></li>
+                     <li><a href="../page/show_timeadd.aspx">ข้อมูลการเข้างาน</a></li>
                     <li><a href="../page/Schedule.aspx">ตารางการปฏิบัติงานแพทย์</a></li>
                     <li><a href="../page/Schedule_register.aspx">ลงตารางการปฏิบัติงาน</a></li>
-                      <li><a href="#">ตารางนัดหมาย</a></li>
+                      <li><a href="../page/appointment_doctor.aspx">ตารางนัดหมาย</a></li>
                  
                  <!--   <li class="dropdown">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>

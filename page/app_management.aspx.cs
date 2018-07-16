@@ -122,37 +122,55 @@ public partial class page_app_management : System.Web.UI.Page
             DateTime day = Convert.ToDateTime(date);
             string app_day = day.ToString("dddd", thday);
             string date_app_pp = day.ToString("yyyy-MM-dd", _cultureTHInfo);
+
+
+            DateTime today_th = DateTime.Today;
+            string today = today_th.ToString("yyyy-MM-dd", new CultureInfo("th-TH"));
+
+            int today_day = today_th.Day;
+            int day_select = day.Day;
+
+
             if (time_zone <= 12.00)
             {
-
-                if (doc_name1 != null)
+                if (day_select > today_day)
                 {
+                    if (doc_name1 != null)
+                    {
 
-               //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  "+ app_day + "');", true);
-                  int doc_id = doc_name1.emp_doc_id;
-                       appointment app = new appointment(app_id, doc_id,"เช้า",app_day, date_app_pp, time, date_app_pp);
+                        //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  "+ app_day + "');", true);
+                        int doc_id = doc_name1.emp_doc_id;
+                        appointment app = new appointment(app_id, doc_id, "เช้า", app_day, date_app_pp, time, date_app_pp);
 
-                       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                    }
+                }else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
                 }
-          
 
 
 
             }
             else if (time_zone >= 12.01)
             {
-
-                if (doc_name1 != null)
+                if (day_select > today_day)
                 {
+                    if (doc_name1 != null)
+                    {
 
-               //    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  " + app_day + "');", true);
-                 int doc_id = doc_name1.emp_doc_id;
-                         appointment app = new appointment(app_id, doc_id, "บ่าย", app_day, date_app_pp, time, date_app_pp);
+                        //    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + date_app_pp + "  ,  " + app_day + "');", true);
+                        int doc_id = doc_name1.emp_doc_id;
+                        appointment app = new appointment(app_id, doc_id, "บ่าย", app_day, date_app_pp, time, date_app_pp);
 
-                         ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment.update_app_opd(app) + "');", true);
+                    }
+
+
+                }else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
                 }
-
-
 
             }
 

@@ -21,8 +21,9 @@
 
              
                    <td class="active" style="width: 230px" colspan="2">
-                 <center> <asp:GridView ID="GridView1" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                 <center> <asp:GridView ID="GridView1" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                      <Columns>
+                         <asp:CommandField ShowSelectButton="True" />
                          <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
                          <asp:BoundField DataField="swd_date_work" HeaderText="วันที่ปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
                          <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
@@ -61,8 +62,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name
          วันนัดหมาย</td>
         <td class="active" style="width: 342px">
             <asp:Label ID="lbldate" runat="server"></asp:Label>
-            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="242px" TextMode="Date"></asp:TextBox>
-            <asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="เลือก" OnClick="btnapp_Click" ></asp:Button>
+            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="242px" TextMode="Date" Enabled="False"></asp:TextBox>
       </td>
         
   </tr>
