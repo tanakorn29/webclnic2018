@@ -101,6 +101,6 @@ public partial class page_patient_appointment : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = GridView1.SelectedRow;
-        txtdate.Text = row.Cells[1].Text;
+        txtdate.Text = row.Cells[2].Text;
     }
 }

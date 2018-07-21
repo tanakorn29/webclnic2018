@@ -122,7 +122,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name ">
       </td>
           <td class="active" style="width: 230px; height: 50px;">
               <k2>
-            <asp:DropDownList ID="DropDownList1" class="btn btn-secondary dropdown-toggle" runat="server" Height="16px" Width="254px">
+            <asp:DropDownList ID="DropDownList1" class="btn btn-secondary dropdown-toggle" runat="server" Height="135px" Width="254px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1">
                 <asp:ListItem>08.30</asp:ListItem>
                 <asp:ListItem>09.30</asp:ListItem>
                 <asp:ListItem>10.30</asp:ListItem>

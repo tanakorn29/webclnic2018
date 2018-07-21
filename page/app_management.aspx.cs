@@ -216,6 +216,7 @@ public partial class page_app_management : System.Web.UI.Page
 
         if (num == 2)
         {
+           Session["id_app"] = txtnum.Text;
             int app_id = Convert.ToInt16(txtnum.Text);
         //    DateTime date = Convert.ToDateTime(txtdate.Text);
           //  string time = txttime.Text;
@@ -227,6 +228,11 @@ public partial class page_app_management : System.Web.UI.Page
     }
 
     protected void btndate_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
     {
 
     }

@@ -11,7 +11,7 @@
        
         <tr>
             <td style="height: 20px">
-             <center>    <asp:Button ID="btnnext" runat="server" Text="ยืนยันนัดหมาย" class="btn btn-primary" Height="56px" Width="233px" OnClick="btnnext_Click" /> </center></td>
+             <center>    <asp:Button ID="btnnext" runat="server" Text="ยืนยันนัดหมาย" class="btn btn-primary" Height="56px" Width="233px" OnClick="btnnext_Click" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </center></td>
 
            
         </tr>

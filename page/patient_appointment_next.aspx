@@ -62,7 +62,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name
          วันนัดหมาย</td>
         <td class="active" style="width: 342px">
             <asp:Label ID="lbldate" runat="server"></asp:Label>
-            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="242px" TextMode="Date" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtdate" class="form-control"  runat="server" Height="41px" Width="242px" Enabled="False"></asp:TextBox>
       </td>
         
   </tr>
