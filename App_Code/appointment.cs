@@ -167,16 +167,18 @@ string app_remark, string opd_name , string swd_date_work)
             if (count_swd == 1)
             {
 
-               
-          query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 5 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
-            // conn.Open();
-             command.CommandText = query;
-             command.ExecuteNonQuery();           
-    
-                return "อัพเดตข้อมูลเรียบร้อย";
-  
+                
+             query = String.Format("Update appointment set app_date = '{0}', app_time = '{1}',status_approve = 5 where app_id = {2}", app.app_date, app.app_time,  app.app_id);
+               // conn.Open();
+                command.CommandText = query;
+                command.ExecuteNonQuery();           
+       
 
-              //  return "อัพเดตเรียบร้อย";
+               
+                return "อัพเดตข้อมูลเรียบร้อย";
+
+
+                //  return "อัพเดตเรียบร้อย";
 
 
             }
@@ -411,6 +413,7 @@ string app_remark, string opd_name , string swd_date_work)
 
             while (reader.Read())
             {
+              
                 DateTime app_date = reader.GetDateTime(0);
                 string app_time = reader.GetString(1);
                 string app_remark = reader.GetString(2);

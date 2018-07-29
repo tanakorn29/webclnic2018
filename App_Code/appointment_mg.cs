@@ -20,7 +20,7 @@ public class appointment_mg
     public string opd_name { get; set; }
     public int status_approve { get; set; }
     public int status_app { get; set; }
-
+    public string emp_doc_name { get; set; }
     static appointment_mg()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ToString();
@@ -28,7 +28,7 @@ public class appointment_mg
         command = new SqlCommand("", conn);
     }
     public appointment_mg(int app_id, DateTime app_date, string app_time,
-        string app_remark, string doc_name, string opd_name, int status_approve, int status_app)
+        string app_remark, string doc_name, string opd_name, int status_approve, int status_app,string emp_doc_name)
     {
         //
         // TODO: Add constructor logic here
@@ -41,6 +41,7 @@ public class appointment_mg
         this.opd_name = opd_name;
         this.status_approve = status_approve;
         this.status_app = status_app;
+        this.emp_doc_name = emp_doc_name;
     }
 
     public appointment_mg(int app_id)
@@ -51,12 +52,20 @@ public class appointment_mg
         this.app_id = app_id;
     }
 
+    public appointment_mg(string emp_doc_name)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.emp_doc_name = emp_doc_name;
+    }
+
     public static string cancel_app(appointment_mg app)
     {
 
         try
         {
-            string query = String.Format("Update appointment set status_app = 0 where app_id = {0}", app.app_id);
+            string query = String.Format("Update appointment set status_approve = 0,status_app = 0 where app_id = {0}", app.app_id);
             conn.Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
@@ -69,6 +78,39 @@ public class appointment_mg
         }
 
     }
+
+    public static string cancel_app1(appointment_mg name)
+    {
+
+        string query = string.Format("select app_id from appointment inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id where employee_doctor.emp_doc_name = '{0}'", name.emp_doc_name);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+           // string app_id = command.ExecuteScalar().ToString();
+
+            int app_id = (int)command.ExecuteScalar();
+
+
+            query = String.Format("Update appointment set status_approve = 0,status_app = 0 where app_id = {0}", app_id);
+          //  conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+             return "อัพเดตข้อมูลเรียบร้อย";
+
+      
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+     //   return null;
+
+    }
+
+
+
     /*
     public static string update_app_doctor(appointment app)
     {

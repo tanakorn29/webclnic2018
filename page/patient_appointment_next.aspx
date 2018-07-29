@@ -47,7 +47,7 @@ schedule_work_doctor.room_id,schedule_work_doctor.swd_note
 from schedule_work_doctor 
 inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id 
 where schedule_work_doctor.swd_status_room = 1 
-AND employee_doctor.emp_doc_name = @emp_doc_name 
+AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0
 ">
                          <SelectParameters>
                              <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />

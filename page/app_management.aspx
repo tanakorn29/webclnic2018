@@ -55,13 +55,13 @@
 
              <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <center>   <asp:GridView ID="GridView2" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
+        <center>   <asp:GridView ID="GridView2" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" OnSelectedIndexChanged="GridView2_SelectedIndexChanged">
                      <Columns>
-                         <asp:BoundField DataField="swd_date_work" HeaderText="swd_date_work" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
-                         <asp:BoundField DataField="swd_day_work" HeaderText="swd_day_work" SortExpression="swd_day_work" />
-                         <asp:BoundField DataField="swd_start_time" HeaderText="swd_start_time" SortExpression="swd_start_time" />
-                         <asp:BoundField DataField="room_id" HeaderText="room_id" SortExpression="room_id" />
-                         <asp:BoundField DataField="swd_note" HeaderText="swd_note" SortExpression="swd_note" />
+                         <asp:BoundField DataField="swd_date_work" HeaderText="เวลาปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
+                         <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
+                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มปฏิบัติงาน" SortExpression="swd_start_time" />
+                         <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
+                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -111,7 +111,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name ">
         <k2>วันที่นัดหมาย </k2>
       </td>
           <td class="active" style="width: 230px">
-        <k2><asp:TextBox ID="txtdate" class="form-control" runat="server" Width="229px" Enabled="False" TextMode="Date"></asp:TextBox> </k2>
+        <k2><asp:TextBox ID="txtdate" class="form-control" runat="server" Width="229px" TextMode="Date"></asp:TextBox> </k2>
       </td>
         
         

@@ -17,7 +17,7 @@ public partial class page_app_management : System.Web.UI.Page
         lblnumber.Text = " " + count_people;
         GridView1.Visible = true;
     
-        txtdate.Enabled = true;
+       // txtdate.Enabled = true;
       //  txttime.Enabled = true;
     }
     /*
@@ -212,10 +212,7 @@ public partial class page_app_management : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        int num = Convert.ToInt16(Session["app_ID"]);
-
-        if (num == 2)
-        {
+       
            Session["id_app"] = txtnum.Text;
             int app_id = Convert.ToInt16(txtnum.Text);
         //    DateTime date = Convert.ToDateTime(txtdate.Text);
@@ -224,7 +221,7 @@ public partial class page_app_management : System.Web.UI.Page
             appointment_mg app = new appointment_mg(app_id);
             appointment_mg.cancel_app(app);
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ยกเลิกเรียบร้อยแล้ว');", true);
-        }
+        
     }
 
     protected void btndate_Click(object sender, EventArgs e)
@@ -235,5 +232,14 @@ public partial class page_app_management : System.Web.UI.Page
     protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
     {
 
+    }
+
+    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       /* GridViewRow row = GridView2.SelectedRow;
+        System.Globalization.CultureInfo _cultureTHInfo = new System.Globalization.CultureInfo("en-US");
+        DateTime date = Convert.ToDateTime(row.Cells[1].Text);
+        string d = date.ToString("yyyy-MM-dd");
+        txtdate.Text = row.Cells[1].Text;*/
     }
 }
