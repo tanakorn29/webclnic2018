@@ -4,7 +4,7 @@
       <meta http-equiv=Content-Type content="text/html; charset=utf-8">
               <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-    <center>  <P3>ยืนยันคำขอแพทย์ที่ขอเลื่อนนัดหมาย</P3> </center>
+    <center>  <P3>ยืนยันคำขอแพทย์ที่ขอเลื่อนนัดหมาย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldate" runat="server"></asp:Label></P3> </center>
 
 
     <table style="width: 100%;">

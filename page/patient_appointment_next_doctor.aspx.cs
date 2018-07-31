@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-public partial class page_patient_appointment : System.Web.UI.Page
+using System.Globalization;
+public partial class patient_appointment_next_doctor : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lbldoctor.Text = ""+Session["doctor_name"];
+        lbldoctor.Text = "" + Session["doctor_name"];
+        lbldateadd.Text = "" + Session["date"];
     }
 
     protected void btnsubmit_Click(object sender, EventArgs e)
     {
-
-        //   DateTime date = DateTime.ParseExact(txtdate.Text, "MM/yy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
         CultureInfo culture = new CultureInfo("th-TH");
-        //  DateTime date = Convert.ToDateTime(txtdate.Text);
-        //    DateTime day = Convert.ToDateTime(time1.ToString("yyyy-MM-dd"));
-        //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('"+ date + "');", true);
-        //  DateTime date_month_year = Convert.ToDateTime(date.ToString("yyyy-MM-dd"));
         string date = txtdate.Text;
         string time = DropDownList1.SelectedItem.ToString();
         string name = "" + Session["staff_name"];
@@ -29,8 +23,8 @@ public partial class page_patient_appointment : System.Web.UI.Page
         string name_doc = "" + Session["doctor_name"];
         doctor doc_name = doctor.doc_idshow(name_doc);
 
-        DateTime day = Convert.ToDateTime(date , culture);
-   
+        DateTime day = Convert.ToDateTime(date, culture);
+
         string date_app = day.ToString("yyyy-MM-dd", culture);
         string app_day = day.ToString("dddd", culture);
         double time_zone = Convert.ToDouble(time);
@@ -41,8 +35,6 @@ public partial class page_patient_appointment : System.Web.UI.Page
 
         int today_day = today_th.Day;
         int day_select = day.Day;
-
-
         if (time_zone <= 12.00)
         {
             if (day_select > today_day)
@@ -62,7 +54,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
             {
                 ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
             }
-    
+
 
 
 
@@ -89,14 +81,9 @@ public partial class page_patient_appointment : System.Web.UI.Page
 
 
         }
-          
 
 
- 
-    
     }
-
-
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {

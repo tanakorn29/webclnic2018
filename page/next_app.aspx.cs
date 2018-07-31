@@ -9,7 +9,7 @@ public partial class page_next_app : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        lbldate.Text = ""+Session["date"];
     }
 
     protected void btnnext_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ public partial class page_next_app : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("../page/patient_appointment_next.aspx");
+        Response.Redirect("../page/patient_appointment_next_doctor.aspx");
     }
 
     protected void Button2_Click(object sender, EventArgs e)
