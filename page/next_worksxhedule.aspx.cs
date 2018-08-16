@@ -100,8 +100,28 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
     {
         CultureInfo ThaiCulture = new CultureInfo("th-TH");
         DateTime date_t = Convert.ToDateTime(txtdate.Text);
+        DateTime today_th = DateTime.Today;
+        string today = today_th.ToString("yyyy-MM-dd", new CultureInfo("th-TH"));
+
         string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
-        txtswdwork.Text = date_th;
+        int day = today_th.Day;
+        int day_tt = date_t.Day;
+        int plus = day + 2;
+
+        if (plus >= day_tt)
+        {
+
+
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนปฏิบัติงานได้');", true);
+        }
+        else
+        {
+
+            txtswdwork.Text = date_th;
+        }
+ 
+
+
     }
 
     protected void txtswdwork_TextChanged(object sender, EventArgs e)
