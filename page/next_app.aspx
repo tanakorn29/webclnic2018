@@ -11,7 +11,7 @@
        
         <tr>
             <td style="height: 20px">
-             <center>    <asp:Button ID="btnnext" runat="server" Text="ยืนยันนัดหมาย" class="btn btn-primary" Height="56px" Width="233px" OnClick="btnnext_Click" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <asp:Button ID="Button1" runat="server" Text="เลื่อนนัดหมายวันอื่น" class="btn btn-primary" Height="56px" Width="233px" OnClick="Button1_Click"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <asp:Button ID="Button2" runat="server" Text="ยกเลิกการนัดหมาย" class="btn btn-primary" Height="56px" Width="233px" OnClick="Button2_Click"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </center></td>
+             <center>    <asp:Button ID="btnnext" runat="server" Text="นัดหมายวันเดิม" class="btn btn-primary" Height="56px" Width="233px" OnClick="btnnext_Click" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <asp:Button ID="Button1" runat="server" Text="เลื่อนนัดหมายตามแพทย์" class="btn btn-primary" Height="56px" Width="233px" OnClick="Button1_Click"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <asp:Button ID="Button2" runat="server" Text="เลือกวันนัดหมายใหม่" class="btn btn-primary" Height="56px" Width="233px" OnClick="Button2_Click"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </center></td>
 
            
         </tr>

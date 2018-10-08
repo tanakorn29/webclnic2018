@@ -15,9 +15,11 @@ public partial class page_Schedule : System.Web.UI.Page
         //    GetData();
 
        lbldoctor.Text = "" + Session["doc_name"];
-        
+
+        int id = Convert.ToInt32(Session["doc_id"]);
+
         btnworkswd.Visible = false;
-        schedule_work_doctor sc = schedule_work_doctor.swd_work(lbldoctor.Text);
+        schedule_work_doctor sc = schedule_work_doctor.swd_work(id);
         if(sc != null)
         {
             if (sc.swd_status_room == 4)
@@ -73,10 +75,18 @@ return myJsonString;
 
     protected void btnselect_Click(object sender, EventArgs e)
     {
-        CultureInfo ThaiCulture = new CultureInfo("th-TH");
-        DateTime date_t = Convert.ToDateTime(txtdate.Text);
-        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
-        txtswdwork.Text = date_th;
+        try
+        {
+            CultureInfo ThaiCulture = new CultureInfo("th-TH");
+            DateTime date_t = Convert.ToDateTime(txtdate.Text);
+            string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+            txtswdwork.Text = date_th;
+        }
+        catch (Exception)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('กรุณาเลือกวันที่');", true);
+        }
+
     }
 
     protected void txtswdwork_TextChanged(object sender, EventArgs e)

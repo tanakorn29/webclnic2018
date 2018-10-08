@@ -28,7 +28,6 @@
                          <asp:BoundField DataField="swd_date_work" HeaderText="วันที่ปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
                          <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
                          <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
-                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -70,15 +69,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_st
       <td class="active" style="width: 230px">
          เวลานัดหมาย</td>
         <td class="active" style="width: 342px">
-            <asp:DropDownList ID="DropDownList1" class="btn btn-secondary dropdown-toggle" runat="server" Height="81px" Width="254px">
-                <asp:ListItem>08.30</asp:ListItem>
-                <asp:ListItem>09.30</asp:ListItem>
-                <asp:ListItem>10.30</asp:ListItem>
-                <asp:ListItem>11.15</asp:ListItem>
-                <asp:ListItem>13.30</asp:ListItem>
-                <asp:ListItem>14.30</asp:ListItem>
-                <asp:ListItem>15.10</asp:ListItem>
-            </asp:DropDownList>
+            <asp:TextBox ID="txttimeapp" class="form-control"  runat="server" Height="41px" Width="242px" Enabled="False"></asp:TextBox>
       </td>
         
   </tr>

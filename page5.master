@@ -81,8 +81,8 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
             <li><a href="../page/appointment_management_index.aspx">Home</a></li>
-                    <li><a href="#">ตารางนัดหมายคนไข้</a></li>
-                    <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
+                    <li><a href="../page/search_app_nurse.aspx">ตารางนัดหมายคนไข้</a></li>
+                    <li><a href="../page/swd_show.aspx">ตารางการปฏิบัติงานแพทย์</a></li>
                       <li><a href="../page/app_management.aspx">จัดการข้อมูลนัดหมายตนไข้</a></li>
                
                  <!--   <li class="dropdown">

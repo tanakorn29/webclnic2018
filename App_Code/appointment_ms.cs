@@ -30,7 +30,6 @@ public class appointment_ms
     public string swd_date_work { get; set; }
 
 
-
     static appointment_ms()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ToString();
@@ -65,8 +64,46 @@ public class appointment_ms
 
     }
 
+    public appointment_ms(int app_id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.app_id = app_id;
+    }
+
+
+
+
+    public static string update_app_opd_ms(appointment_ms app)
+    {
+       
+        try
+        {
+         
+
+
+                string query = String.Format("Update appointment set status_approve = 5 where app_id = {0}", app.app_id);
+               conn.Open();
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+
+
+
+                return "อัพเดตข้อมูลเรียบร้อย";
+
 
   
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
+
+
 
 
 

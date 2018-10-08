@@ -23,7 +23,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
         //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('"+ date + "');", true);
         //  DateTime date_month_year = Convert.ToDateTime(date.ToString("yyyy-MM-dd"));
         string date = txtdate.Text;
-        string time = DropDownList1.SelectedItem.ToString();
+        string time = txttimeapp.Text;
         string name = "" + Session["staff_name"];
         string remark = "" + Session["remark"];
         string name_doc = "" + Session["doctor_name"];
@@ -45,8 +45,8 @@ public partial class page_patient_appointment : System.Web.UI.Page
 
         if (time_zone <= 12.00)
         {
-            if (day_select > today_day)
-            {
+          //  if (day_select > today_day)
+         //   {
                 if (doc_name != null)
                 {
                     int doc_id = doc_name.emp_doc_id;
@@ -57,11 +57,11 @@ public partial class page_patient_appointment : System.Web.UI.Page
                     //  Response.Redirect("../page/appointment.aspx");
                 }
 
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
-            }
+    //        }
+     //       else
+    //        {
+   //             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
+   //         }
     
 
 
@@ -69,8 +69,8 @@ public partial class page_patient_appointment : System.Web.UI.Page
         }
         else if (time_zone >= 12.01)
         {
-            if (day_select > today_day)
-            {
+      //      if (day_select > today_day)
+      //      {
                 if (doc_name != null)
                 {
                     int doc_id = doc_name.emp_doc_id;
@@ -81,11 +81,11 @@ public partial class page_patient_appointment : System.Web.UI.Page
                     //  Response.Redirect("../page/appointment.aspx");
                 }
 
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
-            }
+     //       }
+       //     else
+   //         {
+    //            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
+     //       }
 
 
         }
@@ -102,5 +102,6 @@ public partial class page_patient_appointment : System.Web.UI.Page
     {
         GridViewRow row = GridView1.SelectedRow;
         txtdate.Text = row.Cells[2].Text;
+        txttimeapp.Text = row.Cells[3].Text;
     }
 }

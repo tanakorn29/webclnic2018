@@ -82,8 +82,7 @@
                 <ul class="nav navbar-nav">
                          <li class="active"><a href="../page/index_opd.aspx">Home</a></li>
                              
-                    <li><a href="#">ตารางนัดหมายคนไข้</a></li>
-                    <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
+       
                       <li><a href="../page/appointment.aspx">การนัดหมาย</a></li>
                     <li><a href="../page/tre_his.aspx">ประวัติการรักษา</a></li>
                  <!--   <li class="dropdown">

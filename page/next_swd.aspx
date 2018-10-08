@@ -15,7 +15,6 @@
                        <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
                        <asp:BoundField DataField="swd_start_time" HeaderText="วันที่เริ่มงาน" SortExpression="swd_start_time" />
                        <asp:BoundField DataField="swd_end_time" HeaderText="วันที่เลิกงาน" SortExpression="swd_end_time" />
-                       <asp:BoundField DataField="swd_status" HeaderText="สถานะ" SortExpression="swd_status" />
                        <asp:BoundField DataField="room_id" HeaderText="ห้อง" SortExpression="room_id" />
                    </Columns>
                    <FooterStyle BackColor="#CCCCCC" />
@@ -29,7 +28,7 @@
                    </asp:GridView> 
                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_month_work,swd_day_work,swd_start_time,swd_end_time,swd_note,emp_ru_id,
  swd_status,room_id from schedule_work_doctor
-where  swd_day_work = @swd_day_work AND swd_status = 'เปิด' AND swd_status_room = 0 AND swd_date_work = @swd_date_work">
+where  swd_day_work = @swd_day_work  AND swd_status_room = 0 AND swd_date_work = @swd_date_work">
                        <SelectParameters>
                            <asp:ControlParameter ControlID="txtday" Name="swd_day_work" PropertyName="Text" />
                            <asp:ControlParameter ControlID="txtswdwork" Name="swd_date_work" PropertyName="Text" />

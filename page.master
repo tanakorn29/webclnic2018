@@ -72,8 +72,8 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="../page/index.aspx">Home</a></li>
-                    <li><a href="#">ตารางนัดหมายคนไข้</a></li>
-                    <li><a href="#">ตารางการปฏิบัติงานแพทย์</a></li>
+                    <li><a href="../page/search_app_index.aspx">ตารางนัดหมายคนไข้</a></li>
+                    <li><a href="../page/swd_show_index.aspx">ตารางการปฏิบัติงานแพทย์</a></li>
              
                  <!--   <li class="dropdown">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">การจัดการแพทย์<span class="caret"></span></a>

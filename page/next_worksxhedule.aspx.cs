@@ -33,37 +33,44 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
     */
     protected void btnsummit_Click(object sender, EventArgs e)
     {
-    
+        try
+        {
+            schedule_work_doctor swd = new schedule_work_doctor(Convert.ToInt32(txtswd.Text));
+
+            schedule_work_doctor.update_chenge_note(swd);
+
+
+
+            //ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_chenge_note(swd) + "');", true);
+
+
+
+            Response.Redirect("../page/next_swd.aspx");
+
+
+            // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + doc.emp_doc_id + "');", true);
+
+            //     schedule_work_doctor swd = new schedule_work_doctor(DropDownList1.SelectedValue.ToString(), DropDownList2.SelectedValue.ToString(), Convert.ToInt32(txtroom.Text), doc.emp_doc_id);
+
+            //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_next_swd(swd) + "');", true);
+
+
+
+
+
+
+            //  int s = 1;
+
+
+            // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + DropDownList1.SelectedValue.ToString()+ "');", true);
+        }
+        catch (Exception)
+        {
+
+        }
      
        
-       schedule_work_doctor swd = new schedule_work_doctor(Convert.ToInt32(txtswd.Text));
-
-        schedule_work_doctor.update_chenge_note(swd);
-
-
-
-    //ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_chenge_note(swd) + "');", true);
-
-
-
-        Response.Redirect("../page/next_swd.aspx");
-
-
-        // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + doc.emp_doc_id + "');", true);
-
-        //     schedule_work_doctor swd = new schedule_work_doctor(DropDownList1.SelectedValue.ToString(), DropDownList2.SelectedValue.ToString(), Convert.ToInt32(txtroom.Text), doc.emp_doc_id);
-
-        //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.update_next_swd(swd) + "');", true);
-
-
-
-
-
-
-        //  int s = 1;
-
-
-        // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + DropDownList1.SelectedValue.ToString()+ "');", true);
+ 
     }
     /*
     protected void ddlroom_SelectedIndexChanged(object sender, EventArgs e)

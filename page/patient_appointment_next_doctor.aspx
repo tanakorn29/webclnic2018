@@ -12,8 +12,17 @@
       <table class="table table-condensed">
            <tr class="active">
                     <td class="active" style="width: 230px" colspan="2">
-                <P1>     <center>ตารางงานแพทย์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label></center>  
-
+                <P1>     <center>ตารางงานแพทย์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ความเชี่ยวชาญ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Label ID="lblspc" runat="server" Text="-"></asp:Label>
+                        </center>  
+               <!--       <center>  <P1>เลือกแพทย์ที่มารักษา &nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="DropDownList2"  class="btn btn-secondary dropdown-toggle" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="emp_doc_name" DataValueField="emp_doc_name" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+                          </asp:DropDownList>
+                          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select emp_doc_name from employee_doctor  inner join specialist on specialist.emp_doc_specialistid = employee_doctor.emp_doc_specialistid where specialist.emp_doc_specialist =@emp_doc_specialist ORDER BY emp_doc_id DESC ">
+                              <SelectParameters>
+                                  <asp:ControlParameter ControlID="lblspc" Name="emp_doc_specialist" PropertyName="Text" />
+                              </SelectParameters>
+                          </asp:SqlDataSource>
+                          &nbsp;</P1></center> -->
                       </td>
 
 
@@ -29,7 +38,6 @@
                          <asp:BoundField DataField="swd_date_work" HeaderText="วันที่ปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
                          <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
                          <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
-                         <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -48,7 +56,7 @@ schedule_work_doctor.room_id,schedule_work_doctor.swd_note
 from schedule_work_doctor 
 inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id 
 where schedule_work_doctor.swd_status_room = 1 
-AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0
+AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0 AND swd_note = 'เลื่อนปฏิบัติงาน' 
 ">
                          <SelectParameters>
                              <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
@@ -58,6 +66,15 @@ AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_st
                    
                    </td>
                  </tr>
+               <tr class="active">
+      <td class="active" style="width: 230px">
+         วัน</td>
+        <td class="active" style="width: 342px">
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <asp:TextBox ID="txtday" class="form-control"  runat="server" Height="41px" Width="242px" Enabled="False"></asp:TextBox>
+      </td>
+        
+  </tr>
             <tr class="active">
       <td class="active" style="width: 230px">
          วันนัดหมาย</td>
@@ -71,15 +88,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_st
       <td class="active" style="width: 230px">
          เวลานัดหมาย</td>
         <td class="active" style="width: 342px">
-            <asp:DropDownList ID="DropDownList1" class="btn btn-secondary dropdown-toggle" runat="server" Height="81px" Width="254px">
-                <asp:ListItem>08.30</asp:ListItem>
-                <asp:ListItem>09.30</asp:ListItem>
-                <asp:ListItem>10.30</asp:ListItem>
-                <asp:ListItem>11.15</asp:ListItem>
-                <asp:ListItem>13.30</asp:ListItem>
-                <asp:ListItem>14.30</asp:ListItem>
-                <asp:ListItem>15.10</asp:ListItem>
-            </asp:DropDownList>
+            <asp:TextBox ID="txttimeapp" class="form-control"  runat="server" Height="41px" Width="242px" Enabled="False"></asp:TextBox>
       </td>
         
   </tr>

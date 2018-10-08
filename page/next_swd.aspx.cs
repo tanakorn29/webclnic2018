@@ -35,21 +35,42 @@ public partial class next_swd : System.Web.UI.Page
                 schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
                 if (room_id == 1 || time1 == time)
                 {
-              
 
-                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                 //   Response.Redirect("../Page/index_doctor.aspx");
+                    string update = schedule_work_doctor.updateswd2(swd);
+                    if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                        Response.Redirect("../Page/index_doctor.aspx");
+                    }
+
+         
+               //   Response.Redirect("../Page/index_doctor.aspx");
                     //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
 
 
                 }
                 else
                 {
-       
+                    string update = schedule_work_doctor.updateswd2(swd);
+                    if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                        Response.Redirect("../Page/index_doctor.aspx");
+                    }
 
-               ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+
+                    //     ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                    //    Response.Redirect("../Page/index_doctor.aspx");
                 }
-                
+
                 /*
                 if (room_id == 1 && status_room == 0)
                 {
@@ -73,7 +94,7 @@ public partial class next_swd : System.Web.UI.Page
 
 
 
-         }
+            }
 
 
 
@@ -84,13 +105,21 @@ public partial class next_swd : System.Web.UI.Page
 
     protected void btnselect_Click(object sender, EventArgs e)
     {
-        CultureInfo ThaiCulture = new CultureInfo("th-TH");
-        DateTime date_t = Convert.ToDateTime(txtdate.Text);
-        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
-        txtswdwork.Text = date_th;
+        try
+        {
+            CultureInfo ThaiCulture = new CultureInfo("th-TH");
+            DateTime date_t = Convert.ToDateTime(txtdate.Text);
+            string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+            txtswdwork.Text = date_th;
 
-        string day = date_t.ToString("dddd", ThaiCulture);
-        txtday.Text = day;
+            string day = date_t.ToString("dddd", ThaiCulture);
+            txtday.Text = day;
+        }
+        catch (Exception)
+        {
+
+        }
+
     }
 
     protected void txtswdwork_TextChanged(object sender, EventArgs e)

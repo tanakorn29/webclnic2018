@@ -81,6 +81,7 @@ public partial class page_login : System.Web.UI.Page
         else if (doc != null)
         {
             Session["doc_name"] = doc.emp_doc_name;
+            Session["doc_id"] = doc.emp_doc_id;
             Response.Redirect("../Page/index_doctor.aspx");
         }
         else if (nu != null)

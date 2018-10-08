@@ -155,6 +155,72 @@ string app_remark, string opd_name , string swd_date_work)
     }
 
 
+    public appointment(int emp_doc_id,
+    string app_remark,  string opd_name
+)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+
+        this.emp_doc_id = emp_doc_id;
+        this.app_remark = app_remark;
+        this.opd_name = opd_name;
+
+
+
+
+
+    }
+
+    public appointment(int emp_doc_id, DateTime date_app,string app_time)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        this.emp_doc_id = emp_doc_id;
+
+
+        this.date_app = date_app;
+
+        this.app_time = app_time;
+
+
+    }
+
+
+
+    public static appointment show_app_next_opd(string opd_name)
+    {
+        string query = string.Format("select appointment.app_date,appointment.app_time,appointment.emp_doc_id from appointment inner join opd On opd.opd_id = appointment.opd_id where opd.opd_name = '{0}'", opd_name);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                DateTime date_app = reader.GetDateTime(0);
+                string app_time = reader.GetString(1);
+                int employee_doctor_id = reader.GetInt32(2);
+
+
+                appointment app = new appointment(employee_doctor_id, date_app,app_time);
+                return app;
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
+
 
     public static string update_app_opd(appointment app)
     {
@@ -275,7 +341,7 @@ string app_remark, string opd_name , string swd_date_work)
             {
 
                
-                query = String.Format("Update appointment set  day = '{0}' , app_date = '{1}',app_time = '{2}',status_approve = 2 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{3}' AND opd.opd_name = '{4}'", app.app_day, app.app_date, app.app_time, app.app_remark, app.opd_name);
+                query = String.Format("Update appointment set emp_doc_id = '{0}' , day = '{1}' , app_date = '{2}',app_time = '{3}',status_approve = 2 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{4}' AND opd.opd_name = '{5}'",app.emp_doc_id, app.app_day, app.app_date, app.app_time, app.app_remark, app.opd_name);
                 //    conn.Open();
                 command.CommandText = query;
                 command.ExecuteNonQuery();
@@ -287,6 +353,30 @@ string app_remark, string opd_name , string swd_date_work)
             }
            
        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
+
+
+    public static string update_app_doctor_name(appointment app_doc)
+    {
+       
+        try
+        {
+       
+
+
+                string query = String.Format("Update appointment set emp_doc_id = '{0}', status_approve = 2 from appointment inner join opd On opd.opd_id = appointment.opd_id where appointment.app_remark = '{1}' AND opd.opd_name = '{2}'", app_doc.emp_doc_id, app_doc.app_remark, app_doc.opd_name);
+                conn.Open();
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+                return "อัพเดทข้อมูลเรียบร้อย";
+
+
+        }
         finally
         {
             conn.Close();

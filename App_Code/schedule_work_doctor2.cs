@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for schedule_work_doctor1
+/// Summary description for schedule_work_doctor2
 /// </summary>
-public class schedule_work_doctor1
+public class schedule_work_doctor2
 {
     private static SqlConnection conn;
     private static SqlCommand command;
@@ -28,13 +28,13 @@ public class schedule_work_doctor1
     public int room_id { get; set; }
     public int emp_doc_id { get; set; }
     public string emp_doc_name { get; set; }
-    static schedule_work_doctor1()
+    static schedule_work_doctor2()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ToString();
         conn = new SqlConnection(connectionString);
         command = new SqlCommand("", conn);
     }
-    public schedule_work_doctor1(int swd_id, string swd_month_work, string swd_day_work, string swd_date_work,
+    public schedule_work_doctor2(int swd_id, string swd_month_work, string swd_day_work, string swd_date_work,
         string swd_start_time, string swd_end_time, string swd_note, string swd_timezone,
         string swd_status, int swd_status_room, string swd_work_place, string swd_emp_work_place, int emp_ru_id, int room_id,
         int emp_doc_id, string emp_doc_name)
@@ -60,21 +60,20 @@ public class schedule_work_doctor1
         this.emp_doc_name = emp_doc_name;
     }
 
-    public schedule_work_doctor1(string emp_doc_name)
+    public schedule_work_doctor2(string swd_month_work)
     {
         //
         // TODO: Add constructor logic here
         //
-
-        this.emp_doc_name = emp_doc_name;
+        this.swd_month_work = swd_month_work;
+  
     }
 
 
-
-    public static schedule_work_doctor1 show_swd_doc(string name)
+    public static schedule_work_doctor2 show_swd_doc()
     {
-        string query = string.Format("select employee_doctor.emp_doc_name from employee_doctor where employee_doctor.emp_doc_name LIKE '%{0}%'", name);
-        //     string query = string.Format("select schedule_work_doctor.emp_doc_id from schedule_work_doctor where swd_date_work = '{0}'  AND schedule_work_doctor.swd_start_time LIKE '%{1}%'", app_date, time);
+        string query = string.Format("select swd_month_work from schedule_work_doctor Order by swd_id DESC");
+  
         try
         {
             conn.Open();
@@ -85,10 +84,10 @@ public class schedule_work_doctor1
             {
 
 
-                string name_1 = reader.GetString(0);
+                string month_th = reader.GetString(0);
 
 
-               schedule_work_doctor1 app = new schedule_work_doctor1(name_1);
+                schedule_work_doctor2 app = new schedule_work_doctor2(month_th);
                 return app;
             }
 
@@ -101,4 +100,34 @@ public class schedule_work_doctor1
         return null;
     }
 
+    public static string check_register_swd(string month, int emp_doc_id)
+    {
+        string query = String.Format("select count(*) from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where schedule_work_doctor.swd_status_room = 1 AND schedule_work_doctor.swd_month_work = '{0}' AND schedule_work_doctor.emp_doc_id = {1}",month,emp_doc_id);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+
+
+
+         
+            int count_swd = (int)command.ExecuteScalar();
+            if (count_swd < 1)
+            {
+
+                return "1";
+
+
+            }
+           
+
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+  return null;
+    }
 }

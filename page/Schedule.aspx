@@ -71,6 +71,7 @@ select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doct
                   <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
                   <asp:BoundField DataField="swd_date_work" HeaderText="วันที่" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
                   <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
+                            <asp:BoundField DataField="swd_emp_work_place" HeaderText="แพทย์ที่ทำงานแทน" SortExpression="swd_emp_work_place" />
                   <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกงาน" SortExpression="swd_end_time" />
                   <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
               </Columns>
@@ -83,9 +84,9 @@ select swd_day_work,swd_start_time,swd_end_time,room_id  from schedule_work_doct
               <SortedDescendingCellStyle BackColor="#CAC9C9" />
               <SortedDescendingHeaderStyle BackColor="#383838" />
               </asp:GridView> 
-              <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_id,swd_day_work,swd_date_work,swd_start_time,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND schedule_work_doctor.swd_emp_work_place =@emp_work_place ">
+              <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select swd_id,swd_day_work,swd_date_work,swd_start_time,swd_emp_work_place,swd_end_time,room_id  from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where swd_status_room = 1 AND employee_doctor.emp_doc_name =@emp_doc_name AND swd_note = 'ทำงานแทน' ">
                   <SelectParameters>
-                      <asp:ControlParameter ControlID="lbldoctor" Name="emp_work_place" PropertyName="Text" />
+                      <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
                   </SelectParameters>
               </asp:SqlDataSource>
             </center>

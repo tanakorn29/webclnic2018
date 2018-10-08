@@ -30,8 +30,6 @@
                 <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
                 <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
                 <asp:BoundField DataField="swd_end_time" HeaderText="เวลาเลิกงาน" SortExpression="swd_end_time" />
-                <asp:BoundField DataField="swd_note" HeaderText="หมายเหตุ" SortExpression="swd_note" />
-                <asp:BoundField DataField="swd_status" HeaderText="สถานะ" SortExpression="swd_status" />
                 <asp:BoundField DataField="room_id" HeaderText="ห้อง" SortExpression="room_id" />
             </Columns>
             <FooterStyle BackColor="White" ForeColor="#333333" />

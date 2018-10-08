@@ -21,6 +21,7 @@ public class appointment_mg
     public int status_approve { get; set; }
     public int status_app { get; set; }
     public string emp_doc_name { get; set; }
+
     static appointment_mg()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ToString();
@@ -42,6 +43,7 @@ public class appointment_mg
         this.status_approve = status_approve;
         this.status_app = status_app;
         this.emp_doc_name = emp_doc_name;
+
     }
 
     public appointment_mg(int app_id)

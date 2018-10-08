@@ -27,7 +27,7 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connectionstring %>" SelectCommand="select opd.opd_name,app_date,app_time,app_remark from appointment
 inner join employee_doctor on employee_doctor.emp_doc_id = appointment.emp_doc_id
 inner join opd on appointment.opd_id = opd.opd_id
-where employee_doctor.emp_doc_name = @emp_doc_name">
+where employee_doctor.emp_doc_name = @emp_doc_name AND status_app = 1">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblnamedoc" Name="emp_doc_name" PropertyName="Text" />
         </SelectParameters>
