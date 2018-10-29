@@ -134,6 +134,20 @@ int room_id,
     
 
     }
+
+    public schedule_work_doctor(string swd_start_time, int swd_status_room, int room_id,int emp_doc_id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+
+        this.swd_start_time = swd_start_time;
+        this.swd_status_room = swd_status_room;
+
+        this.room_id = room_id;
+        this.emp_doc_id = emp_doc_id;
+
+    }
     public static schedule_work_doctor check_room(DateTime day,string time)
     {
         string query = string.Format("select swd_start_time,swd_status_room, room_id  from schedule_work_doctor where swd_date_work = '{0}' AND swd_status_room = 0 AND swd_start_time = '{1}' ", day,time);
@@ -162,6 +176,151 @@ int room_id,
         }
         return null;
     }
+
+    public static schedule_work_doctor check_room_1(DateTime day,int room_id_1)
+    {
+        string query = string.Format("select swd_start_time,swd_status_room, room_id ,emp_doc_id from schedule_work_doctor where swd_date_work = '{0}' or room_id = {1}", day,room_id_1);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string swd_start_time = reader.GetString(0);
+                int swd_status_room = reader.GetInt32(1);
+                int room_id = reader.GetInt32(2);
+                int emp_doc_id1 = reader.GetInt32(3);
+                schedule_work_doctor swd = new schedule_work_doctor(swd_start_time, swd_status_room, room_id,emp_doc_id1);
+                return swd;
+
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
+    public static schedule_work_doctor check_room_2(DateTime day, int room_id_1,int doc_id)
+    {
+        string query = string.Format("select swd_start_time,swd_status_room, room_id ,emp_doc_id from schedule_work_doctor where swd_date_work = '{0}' AND room_id = {1} AND emp_doc_id = {2} order by room_id asc ", day, room_id_1,doc_id);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string swd_start_time = reader.GetString(0);
+                int swd_status_room = reader.GetInt32(1);
+                int room_id = reader.GetInt32(2);
+                int emp_doc_id1 = reader.GetInt32(3);
+                schedule_work_doctor swd = new schedule_work_doctor(swd_start_time, swd_status_room, room_id, emp_doc_id1);
+                return swd;
+
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
+
+    public static schedule_work_doctor check_room_3(DateTime day, string time , int roomid)
+    {
+        string query = string.Format("select swd_start_time,swd_status_room, room_id ,emp_doc_id from schedule_work_doctor where swd_date_work = '{0}' AND swd_start_time = '{1}' AND room_id <= {2}", day, time, roomid);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string swd_start_time = reader.GetString(0);
+                int swd_status_room = reader.GetInt32(1);
+                int room_id = reader.GetInt32(2);
+                int emp_doc_id1 = reader.GetInt32(3);
+                schedule_work_doctor swd = new schedule_work_doctor(swd_start_time, swd_status_room, room_id, emp_doc_id1);
+                return swd;
+
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
+    public static int check_room_4(int roomid,DateTime day)
+    {
+        string query = string.Format("SELECT COUNT(*) from schedule_work_doctor where swd_status_room = 1  AND room_id = {0} AND swd_date_work = '{1}'", roomid,day);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            int count_room = (int)command.ExecuteScalar();
+            if(count_room == 2)
+            {
+                return 0;
+            }else
+            {
+                return 1;
+            }
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
+    public static schedule_work_doctor check_room_5(DateTime day,int empdoctorid)
+    {
+        string query = string.Format("select swd_start_time,swd_status_room, room_id ,emp_doc_id from schedule_work_doctor where swd_status_room = 1  AND  swd_date_work = '{0}' AND emp_doc_id = {1}", day,empdoctorid);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string swd_start_time = reader.GetString(0);
+                int swd_status_room = reader.GetInt32(1);
+                int room_id = reader.GetInt32(2);
+                int emp_doc_id1 = reader.GetInt32(3);
+                schedule_work_doctor swd = new schedule_work_doctor(swd_start_time, swd_status_room, room_id, emp_doc_id1);
+                return swd;
+
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
+
     public schedule_work_doctor(int swd_status_room, string emp_doc_name)
     {
         //
@@ -211,7 +370,10 @@ int room_id,
       {
           conn.Open();
          command.CommandText = query;
-          int amountOfUsers = (int)command.ExecuteScalar();
+      /*     query = String.Format("SELECT COUNT(swd_status_room) from schedule_work_doctor where swd_status_room = 1  AND swd_start_time = '{0}' AND swd_day_work = '{1}' AND swd_date_work = '{2}'", swd.swd_start_time, swd.swd_day_work, swd.swd_date_work);
+            command.CommandText = query;
+            int count_enp_id = (int)command.ExecuteScalar();*/
+            int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers < 1)
             {
                query = String.Format("Update schedule_work_doctor set swd_status_room = 1,emp_doc_id = {0} where room_id = {1} AND swd_start_time = '{2}' AND swd_day_work = '{3}' AND swd_date_work = '{4}'", swd.emp_doc_id,swd.room_id,swd.swd_start_time,swd.swd_day_work, swd.swd_date_work);

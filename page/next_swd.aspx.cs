@@ -30,47 +30,81 @@ public partial class next_swd : System.Web.UI.Page
         if (doc != null)
 
            {
+                int doc_id = doc.emp_doc_id;
+                schedule_work_doctor swd2 = schedule_work_doctor.check_room_3(day, time, room_id);
+                
+                schedule_work_doctor swd4 = schedule_work_doctor.check_room_5(day, doc_id);
+                if (swd2 != null)
+                {
+
+                    if (swd4 != null)
+                    {
+                        int roomiddoc = swd4.room_id;
+                        int docid = swd4.emp_doc_id;
+                        int swd3 = schedule_work_doctor.check_room_4(roomiddoc, day);
+                        if (swd3 == 0)
+                        {
+                            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('มีแพทย์ทำงานห้องตรวจแล้ว');", true);
+                        }
+                        else
+                        {
+                            schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, roomiddoc, doc.emp_doc_id);
+                            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                            Response.Redirect("../Page/index_doctor.aspx");
+                        }
+                    }
+                    else
+                    {
+                        schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
+                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                        Response.Redirect("../Page/index_doctor.aspx");
+                    }
+
+
+
+                }
+            
 
                 //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
-                schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
-                if (room_id == 1 || time1 == time)
-                {
+                /*        schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
+                    if (room_id == 1 || time1 == time)
+                      {
 
-                    string update = schedule_work_doctor.updateswd2(swd);
-                    if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                        Response.Redirect("../Page/index_doctor.aspx");
-                    }
-
-         
-               //   Response.Redirect("../Page/index_doctor.aspx");
-                    //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
+                          string update = schedule_work_doctor.updateswd2(swd);
+                          if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
+                          {
+                              ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
+                          }
+                          else
+                          {
+                              ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                              Response.Redirect("../Page/index_doctor.aspx");
+                          }
 
 
-                }
-                else
-                {
-                    string update = schedule_work_doctor.updateswd2(swd);
-                    if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                        Response.Redirect("../Page/index_doctor.aspx");
-                    }
+                     //   Response.Redirect("../Page/index_doctor.aspx");
+                          //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
 
 
-                    //     ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                    //    Response.Redirect("../Page/index_doctor.aspx");
-                }
+                      }
+                      else
+                      {
+                          string update = schedule_work_doctor.updateswd2(swd);
+                          if (update == "ห้องตรวจซ้ำ กรุณาเลือกใหม่")
+                          {
+                              ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำ กรุณาเลือกใหม่');", true);
+                          }
+                          else
+                          {
+                              ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                              Response.Redirect("../Page/index_doctor.aspx");
+                          }
 
+
+                          //     ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                          //    Response.Redirect("../Page/index_doctor.aspx");
+                      }
+                      */
                 /*
                 if (room_id == 1 && status_room == 0)
                 {
@@ -100,7 +134,7 @@ public partial class next_swd : System.Web.UI.Page
 
 
 
-       }
+        }
     }
 
     protected void btnselect_Click(object sender, EventArgs e)

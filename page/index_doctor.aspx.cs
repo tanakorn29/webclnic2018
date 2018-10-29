@@ -10,26 +10,31 @@ public partial class page_index_doctor : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         DateTime today = DateTime.Today;
-      int id = Convert.ToInt32(Session["doc_id"]);
- 
-        int day = today.Day;
-        if(day >= 17 && day < 20)
-        {
+      //  ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('คุณยังไม่ลงเวลาปฏิบัติงาน') window.location = '"+ Request.ApplicationPath + "/Page/index_doctor.aspx';", true);
 
-            schedule_work_doctor2 month = schedule_work_doctor2.show_swd_doc();
-            if(month != null)
+
+          int id = Convert.ToInt32(Session["doc_id"]);
+
+            int day = today.Day;
+            if(day >= 17 && day < 20)
             {
-                string swd_month = month.swd_month_work;
-                string check = schedule_work_doctor2.check_register_swd(swd_month,id);
-                if(check == "1")
+
+                schedule_work_doctor2 month = schedule_work_doctor2.show_swd_doc();
+                if(month != null)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('คุณยังไม่ลงเวลาปฏิบัติงาน');", true);
+                    string swd_month = month.swd_month_work;
+                    string check = schedule_work_doctor2.check_register_swd(swd_month,id);
+                    if(check == "1")
+                    {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
+"alert('คุณยังไม่ลงเวลาปฏิบัติงาน'); window.location='" +
+Request.ApplicationPath + "../Page/Schedule_register.aspx';", true);
                 }
-                
-              
+
+
+                }
+
+
             }
-
-
-        }
     }
 }
