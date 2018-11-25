@@ -11,11 +11,6 @@ public partial class page_patient_appointment : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         lbldoctor.Text = ""+Session["doctor_name"];
-        doctor doc_name = doctor.check_spec_name(lbldoctor.Text);
-        if(doc_name != null)
-        {
-          lblsp.Text =  doc_name.emp_doc_specialist;
-        }
     }
 
     protected void btnsubmit_Click(object sender, EventArgs e)
@@ -31,7 +26,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
         string time = txttimeapp.Text;
         string name = "" + Session["staff_name"];
         string remark = "" + Session["remark"];
-        string name_doc = "" + txtdocname.Text;
+        string name_doc = "" + Session["doctor_name"];
         doctor doc_name = doctor.doc_idshow(name_doc);
 
         DateTime day = Convert.ToDateTime(date , culture);
@@ -106,8 +101,7 @@ public partial class page_patient_appointment : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = GridView1.SelectedRow;
-        txtdate.Text = row.Cells[3].Text;
-        txttimeapp.Text = row.Cells[4].Text;
-        txtdocname.Text = row.Cells[1].Text;
+        txtdate.Text = row.Cells[2].Text;
+        txttimeapp.Text = row.Cells[3].Text;
     }
 }

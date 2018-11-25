@@ -62,7 +62,7 @@ public class doctor
 
     }
     public doctor(int emp_doc_id,
-     string emp_doc_idcard, string emp_doc_birth, string emp_doc_name)
+     string emp_doc_idcard, string emp_doc_birth, string emp_doc_name, string emp_doc_specialist)
     {
         //
         // TODO: Add constructor logic here
@@ -73,6 +73,7 @@ public class doctor
         this.emp_doc_birth = emp_doc_birth;
 
         this.emp_doc_name = emp_doc_name;
+        this.emp_doc_specialist = emp_doc_specialist;
     }
 
 
@@ -111,18 +112,18 @@ public class doctor
                 string dbpassword = command.ExecuteScalar().ToString();
                 if (dbpassword == password)
                 {
-                    query = String.Format("select employee_doctor.emp_doc_id,employee_doctor.emp_doc_name from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id where user_control.uct_user ='{0}' ", username);
+                    query = String.Format("select employee_doctor.emp_doc_id,employee_doctor.emp_doc_name , specialist.emp_doc_specialist  from employee_doctor inner join user_control On user_control.emp_doc_id = employee_doctor.emp_doc_id inner join specialist On specialist.emp_doc_specialistid = employee_doctor.emp_doc_specialistid where user_control.uct_user ='{0}' ", username);
                     command.CommandText = query;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         int doc_id = reader.GetInt32(0);
                         string Doctor_Name = reader.GetString(1);
+                        string specialist = reader.GetString(2);
 
 
 
-
-                        doctor staff = new doctor(doc_id,username, password,Doctor_Name);
+                        doctor staff = new doctor(doc_id,username, password,Doctor_Name,specialist);
                         return staff;
 
                     }
@@ -224,6 +225,40 @@ public class doctor
             {
 
                string specname = reader.GetString(0);
+
+
+
+
+                doctor doc = new doctor(specname);
+                return doc;
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return null;
+    }
+
+
+    public static doctor check_spec_name(string doc_name)
+    {
+        string query = String.Format("select specialist.emp_doc_specialist from employee_doctor inner join specialist On specialist.emp_doc_specialistid = employee_doctor.emp_doc_specialistid where employee_doctor.emp_doc_name = '{0}'", doc_name);
+
+        try
+        {
+
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+                string specname = reader.GetString(0);
 
 
 

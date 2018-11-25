@@ -27,19 +27,15 @@ public partial class page_next_app : System.Web.UI.Page
 
             string time = app.app_time;
             double time_app = Convert.ToDouble(time);
-
-         //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + time_app + "');", true);
-             appointment_swd app1 = appointment_swd.show_swd_app_doctor_id(date_app, time);
-               if(app1 != null)
-               {
+            appointment_swd app1 = appointment_swd.show_swd_app_doctor_id(date_app, time);
+            if(app1 != null)
+            {
                 int id = app1.emp_doc_id;
-
-                    appointment_swd app3 = new appointment_swd(id,remark,name);
-                    appointment_swd.confirm_app(app3);
-                    Response.Redirect("../page/appointment.aspx");
-
-                   //       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + id + "');", true);
-               }
+                 appointment_swd app3 = new appointment_swd(id,remark,name);
+                appointment_swd.confirm_app(app3);
+               Response.Redirect("../page/appointment_nurse.aspx");
+                //       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + id + "');", true);
+            }
 
         }
       
@@ -65,12 +61,12 @@ public partial class page_next_app : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
        // string name = "" + Session["staff_name"];
-      Response.Redirect("../page/patient_appointment_next_doctor.aspx");
+      Response.Redirect("../page/patient_appointment_next_doctor_nurse.aspx");
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        Response.Redirect("../page/patient_appointment_next.aspx");
+        Response.Redirect("../page/patient_appointment_nurse.aspx");
         //  string doctor_name = Convert.ToString(Session["doctor_name"]);
         //    DateTime date = Convert.ToDateTime(txtdate.Text);
         //  string time = txttime.Text;

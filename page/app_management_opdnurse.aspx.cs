@@ -109,23 +109,22 @@ public partial class page_app_management : System.Web.UI.Page
             if (status != null)
             {
                 int status_app = status.status_approve;
-                if(status_app == 3)
+                if (status_app == 3)
                 {
-                  appointment_ms app = new appointment_ms(id_num);
+                    appointment_ms app = new appointment_ms(id_num);
 
-                  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment_ms.update_app_opd_ms(app) + "');", true);
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + appointment_ms.update_app_opd_ms(app) + "');", true);
                 }
-                else if(status_app == 6)
+                else if (status_app == 6)
                 {
                     Session["opd_name_app"] = txtopd.Text;
                     Session["doctor_app"] = txtdoctor.Text;
                     Session["remark_app"] = txtremark.Text;
-                    Response.Redirect("../page/app_management_now.aspx");
+                    Response.Redirect("../page/app_management_now_nurseopd.aspx");
                 }
-          
+
             }
 
-    
 
         }
         catch (Exception)

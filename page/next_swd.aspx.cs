@@ -34,35 +34,48 @@ public partial class next_swd : System.Web.UI.Page
                 schedule_work_doctor swd2 = schedule_work_doctor.check_room_3(day, time, room_id);
                 
                 schedule_work_doctor swd4 = schedule_work_doctor.check_room_5(day, doc_id);
-                if (swd2 != null)
+                int swd5 = schedule_work_doctor.check_room_6(day, doc_id);
+                if(swd5 == 1)
                 {
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('มีแพทย์ทำงานในห้องตรวจแล้ว');", true);
 
-                    if (swd4 != null)
+                }
+                else
+                {
+                    if (swd2 != null)
                     {
-                        int roomiddoc = swd4.room_id;
-                        int docid = swd4.emp_doc_id;
-                        int swd3 = schedule_work_doctor.check_room_4(roomiddoc, day);
-                        if (swd3 == 0)
+
+                        if (swd4 != null)
                         {
-                            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('มีแพทย์ทำงานห้องตรวจแล้ว');", true);
+                            int roomiddoc = swd4.room_id;
+                            int docid = swd4.emp_doc_id;
+                            int swd3 = schedule_work_doctor.check_room_4(roomiddoc, day);
+                            if (swd3 == 0)
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('มีแพทย์ทำงานห้องตรวจแล้ว');", true);
+                            }
+                            else
+                            {
+                                schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, roomiddoc, doc.emp_doc_id);
+                                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
+                                Response.Redirect("../Page/index_doctor.aspx");
+                            }
                         }
                         else
                         {
-                            schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, roomiddoc, doc.emp_doc_id);
+                            schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
                             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
                             Response.Redirect("../Page/index_doctor.aspx");
                         }
-                    }
-                    else
-                    {
-                        schedule_work_doctor swd = new schedule_work_doctor(txtday.Text, txtswdwork.Text, time1, room_id, doc.emp_doc_id);
-                        ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + schedule_work_doctor.updateswd2(swd) + "');", true);
-                        Response.Redirect("../Page/index_doctor.aspx");
+
+
+
                     }
 
 
 
                 }
+  
             
 
                 //  ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('" + room_id + "');", true);
@@ -143,11 +156,20 @@ public partial class next_swd : System.Web.UI.Page
         {
             CultureInfo ThaiCulture = new CultureInfo("th-TH");
             DateTime date_t = Convert.ToDateTime(txtdate.Text);
-            string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
-            txtswdwork.Text = date_th;
+            DateTime today = DateTime.Now;
+            if(today.Date >= date_t.Date)
+            {
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนปฏิบัติงานได้');", true);
+            }
+            else
+            {
+                string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+                txtswdwork.Text = date_th;
 
-            string day = date_t.ToString("dddd", ThaiCulture);
-            txtday.Text = day;
+                string day = date_t.ToString("dddd", ThaiCulture);
+                txtday.Text = day;
+            }
+
         }
         catch (Exception)
         {

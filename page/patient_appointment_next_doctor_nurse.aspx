@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page2.master" AutoEventWireup="true" CodeFile="patient_appointment_next_doctor.aspx.cs" Inherits="patient_appointment_next_doctor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page6.master" AutoEventWireup="true" CodeFile="patient_appointment_next_doctor_nurse.aspx.cs" Inherits="patient_appointment_next_doctor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
        <meta http-equiv=Content-Type content="text/html; charset=utf-8">
@@ -56,7 +56,7 @@ schedule_work_doctor.room_id,schedule_work_doctor.swd_note
 from schedule_work_doctor 
 inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id 
 where schedule_work_doctor.swd_status_room = 1 
-AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0 
+AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0
 ">
                          <SelectParameters>
                              <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />

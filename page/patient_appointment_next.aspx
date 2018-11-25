@@ -11,7 +11,7 @@
       <table class="table table-condensed">
            <tr class="active">
                     <td class="active" style="width: 230px" colspan="2">
-                <P1>     <center>ตารางงานแพทย์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label></center>  
+                <P1>     <center>ตารางงานแพทย์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ความเชี่ยวชาญ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lblsp" runat="server" Text="-"></asp:Label></center>  
 
                       </td>
 
@@ -24,9 +24,10 @@
                  <center> <asp:GridView ID="GridView1" runat="server" EmptyDataText="ไม่มีแพทย์ปฏิบัติงาน" Width="771px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                      <Columns>
                          <asp:CommandField ShowSelectButton="True" />
-                         <asp:BoundField DataField="swd_day_work" HeaderText="วันปฏิบัติงาน" SortExpression="swd_day_work" />
-                         <asp:BoundField DataField="swd_date_work" HeaderText="วันที่ปฏิบัติงาน" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
-                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มงาน" SortExpression="swd_start_time" />
+                         <asp:BoundField DataField="emp_doc_name" HeaderText="ชื่อแพทย์" SortExpression="emp_doc_name" />
+                         <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />
+                         <asp:BoundField DataField="swd_date_work" HeaderText="วันที่" SortExpression="swd_date_work" DataFormatString="{0:yyyy-MM-dd}" />
+                         <asp:BoundField DataField="swd_start_time" HeaderText="เวลาเริ่มปฏิบัติงาน" SortExpression="swd_start_time" />
                          <asp:BoundField DataField="room_id" HeaderText="ห้องตรวจ" SortExpression="room_id" />
                      </Columns>
                      <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -45,17 +46,27 @@ schedule_work_doctor.swd_start_time,
 schedule_work_doctor.room_id,schedule_work_doctor.swd_note 
 from schedule_work_doctor 
 inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id 
+inner join specialist on specialist.emp_doc_specialistid = employee_doctor.emp_doc_specialistid
 where schedule_work_doctor.swd_status_room = 1 
-AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_status_checkwork = 0
+AND specialist.emp_doc_specialist = @emp_doc_specialist  AND schedule_work_doctor.swd_status_checkwork = 0
 ">
                          <SelectParameters>
-                             <asp:ControlParameter ControlID="lbldoctor" Name="emp_doc_name" PropertyName="Text" />
+                             <asp:ControlParameter ControlID="lblsp" Name="emp_doc_specialist" PropertyName="Text" />
                          </SelectParameters>
                      </asp:SqlDataSource>
                        </center>     
                    
                    </td>
                  </tr>
+                  <tr class="active">
+      <td class="active" style="width: 230px">
+       แพทย์ผู้ทำการรักษา</td>
+        <td class="active" style="width: 342px">
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <asp:TextBox ID="txtdocname" class="form-control"  runat="server" Height="41px" Width="242px" Enabled="False"></asp:TextBox>
+      </td>
+        
+  </tr>
             <tr class="active">
       <td class="active" style="width: 230px">
          วันนัดหมาย</td>

@@ -2,60 +2,58 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class page_appointment : System.Web.UI.Page
+public partial class page_appointment_nurse : System.Web.UI.Page
 {
     private void status_approve()
     {
-   
 
 
-            string name = "" + Session["staff_name"];
- 
-            int status_app = 1;
-            appointment app = appointment.show_app(status_app, name);
-            if (app != null)
-            {
+
+        string name = "" + Session["staff_name"];
+
+        int status_app = 1;
+        appointment app = appointment.show_app(status_app, name);
+        if (app != null)
+        {
             CultureInfo culture = new CultureInfo("en-US");
-            DateTime date_app = Convert.ToDateTime(app.date_app , culture);
+            DateTime date_app = Convert.ToDateTime(app.date_app, culture);
             string app_date = String.Format("{0:yyyy-MM-dd}", date_app, culture);
             string date_th = date_app.ToString("yyyy-MM-dd", culture);
-            lbldate.Text = ""+ date_th;
+            lbldate.Text = "" + date_th;
 
             Session["date"] = date_th;
             lbltime.Text = app.app_time;
             lblremark.Text = app.app_remark;
             Session["remark"] = app.app_remark;
-                lbldoctor.Text = app.doc_name;
+            lbldoctor.Text = app.doc_name;
             Session["doctor_name"] = app.doc_name;
 
             int status_app1 = app.status_app;
-                if (app.status_approve == 2)
-                {
-                    lblstatus.Text = "นัดหมายการรักษาปกติ";
-                    Session["status1"] = "นัดหมายการรักษาปกติ";
+            if (app.status_approve == 2)
+            {
+                lblstatus.Text = "นัดหมายการรักษาปกติ";
+                Session["status1"] = "นัดหมายการรักษาปกติ";
 
-                }
-                else if (app.status_approve == 3)
-                {
-              
-                    lblstatus.Text = "แพทย์ขอเลื่อนนัด";
-                    Session["status1"] = "แพทย์ขอเลื่อนนัด";
+            }
+            else if (app.status_approve == 3)
+            {
 
-                
-            
+                lblstatus.Text = "แพทย์ขอเลื่อนนัด";
+                Session["status1"] = "แพทย์ขอเลื่อนนัด";
 
-                
-                    
-                
-          
-                } else if (app.status_approve == 4)
+
+
+
+
+
+
+
+            }
+            else if (app.status_approve == 4)
             {
                 lblstatus.Text = "รออนุมัติการนัดหมาย";
                 Session["status1"] = "รออนุมัติการนัดหมาย";
@@ -71,13 +69,14 @@ public partial class page_appointment : System.Web.UI.Page
                 Session["status1"] = "แพทย์ขอเลื่อนนัดด่วน";
             }
 
+
         }
 
-        
-          
-            
-            
-        
+
+
+
+
+
 
 
     }
@@ -89,10 +88,11 @@ public partial class page_appointment : System.Web.UI.Page
     protected void btnapp_Click(object sender, EventArgs e)
     {
         string status_approve = "" + Session["status1"];
-        if(status_approve == "นัดหมายการรักษาปกติ")
+        if (status_approve == "นัดหมายการรักษาปกติ")
         {
-            Response.Redirect("../page/patient_appointment_step1.aspx");
-        }else if (status_approve == "แพทย์ขอเลื่อนนัด")
+            Response.Redirect("../page/nurse_appointment_next.aspx");
+        }
+        else if (status_approve == "แพทย์ขอเลื่อนนัด")
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอข้อมูลนัดหมายจากพยาบาล');", true);
             //  Response.Redirect("../page/next_app.aspx");
@@ -138,13 +138,13 @@ public partial class page_appointment : System.Web.UI.Page
 
 
         }
-        else if(status_approve == "รออนุมัติการนัดหมาย")
+        else if (status_approve == "รออนุมัติการนัดหมาย")
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('รอการอนุมัติจากแพทย์');", true);
         }
         else if (status_approve == "อนุมัติการเลื่อนนัดหมาย")
         {
-            Response.Redirect("../page/next_app.aspx");
+            Response.Redirect("../page/next_app_nurse.aspx");
         }
         else if (status_approve == "แพทย์ขอเลื่อนนัดด่วน")
         {
@@ -154,53 +154,11 @@ public partial class page_appointment : System.Web.UI.Page
         {
             ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ยังไม่มีการนัดหมาย');", true);
         }
-         
-     
-        
+
     }
 
     protected void btnhistory_Click(object sender, EventArgs e)
     {
-        Response.Redirect("../page/appointment_history.aspx");
+        Response.Redirect("../page/appointment_history_nurse.aspx");
     }
-
-
-
-    protected void Submit(object sender, EventArgs e)
-    {
-        string confirmValue = Request.Form["confirm_value"];
-        if (confirmValue == "Yes")
-        {
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('Yes');", true);
-        }
-        else
-        {
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('NO');", true);
-        }
-    }
-
-    [WebMethod]
-
-    public static string GetData()
-
-    {
-        /*
-        string name = "" + HttpContext.Current.Session["staff_name"];
-
-        appointment app = new appointment(name);
-        string name1 = appointment.update_status(app);
-        */
-
-        Dictionary<string, string> name = new Dictionary<string, string>();
-
-        name.Add("1", "Sourav Kayal");
-
-        name.Add("2", "Ram mishra");
-
-        string myJsonString = (new JavaScriptSerializer()).Serialize(name);
-
-        return myJsonString;
-
-    }
-
 }

@@ -1,0 +1,131 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page6.master" AutoEventWireup="true" CodeFile="appointment_nurse.aspx.cs" Inherits="page_appointment_nurse" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+          <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+              <link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+      <!-- jQuery -->
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+ <script>
+     /*
+     function updatejson() {
+         
+         $.ajax({
+
+             type: "POST",
+
+             url: "appointment.aspx / GetData",
+
+             contentType: "application/json; charset=utf-8",
+
+             dataType: "json",
+
+             success: function (response) {
+
+                 var names = response.d;
+
+                 alert(names);
+
+             },
+
+             failure: function (response) {
+
+                 alert(response.d);
+
+             }
+
+         });
+
+  
+         /*
+         if (confirm("Confirm Proceed Further?")) {
+             myMethod1(); //OK Callback function here..
+         } else {
+             myMethod2(); //CANCEL Callback function here..
+         }
+         
+     }
+
+     function myMethod1() {
+         //any stuff here..
+         alert("1");
+     }
+
+     function myMethod2() {
+         //any stuff here..
+         alert("2");
+     }
+
+    */
+ </script>
+
+
+<body> 
+  <center>  <P1>การนัดหมาย</P1> </center>
+      <table class="table table-condensed">
+  
+            <tr class="active">
+      <td class="active" style="width: 230px">
+         วันนัดหมาย</td>
+        <td class="active" style="width: 342px">
+          
+            <asp:Label ID="lbldate" runat="server"></asp:Label>
+          
+      </td>
+        
+  </tr>
+              <tr class="active">
+      <td class="active" style="width: 230px">
+         เวลานัดหมาย</td>
+        <td class="active" style="width: 342px">
+            
+            <asp:Label ID="lbltime" runat="server"></asp:Label>
+            
+      </td>
+        
+  </tr>
+
+             
+              <tr class="active">
+      <td class="active" style="width: 230px">
+      หมายเหตุ   </td>
+        <td class="active" style="width: 342px">
+            
+            <asp:Label ID="lblremark" runat="server"></asp:Label>
+            
+      </td>
+        
+  </tr>
+                <tr class="active">
+      <td class="active" style="width: 230px">
+         แพทย์ผู้ทำการรักษา</td>
+        <td class="active" style="width: 342px">
+            
+            <asp:Label ID="lbldoctor" runat="server"></asp:Label>
+            
+      </td>
+        
+  </tr>
+           <tr class="active">
+      <td class="active" style="width: 230px">
+         สถานะการนัดหมาย</td>
+        <td class="active" style="width: 342px">
+            
+            <asp:Label ID="lblstatus" runat="server"></asp:Label>
+            
+      </td>
+        
+  </tr>
+            <tr class="active">
+      <td class="active" style="width: 230px" colspan="2">
+        
+        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="เลื่อนนัดหมาย" OnClick="btnapp_Click" OnClientClick = "Confirm()" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnhistory" runat="server" class="btn btn-default" Text="ประวัติการนัดหมาย" OnClick="btnhistory_Click" ></asp:Button>&nbsp; 
+        <%  %>
+        
+  </tr>
+    </table>
+
+</body>
+</asp:Content>
+

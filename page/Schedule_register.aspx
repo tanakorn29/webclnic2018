@@ -24,7 +24,7 @@
            
          
         </table>
-  <center>     <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EmptyDataText="ยังไม่เปิดลงทะเบียน" Height="216px" Width="1105px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+  <center>     <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EmptyDataText="ห้องตรวจเต็ม" Height="216px" Width="1105px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField DataField="swd_month_work" HeaderText="เดือน" SortExpression="swd_month_work" />
                 <asp:BoundField DataField="swd_day_work" HeaderText="วัน" SortExpression="swd_day_work" />

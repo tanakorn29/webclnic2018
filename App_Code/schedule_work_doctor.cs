@@ -134,7 +134,33 @@ int room_id,
     
 
     }
+    public static schedule_work_doctor check_swdid_doctor(string name , string date_swd)
+    {
+        string query = string.Format("select swd_id from schedule_work_doctor inner join employee_doctor on employee_doctor.emp_doc_id = schedule_work_doctor.emp_doc_id where employee_doctor.emp_doc_name = '{0}' AND swd_date_work = '{1}'", name, date_swd);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
 
+            while (reader.Read())
+            {
+      
+                int swd_id = reader.GetInt32(0);
+                schedule_work_doctor swd = new schedule_work_doctor(swd_id);
+                return swd;
+
+
+            }
+
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return null;
+    }
     public schedule_work_doctor(string swd_start_time, int swd_status_room, int room_id,int emp_doc_id)
     {
         //
@@ -320,6 +346,30 @@ int room_id,
         }
         return null;
     }
+    public static int check_room_6(DateTime day, int empdoctorid)
+    {
+        string query = string.Format("SELECT COUNT(*) from schedule_work_doctor where swd_date_work = '{0}' AND swd_note = 'รอการทำงานแทน' AND emp_doc_id = {1}", day, empdoctorid);
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            int count_room = (int)command.ExecuteScalar();
+            if (count_room == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+    }
 
     public schedule_work_doctor(int swd_status_room, string emp_doc_name)
     {
@@ -478,6 +528,28 @@ int room_id,
             conn.Close();
         }
     }
+
+    public static string check_register_work(string date)
+    {
+        string query = String.Format("select count(swd_status_room) from schedule_work_doctor where swd_status = 'เปิด' AND swd_status_room = 0 AND swd_date_work = '{0}'", date);
+        try
+        {
+               conn.Open();
+             command.CommandText = query;
+            int count_register = (int)command.ExecuteScalar();
+             if (count_register < 1)
+             {
+
+                return "1";
+             }
+            return null;
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
     public static string centel_chenge_note_work(schedule_work_doctor swd)
     {
         // string query = String.Format("SELECT COUNT(*) from schedule_work_doctor swd inner join room on room.room_id = swd.room_id where swd_day_work = '{0}' AND swd_start_time = '{1}'  AND swd_status_room = 1 ", swd.swd_day_work,swd.swd_start_time);
@@ -493,7 +565,7 @@ int room_id,
             command.CommandText = query;
             command.ExecuteNonQuery();
        
-         query = String.Format("Update schedule_work_doctor set swd_note = '',swd_status_room = 1 where  swd_note = 'รอการอนุมัติการเลื่อนปฏิบัติงาน' AND emp_doc_id = {0} ", swd.emp_name_doc_id);
+         query = String.Format("Update schedule_work_doctor set swd_note = '',swd_status_room = 0,emp_doc_id = 0 where  swd_note = 'รอการอนุมัติการเลื่อนปฏิบัติงาน' AND emp_doc_id = {0} ", swd.emp_name_doc_id);
         
             command.CommandText = query;
             command.ExecuteNonQuery();

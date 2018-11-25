@@ -1,19 +1,21 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page2.master" AutoEventWireup="true" CodeFile="patient_appointment_next_doctor.aspx.cs" Inherits="patient_appointment_next_doctor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page5.master" AutoEventWireup="true" CodeFile="app_management_now.aspx.cs" Inherits="page_app_management_now" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-       <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-              <link href="../../css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/style.css">
+           <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+              <link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+    
 <body>
-  <center>  <P1>เลื่อนการนัดหมาย &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="lbldateadd" runat="server"></asp:Label></P1>
-      
-     
-    </center>
+     <center>  
+      <P1>จัดการข้อมูลการนัดหมายคนไข้ (ด่วน) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P1> </center>
+         <center> <P1>ชื่อคนไข้&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lblopdname" runat="server"></asp:Label></P1> </center>
+
       <table class="table table-condensed">
            <tr class="active">
                     <td class="active" style="width: 230px" colspan="2">
                 <P1>     <center>ตารางงานแพทย์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lbldoctor" runat="server" Text="-"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ความเชี่ยวชาญ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:Label ID="lblspc" runat="server" Text="-"></asp:Label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </center>  
                <!--       <center>  <P1>เลือกแพทย์ที่มารักษา &nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="DropDownList2"  class="btn btn-secondary dropdown-toggle" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="emp_doc_name" DataValueField="emp_doc_name" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
                           </asp:DropDownList>
@@ -94,7 +96,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_st
   </tr>
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnsubmit_Click" ></asp:Button></k2>
+        <k2><asp:Button ID="btnsubmit" runat="server" class="btn btn-default" Text="นัดหมาย" OnClick="btnsubmit_Click" ></asp:Button></k2>   <k2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="Button1" runat="server" class="btn btn-default" Text="วันนัดหมายเดิม" OnClick="Button1_Click" ></asp:Button></k2>
       </td>
         
         

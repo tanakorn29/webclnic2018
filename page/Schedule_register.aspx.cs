@@ -241,6 +241,9 @@ public partial class page_Schedule_register : System.Web.UI.Page
 
 
 
+            }else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจซ้ำกรุณาลงใหม่');", true);
             }
 
 
@@ -275,13 +278,27 @@ public partial class page_Schedule_register : System.Web.UI.Page
 
     protected void btnselect_Click(object sender, EventArgs e)
     {
-        CultureInfo ThaiCulture = new CultureInfo("th-TH");
-        DateTime date_t = Convert.ToDateTime(TextBox1.Text);
-        string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
-        TextBox2.Text = date_th;
+        try
+        {
+            CultureInfo ThaiCulture = new CultureInfo("th-TH");
+            DateTime date_t = Convert.ToDateTime(TextBox1.Text);
+            string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
+            TextBox2.Text = date_th;
+            string swd1 = schedule_work_doctor.check_register_work(date_th);
+            if (swd1 == "1")
+            {
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ห้องตรวจเต็ม');", true);
+            }
 
-        string day = date_t.ToString("dddd", ThaiCulture);
-        txtdate.Text = day;
+            string day = date_t.ToString("dddd", ThaiCulture);
+            txtdate.Text = day;
+
+        }
+        catch (Exception)
+        {
+
+        }
+  
     }
 
     protected void TextBox2_TextChanged(object sender, EventArgs e)

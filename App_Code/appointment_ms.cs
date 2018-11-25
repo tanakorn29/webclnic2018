@@ -73,27 +73,25 @@ public class appointment_ms
     }
 
 
-
-
     public static string update_app_opd_ms(appointment_ms app)
     {
-       
+
         try
         {
-         
-
-
-                string query = String.Format("Update appointment set status_approve = 5 where app_id = {0}", app.app_id);
-               conn.Open();
-                command.CommandText = query;
-                command.ExecuteNonQuery();
 
 
 
-                return "อัพเดตข้อมูลเรียบร้อย";
+            string query = String.Format("Update appointment set status_approve = 5 where app_id = {0}", app.app_id);
+            conn.Open();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
 
 
-  
+
+            return "อัพเดตข้อมูลเรียบร้อย";
+
+
+
 
         }
         finally
@@ -102,6 +100,8 @@ public class appointment_ms
         }
 
     }
+
+
 
 
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page5.master" AutoEventWireup="true" CodeFile="app_management.aspx.cs" Inherits="page_app_management" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/page6.master" AutoEventWireup="true" CodeFile="app_management_opdnurse.aspx.cs" Inherits="page_app_management" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
            <meta http-equiv=Content-Type content="text/html; charset=utf-8">
@@ -177,7 +177,7 @@ AND employee_doctor.emp_doc_name = @emp_doc_name AND schedule_work_doctor.swd_st
   
             <tr class="active">
       <td class="active" style="width: 230px" colspan="2">
-        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="ส่งข้อมูลนัดหมาย" OnClick="btnapp_Click" style="margin-bottom: 0" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <k2><asp:Button ID="btnapp" runat="server" class="btn btn-default" Text="ส่งข้อมูลนัดหมาย" OnClick="btnapp_Click" ></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </k2>
       </td>
         

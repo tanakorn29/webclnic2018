@@ -49,6 +49,10 @@ public partial class page_login : System.Web.UI.Page
                     {
                         Response.Redirect("../Page/index_opd.aspx");
                     }
+                    else if (show_name.pos_name == "หัวหน้า")
+                    {
+                        Response.Redirect("../Page/index_opd.aspx");
+                    }
                     else
                     {
                         Response.Redirect("../Page/index_student.aspx");
@@ -61,8 +65,10 @@ public partial class page_login : System.Web.UI.Page
                     Session["staff_name"] = show_name.emp_ru_name;
                     if (show_name.pos_name == "พยาบาล")
                     {
-                        Response.Redirect("../Page/appointment_management_index.aspx");
-                    }else
+                 Response.Redirect("../Page/appointment_management_index.aspx");
+                 //       ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('เป็นพยาบาล');", true);
+                    }
+                    else
                     {
                         ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
                     }
@@ -71,7 +77,7 @@ public partial class page_login : System.Web.UI.Page
 
 
             }
-
+         
 
 
 
@@ -82,7 +88,9 @@ public partial class page_login : System.Web.UI.Page
         {
             Session["doc_name"] = doc.emp_doc_name;
             Session["doc_id"] = doc.emp_doc_id;
+            Session["specialist"] = doc.emp_doc_specialist;
             Response.Redirect("../Page/index_doctor.aspx");
+           // ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('gfdtdryhththdyhn');", true);
         }
         else if (nu != null)
         {
@@ -91,13 +99,14 @@ public partial class page_login : System.Web.UI.Page
          
             if (nu.pos_name == "พยาบาล")
             {
-                Response.Redirect("../Page/appointment_management_index.aspx");
+              Response.Redirect("../Page/appointment_management_index.aspx");
+           //   ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('"+ nu.emp_ru_name + "');", true);
             }
             else
             {
                 ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่ถูกยืนยันสิทธิการรักษา');", true);
             }
-            Response.Redirect("../Page/index_doctor.aspx");
+      //      Response.Redirect("../Page/index_doctor.aspx");
         }
 
         else

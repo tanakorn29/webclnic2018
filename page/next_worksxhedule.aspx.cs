@@ -113,9 +113,10 @@ public partial class page_next_worksxhedule : System.Web.UI.Page
         string date_th = date_t.ToString("yyyy-MM-dd", ThaiCulture);
         int day = today_th.Day;
         int day_tt = date_t.Day;
-        int plus = day + 2;
+        int plus = (day + 1) - 1;
 
-        if (plus >= day_tt)
+        //  if (plus >= day_tt )
+        if (today_th.Date >= date_t.Date)
         {
 
 

@@ -88,7 +88,7 @@ public partial class patient_appointment_next_doctor : System.Web.UI.Page
             }
             else
             {
-                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้1');", true);
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "alert('ไม่สามารถเลื่อนนัดได้');", true);
             }
 
 

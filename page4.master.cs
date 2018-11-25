@@ -19,6 +19,6 @@ public partial class page5 : System.Web.UI.MasterPage
     protected void lblLogin_Click(object sender, EventArgs e)
     {
         Session.Clear();
-        Response.Redirect("../page/login_opd.aspx");
+        Response.Redirect("../page/login.aspx");
     }
 }

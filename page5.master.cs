@@ -9,9 +9,9 @@ public partial class page5 : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["staff_name"] != null)
+        if (Session["nurse_name"] != null)
         {
-            lblLogin.Text = "" + Session["staff_name"];
+            lblLogin.Text = "" + Session["nurse_name"];
 
         }
     }
